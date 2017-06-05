@@ -1,0 +1,176 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+a {
+  color: #005EA5;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #4C2C92
+}
+
+a:hover {
+  color: #2B8CC4;
+}
+
+#banner {
+  background-color: #0B0C0C;
+  color: #FFFFFF;
+  font-size: 24px;
+  width: 105%;
+  padding: 5px;
+  padding-top: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+#under_banner {
+  height: 10px;
+  background-color: #005EA5;
+  margin-left: 15%;
+  margin-right: 10%
+}
+
+#inner_banner {
+  margin-left: 45%;
+  margin-top: -28px
+}
+
+#self_title {
+  margin-top: -4px;
+  margin-bottom: 3px
+}
+
+#home_link {
+  margin-top: -15px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #FFFFFFF;
+}
+
+#home_link:visited {
+  color: #FFFFFF
+}
+
+#home_link:hover {
+  text-decoration: underline;
+}
+
+#govuk_link {
+  margin-top: -4px;
+  text-decoration: none;
+  color: #FFFFFF;
+  margin-left: 15%;
+  margin-right: 20%;
+  font-size: 30px
+}
+
+#govuk_link:hover {
+  border-bottom: 1px solid #FFFFFF
+}
+
+#wrapper {
+  color: #0B0C0C;
+  width: 85%;
+  background-color: #FFFFFF;
+  text-align: left;
+  padding: 5%;
+  font-family: sans-serif;
+  padding-left: 15%;
+  padding-right: 15%
+}
+
+#result_counter {
+  clear: both;
+  margin: auto;
+  width: 90%;
+  margin-top: 1%
+}
+
+#search_term {
+  background-color: #FFFFFF;
+  padding: 0.01%;
+  width: 40%;
+  border-radius: 5px
+}
+
+.header {
+  margin: auto;
+}
+
+.up_box, .down_box, .changeless_box {
+  border-radius: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.up_box {
+  background-color: #85994B
+}
+
+.down_box {
+  background-color: #aa4c56;
+}
+
+.search_buttons {
+  margin-top: 3px;
+  text-align: left;
+  border: 2px solid #0b0c0c;
+  width: 30%;
+  height: 30px
+}
+
+.search_buttons:focus {
+  outline-offset: 0px;
+  outline: 3px solid #FFBF47;
+}
+
+#search_button {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFFFFF;
+  font-family: sans-serif;
+  background-color: #00823B;
+  width: 170px;
+  height: 55px;
+  padding: 10px
+}
+
+#search_button:hover {
+  background-color: #006435
+}
+
+#search_form {
+  margin: auto;
+  text-align: left;
+}
+
+.AB_search_wrapper {
+  width: 40%;
+  float: left;
+  margin-right: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1%;
+  margin-bottom: 1%
+
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */

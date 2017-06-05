@@ -1,0 +1,143 @@
+<head>
+
+  <%= stylesheet_link_tag "application.css" %>
+  <title>A/B Search Comparison</title>
+
+</head>
+
+
+<body>
+<header id="banner">
+  <a id="govuk_link" href="https://www.gov.uk">
+    <img style="filter: invert(100%)" src="https://assets.publishing.service.gov.uk/static/gov.uk_logotype_crown_invert_trans-203e1db49d3eff430d7dc450ce723c1002542fe1d2bce661b6d8571f14c1043c.png" width="36" height="32" alt="">
+    GOV.UK
+  </a>
+  <div id="inner_banner">
+    <p id="self_title">
+      A/B Search Tool<br>
+    </p>
+    <a id="home_link" href="/">
+      Home
+    </a>
+  </div>
+</header>
+<div id="under_banner">
+
+</div>
+
+<div id="wrapper">
+
+  <h1 style="font-size: 30px">You searched for</h1>
+  <div id="search_term"><h1 style="font-size: 24px"><%= params["search_term"] %></h1></div>
+
+
+  <h2 style="font-size: 16px">These are your results</h2>
+
+  <br>
+
+
+  <%# Sets the base bit of the url and adds the user
+      defined search term connected with '+' so it's in
+      the right format                                  %>
+  <% url = 'https://www.gov.uk/api/search.json?q=' %>
+  <% term = params["search_term"] %>
+  <% url += term.split.join("+") %>
+
+
+  <%# Allows the user to not enter a result count (default's 10)
+      and caps the displayed results at 1000 as per API limit.
+      Also adds the count to the URL that's passed in        %>
+  <% if params["count"] == "" %>
+    <% count = "10" %>
+  <% elsif params["count"].to_i > 1000 %>
+    <%count = "1000" %>
+  <% else %>
+    <%count = params["count"] %>
+  <% end %>
+  <% url += "&count=" + count %>
+
+
+  <%# Creates an empty hash to put the search results from our 'A'
+      test in and a counter to increment within each of the following
+      loops                           %>
+  <% a_list = {} %>
+  <% a_counter = 0 %>
+  <% b_counter = 0 %>
+
+  <div class="AB_search_wrapper">
+    <h2>A Results</h2>
+
+    <%# Adds the A test parameter to the URL  %>
+    <% uri = URI("#{url}&ab_tests=#{params["which_test"]}:A") %>
+
+    <%# Gets a result from the search API based on the URL we made %>
+    <% response = Net::HTTP.get(uri) %>
+    <% findings = JSON.parse(response) %>
+
+    <%# Loops over the 'results' section of our result %>
+    <% findings["results"].each do |each_bit| %>
+
+      <%# increments counter and creates hash entry based on link and counter %>
+      <% a_counter += 1 %>
+      <% a_list["#{each_bit["link"]}"] = a_counter %>
+
+      <%# displays this in the 'A' section %>
+      <div class="changeless_box">
+        <% link = "https://gov.uk" + each_bit["link"] %>
+        <a href = "<%= link %>" ><%= each_bit["title"] %></a>
+      </div>
+      <br><br>
+    <% end %>
+  </div>
+
+  <div class="AB_search_wrapper">
+    <h2>B Results</h2>
+    <% uri = URI("#{url}&ab_tests=#{params["which_test"]}:B") %>
+    <% response = Net::HTTP.get(uri) %>
+    <% findings = JSON.parse(response) %>
+    <% findings["results"].each do |each_bit| %>
+
+      <% b_counter += 1 %>
+      <% if a_list["#{each_bit["link"]}"] != nil %>
+        <% score_difference = a_list["#{each_bit["link"]}"] - b_counter %>
+      <% else %>
+        <% score_difference = "++++"  %>
+      <% end %>
+
+      <% if score_difference == "++++"%>
+        <div class="up_box">
+          <% link = "https://gov.uk" + each_bit["link"] %>
+          <a href = "<%= link %>" ><%= each_bit["title"] %></a>
+          <%= score_difference %>
+        </div>
+      <% elsif score_difference == 0 %>
+        <div class="changeless_box">
+          <% link = "https://gov.uk" + each_bit["link"] %>
+          <a href = "<%= link %>" ><%= each_bit["title"] %></a>
+        </div>
+      <% elsif score_difference > 0 %>
+        <div class="up_box">
+          <% link = "https://gov.uk" + each_bit["link"] %>
+          <a href = "<%= link %>" ><%= each_bit["title"] %></a>
+          <%= "+#{score_difference}" %>
+        </div>
+        <% else %>
+          <div class="down_box">
+            <% link = "https://gov.uk" + each_bit["link"] %>
+            <a href = "<%= link %>" ><%= each_bit["title"] %></a>
+            <%= score_difference %>
+          </div>
+        <% end %>
+
+      <br><br>
+    <% end %>
+  </div>
+  <br><br>
+  <div id="result_counter">
+    <% number = findings["total"] - count.to_i %>
+    <% number = 0 if number < 0 %>
+    <%= findings["total"] %> results, <%= number %> not shown
+  </div>
+
+</div>
+</body>

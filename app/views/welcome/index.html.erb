@@ -1,0 +1,44 @@
+<head>
+
+  <%= stylesheet_link_tag "application.css" %>
+  <title>A/B Search Comparison</title>
+
+</head>
+
+<body>
+<header id="banner">
+  <p id="self_title">
+    <a id="govuk_link" href="https://www.gov.uk">
+      <img style="filter: invert(100%)" src="https://assets.publishing.service.gov.uk/static/gov.uk_logotype_crown_invert_trans-203e1db49d3eff430d7dc450ce723c1002542fe1d2bce661b6d8571f14c1043c.png" width="36" height="32" alt="">
+      GOV.UK
+    </a>
+    A/B Search Tool<br>
+  </p>
+</header>
+<div id="under_banner">
+
+</div>
+
+
+<div id="wrapper">
+  <h1 class="header">Search</h1><br><br>
+  <form id="search_form" action="/result" method="get">
+    <label class="form-label" for="search_term_input">
+      Search term to compare
+    <label><br>
+    <input class="search_buttons" id = "search_term_input" name="search_term" type="text"><br><br>
+    <label class="form-label" for="result_count">
+      Required number of results
+    <label><br>
+    <input id="result_count" class="search_buttons" name="count" type="number"><br><br>
+    <label class="form-label" for="AB_select">
+      A/B test being used
+    <label><br>
+    <select class="search_buttons" name="which_test" id="AB_select">
+      <option value="search_match_length">Search Match Length</option>
+    </select><br><br>
+    <input id="search_button" class="search_buttons" type="submit" value="Search">
+  </form>
+</div>
+
+</body>
