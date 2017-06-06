@@ -1,24 +1,20 @@
-# README
+# Search Performance Explorer
+A tool for comparing the order of search results in A/B tests
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Technical documentation
+This is a Ruby on Rails application that compares the results of an A/B test.
+It is only for internal use and is not public facing.
 
-Things you may want to cover:
+## Running the application
+* Clone this repository
+* `bundle install`
+* `bundle exec rails s -p 3000`
+* The application will now run on localhost:3000
 
-* Ruby version
+## Running the tests
+`bundle exec rake`
 
-* System dependencies
+## Screenshots
+![screenshot01](app/assets/images/screenshot01.png)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![screenshot02](app/assets/images/screenshot02.png)
