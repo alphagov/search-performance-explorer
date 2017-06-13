@@ -4,4 +4,9 @@ Rails.application.routes.draw do
   resources :result
 
   root 'welcome#index'
+
+  if Rails.env.development?
+    mount GovukAdminTemplate::Engine, at: "/style-guide"
+  end
+
 end
