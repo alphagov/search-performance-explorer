@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Testing</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% yield :app_title %>
+    <% yield :head %>
   </head>
 
+  <% content_for :head do %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag 'application' %>
+  <% end %>
+
   <body>
-    <%= yield %>
+    <% yield :content %>
+    <%= render template: 'layouts/govuk_admin_template' %>
   </body>
+
 </html>

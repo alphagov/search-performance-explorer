@@ -1,0 +1,104 @@
+@import 'govuk_admin_template';
+@import '_conditionals';
+@import 'design-patterns/_buttons';
+@import '_grid_layout.scss';
+@import '_colours.scss';
+@import '_typography.scss';
+
+.button {
+  @include button;
+  font-size: 1.4em
+}
+
+#wrapper {
+  @extend %site-width-container;
+}
+
+.grid-row {
+  @extend %grid-row;
+
+  .heading {
+    @include grid-column( 2/3 );
+    background-color: $grey-3;
+  }
+  .new-search {
+    @include grid-column( 1/3 );
+    margin-bottom: 30px;
+    background-color: $grey-3;
+    padding-bottom: 15px
+  }
+  .AB_search_wrapper_left {
+    clear: both;
+    @include grid-column( 1/2 );
+  }
+  .AB_search_wrapper_right {
+    @include grid-column( 1/2 );
+  }
+}
+
+#homepage-form-container {
+  margin-bottom: 20%;
+  @extend %grid-row;
+
+  #homepage-form {
+    @include grid-column( 2/3 );
+  }
+}
+
+.up_box, .down_box, .changeless_box {
+  text-decoration: none;
+  padding: 2px
+}
+.up_box a:link { color: $grass-green; }
+.down_box a:link { color: $red}
+.up_box a:visited { color: $grass-green; }
+.down_box a:visited { color: $red}
+.up_box {
+  color: $grass-green;
+  background-color: $grass-green-25;
+}
+.down_box {
+  color: $red;
+  background-color: $red-25;
+}
+
+#result_counter {
+  clear: both;
+    margin-bottom: 25%
+}
+
+.head-text {
+  @include heading-36;
+}
+#search_term {
+  @include heading-27
+}
+#results-text {
+  @include copy-16
+}
+.results-header {
+  @include heading-36
+}
+
+.form-control {
+  border: 2px solid $black;
+  border-radius: 0px;
+  font-size: 19px;
+  line-height: 1.31579;
+}
+.form-control:focus {
+  outline-offset: 0px;
+  outline: 3px solid $yellow;
+  border: 2px solid $black;
+}
+
+.form-group {
+  padding-bottom: 15px
+}
+
+.form-label {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 1.25; }
