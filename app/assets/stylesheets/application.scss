@@ -1,99 +1,114 @@
 @import 'govuk_admin_template';
-@import '_conditionals';
-@import 'design-patterns/_buttons';
-@import '_grid_layout.scss';
-@import '_colours.scss';
-@import '_typography.scss';
+@import 'conditionals';
+@import 'design-patterns/buttons';
+@import 'grid_layout';
+@import 'colours';
+@import 'typography';
 
 .button {
   @include button;
-  font-size: 1.4em
+  font-size: 1.4em;
 }
 
-#wrapper {
+.wrapper {
   @extend %site-width-container;
+}
+
+.head-section {
+  background-color: $grey-3;
+  @extend %grid-row;
+
+  .heading {
+    @include grid-column( 2 / 3 );
+  }
+
+  .new-search {
+    @include grid-column( 1 / 3 );
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+  }
 }
 
 .grid-row {
   @extend %grid-row;
 
-  .heading {
-    @include grid-column( 2/3 );
-    background-color: $grey-3;
-  }
-  .new-search {
-    @include grid-column( 1/3 );
-    margin-bottom: 30px;
-    background-color: $grey-3;
-    padding-bottom: 15px
-  }
-  .AB_search_wrapper_left {
+  .ab-search-wrapper-left {
     clear: both;
-    @include grid-column( 1/2 );
+    @include grid-column( 1 / 2 );
   }
-  .AB_search_wrapper_right {
-    @include grid-column( 1/2 );
+
+  .ab-search-wrapper-right {
+    @include grid-column( 1 / 2 );
   }
 }
 
-#homepage-form-container {
+.homepage-form-container {
   margin-bottom: 20%;
   @extend %grid-row;
 
-  #homepage-form {
-    @include grid-column( 2/3 );
+  .homepage-form {
+    @include grid-column( 2 / 3 );
   }
 }
 
-.up_box, .down_box, .changeless_box {
+.up-box,
+.down-box,
+.changeless-box {
   text-decoration: none;
-  padding: 2px
+  padding: 2px;
 }
-.up_box a:link { color: $grass-green; }
-.down_box a:link { color: $red}
-.up_box a:visited { color: $grass-green; }
-.down_box a:visited { color: $red}
-.up_box {
+
+.up-box a:link { color: $grass-green; }
+.down-box a:link { color: $red;}
+.up-box a:visited { color: $grass-green; }
+.down-box a:visited { color: $red;}
+.up-box {
   color: $grass-green;
   background-color: $grass-green-25;
 }
-.down_box {
+
+.down-box {
   color: $red;
   background-color: $red-25;
 }
 
-#result_counter {
+.result-counter {
   clear: both;
-    margin-bottom: 25%
+  margin-top: 30px;
+  margin-bottom: 25%;
 }
 
 .head-text {
   @include heading-36;
 }
-#search_term {
-  @include heading-27
+
+.search-term {
+  @include heading-27;
 }
-#results-text {
-  @include copy-16
+
+.results-text {
+  @include copy-16;
 }
+
 .results-header {
-  @include heading-36
+  @include heading-36;
 }
 
 .form-control {
   border: 2px solid $black;
-  border-radius: 0px;
+  border-radius: 0;
   font-size: 19px;
   line-height: 1.31579;
 }
+
 .form-control:focus {
-  outline-offset: 0px;
+  outline-offset: 0;
   outline: 3px solid $yellow;
   border: 2px solid $black;
 }
 
 .form-group {
-  padding-bottom: 15px
+  padding-bottom: 15px;
 }
 
 .form-label {
@@ -102,3 +117,15 @@
   text-transform: none;
   font-size: 16px;
   line-height: 1.25; }
+
+
+
+@media only screen and (max-width: 640px) {
+  .new-search {
+    display: none;
+  }
+
+  .ab-search-wrapper-left {
+    display: none;
+  }
+}
