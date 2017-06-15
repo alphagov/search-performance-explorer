@@ -29,17 +29,18 @@
   }
 }
 
+.table-row {
+  border-bottom: solid 1px $grey-3;
+  margin-top: 10px;
+}
+
 .grid-row {
   @extend %grid-row;
 
-  .ab-search-wrapper-left {
-    clear: both;
-    @include grid-column( 1 / 2 );
+  .results-table {
+    @include grid-column( 1 );
   }
 
-  .ab-search-wrapper-right {
-    @include grid-column( 1 / 2 );
-  }
 }
 
 .homepage-form-container {
@@ -56,26 +57,21 @@
 .changeless-box {
   text-decoration: none;
   padding: 2px;
+  text-align: right;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.up-box a:link { color: $grass-green; }
-.down-box a:link { color: $red;}
-.up-box a:visited { color: $grass-green; }
-.down-box a:visited { color: $red;}
-.up-box {
+.up-box,
+.up-box a:link,
+.up-box a:visited {
   color: $grass-green;
-  background-color: $grass-green-25;
 }
 
-.down-box {
+.down-box,
+.down-box a:link,
+.down-box a:visited {
   color: $red;
-  background-color: $red-25;
-}
-
-.result-counter {
-  clear: both;
-  margin-top: 30px;
-  margin-bottom: 25%;
 }
 
 .head-text {
@@ -117,8 +113,6 @@
   text-transform: none;
   font-size: 16px;
   line-height: 1.25; }
-
-
 
 @media only screen and (max-width: 640px) {
   .new-search {
