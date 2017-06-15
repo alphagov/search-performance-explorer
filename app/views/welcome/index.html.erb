@@ -10,17 +10,17 @@
       <form class="homepage-form" action="/result" method="get">
 
         <div class="form-group">
-          <label class="form-label" for="search_term_input">
+          <label class="form-label" for="search_term">
             Search term to compare
           </label>
-          <input class="form-control" id="search_term_input" type="text" name="search_term"></input>
+          <%= text_field_tag("search_term", "", class: "form-control") %>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="result_count">
             Required number of results
           </label>
-          <input class="form-control" id="result_count" name="count" type="number"></input>
+          <%= number_field_tag("count", "", class: "form-control") %>
         </div>
 
         <div class="form-group">
@@ -29,6 +29,7 @@
           </label>
           <select class="form-control" name="which_test" id="AB_select">
             <option value="search_match_length">Search Match Length</option>
+            <option value="format_boosting">Format Boosting</option>
           </select>
         </div>
 
