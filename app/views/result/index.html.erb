@@ -2,14 +2,20 @@
     <%= "Search Performance Explorer" %>
 <% end %>
 
-<div id="wrapper">
+<div class="wrapper">
 
-  <div class="grid-row">
+  <div class="head-section">
+
     <div class="heading">
-      <h1 class="head-text">You searched for</h1>
-      <div id="search_term"><%= params["search_term"] %></h1></div>
 
-      <h2 id="results-text">These are your results</h2>
+      <% if params["search_term"] == "" %>
+        <h1 class="head-text">You did not enter a search term</h1>
+      <% else %>
+        <h1 class="head-text">You searched for</h1>
+        <div class="search-term"><h1><%= params["search_term"] %></h1></div>
+      <% end %>
+
+      <h2 class="results-text">These are your results</h2>
 
     </div>
 
@@ -40,6 +46,9 @@
       </form>
 
     </div>
+  </div>
+
+  <div class="grid-row">
 
 
 
@@ -70,7 +79,7 @@
     <% a_list = {} %>
     <% a_counter = 0 %>
     <% b_counter = 0 %>
-    <div class="AB_search_wrapper_left">
+    <div class="ab-search-wrapper-left">
       <h2 class="results-header">A Results</h2>
 
       <%# Adds the A test parameter to the URL  %>
@@ -88,7 +97,7 @@
         <% a_list["#{each_bit["link"]}"] = a_counter %>
 
         <%# displays this in the 'A' section %>
-        <div class="changeless_box">
+        <div class="changeless-box">
           <% link = "https://gov.uk" + each_bit["link"] %>
           <a href = "<%= link %>" ><%= each_bit["title"] %></a>
         </div>
@@ -96,7 +105,7 @@
       <% end %>
     </div>
 
-    <div class="AB_search_wrapper_right">
+    <div class="ab-search-wrapper-right">
       <h2 class="results-header">B Results</h2>
       <% uri = URI("#{url}&ab_tests=#{params["which_test"]}:B") %>
       <% response = Net::HTTP.get(uri) %>
@@ -111,24 +120,24 @@
         <% end %>
 
         <% if score_difference == "++++"%>
-          <div class="up_box">
+          <div class="up-box">
             <% link = "https://gov.uk" + each_bit["link"] %>
             <a href = "<%= link %>" ><%= each_bit["title"] %></a>
             <%= score_difference %>
           </div>
         <% elsif score_difference == 0 %>
-          <div class="changeless_box">
+          <div class="changeless-box">
             <% link = "https://gov.uk" + each_bit["link"] %>
             <a href = "<%= link %>" ><%= each_bit["title"] %></a>
           </div>
         <% elsif score_difference > 0 %>
-          <div class="up_box">
+          <div class="up-box">
             <% link = "https://gov.uk" + each_bit["link"] %>
             <a href = "<%= link %>" ><%= each_bit["title"] %></a>
             <%= "+#{score_difference}" %>
           </div>
         <% else %>
-          <div class="down_box">
+          <div class="down-box">
             <% link = "https://gov.uk" + each_bit["link"] %>
             <a href = "<%= link %>" ><%= each_bit["title"] %></a>
             <%= score_difference %>
@@ -141,9 +150,7 @@
 
   </div>
 
-
-  <br><br>
-  <div id="result_counter">
+  <div class="result-counter">
     <% number = findings["total"] - count.to_i %>
     <% number = 0 if number < 0 %>
     <%= findings["total"] %> results, <%= number %> not shown
