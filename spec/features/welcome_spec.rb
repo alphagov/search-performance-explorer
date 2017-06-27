@@ -8,7 +8,7 @@ feature 'visiting the homepage' do
 
   scenario 'the visitor can input text and search result number and search' do
     visit '/'
-    fill_in('search_term',  with: 'water')
+    fill_in('search_term', with: 'water')
     fill_in('count', with: '50')
     click_button 'Search'
     expect(page).to have_text("water")
@@ -28,24 +28,23 @@ feature 'visiting the homepage' do
 
   scenario 'the search function accepts search terms of different lengths' do
     visit '/'
-    fill_in('search_term',  with: 'apple gds')
+    fill_in('search_term', with: 'apple gds')
     fill_in('count', with: '50')
     expect(page.status_code).to eq(200)
 
     visit '/'
-    fill_in('search_term',  with: 'jonathan james hallam')
+    fill_in('search_term', with: 'jonathan james hallam')
     fill_in('count', with: '50')
     expect(page.status_code).to eq(200)
 
     visit '/'
-    fill_in('search_term',  with: 'water system control')
+    fill_in('search_term', with: 'water system control')
     fill_in('count', with: '50')
     expect(page.status_code).to eq(200)
 
     visit '/'
-    fill_in('search_term',  with: 'I recently smuggled a cheetah to the UK from Ethiopia, unfortunately it won\'t fit in my flat and I would like somebody to come and collect it')
+    fill_in('search_term', with: 'I recently smuggled a cheetah to the UK from Ethiopia, unfortunately it won\'t fit in my flat and I would like somebody to come and collect it')
     fill_in('count', with: '50')
     expect(page.status_code).to eq(200)
   end
-
 end

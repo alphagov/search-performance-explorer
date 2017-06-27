@@ -52,52 +52,9 @@
 
 
 
-    <%# Sets the base bit of the url and adds the user
-        defined search term connected with '+' so it's in
-        the right format                                  %>
-    <%  url = 'https://www.gov.uk/api/search.json?q='
-        term = params["search_term"]
-        url += term.split.join("+")   %>
-
-    <%# Allows the user to not enter a result count (default's 10)
-        and caps the displayed results at 1000 as per API limit.
-        Also adds the count to the URL that's passed in        %>
-    <% if params["count"].blank? %>
-      <% count = "10" %>
-    <% elsif params["count"].to_i > 1000 %>
-      <% count = "1000" %>
-    <% else %>
-      <%count = params["count"] %>
-    <% end %>
-    <% url += "&count=" + count %>
 
 
-    <%# Creates an empty hash to put the search results from our 'A'
-        test in, also an array to add our 'A' titles and a counter
-        to increment within each of the following loops
-                                  %>
-    <% a_list = {} %>
-    <% a_list_titles = [] %>
-    <% a_counter = 0 %>
-    <% b_counter = 0 %>
-
-    <%# <h2 class="results-header">A Results</h2> %>
-    <%# Adds the A test parameter to the URL  %>
-    <% uri = URI("#{url}&ab_tests=#{params["which_test"]}:A") %>
-    <%# Gets a result from the search API based on the URL we made %>
-    <% response = Net::HTTP.get(uri) %>
-    <% findings_left = JSON.parse(response) %>
-    <%# Loops over the 'results' section of our result %>
-    <% findings_left["results"].each do |each_bit| %>
-      <%# increments counter and creates hash entry based on link and counter %>
-      <% a_counter += 1 %>
-      <% a_list["#{each_bit["link"]}"] = a_counter %>
-      <% a_list_titles << each_bit["title"] %>
-    <% end %>
-    <% uri = URI("#{url}&ab_tests=#{params["which_test"]}:B") %>
-    <% response = Net::HTTP.get(uri) %>
-    <% findings_right = JSON.parse(response) %>
-
+    <% findings_left, findings_right, a_list, a_list_titles = *Searching.new(params).call %>
     <table class="results-table" >
       <tr class="table-row" class="table-row">
         <th scope="col"><h3 class="heading-27" >A Results</h3></th>
@@ -176,12 +133,12 @@
       <% end %>
       <tr class="table-row">
         <th>
-          <% number = findings_left["total"] - count.to_i %>
+          <% number = findings_left["total"] - findings_left["results"].count %>
           <% number = 0 if number < 0 %>
           <%= findings_left["total"] %> results, <%= number %> not shown
         </th>
         <th>
-          <% number = findings_right["total"] - count.to_i %>
+          <% number = findings_right["total"] - findings_right["results"].count %>
           <% number = 0 if number < 0 %>
           <p class="table-body">
             <%= "#{findings_right["total"]} results, #{number} not shown" %>
