@@ -8,10 +8,23 @@
 .button {
   @include button;
   font-size: 1.4em;
+  float: left;
+  clear: left;
+  margin-top: 60px;
 }
 
 .wrapper {
   @extend %site-width-container;
+}
+
+.table-column-with-padding {
+  margin-right: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.results-column {
+  padding-right: 10px;
 }
 
 .head-section {
@@ -29,17 +42,18 @@
   }
 }
 
+.table-row {
+  border-bottom: solid 1px $grey-3;
+  margin-top: 10px;
+}
+
 .grid-row {
   @extend %grid-row;
 
-  .ab-search-wrapper-left {
-    clear: both;
-    @include grid-column( 1 / 2 );
+  .results-table {
+    @include grid-column( 3 / 3 );
   }
 
-  .ab-search-wrapper-right {
-    @include grid-column( 1 / 2 );
-  }
 }
 
 .homepage-form-container {
@@ -56,26 +70,21 @@
 .changeless-box {
   text-decoration: none;
   padding: 2px;
+  text-align: right;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.up-box a:link { color: $grass-green; }
-.down-box a:link { color: $red;}
-.up-box a:visited { color: $grass-green; }
-.down-box a:visited { color: $red;}
-.up-box {
+.up-box,
+.up-box a:link,
+.up-box a:visited {
   color: $grass-green;
-  background-color: $grass-green-25;
 }
 
-.down-box {
+.down-box,
+.down-box a:link,
+.down-box a:visited {
   color: $red;
-  background-color: $red-25;
-}
-
-.result-counter {
-  clear: both;
-  margin-top: 30px;
-  margin-bottom: 25%;
 }
 
 .head-text {
@@ -90,8 +99,43 @@
   @include copy-16;
 }
 
+.results-text a:link {
+  @include heading-24;
+  text-decoration: underline;
+}
+
 .results-header {
   @include heading-36;
+}
+
+.head-info {
+  @include copy-14;
+  color: $grey-1;
+  position: relative;
+  bottom: 20px;
+}
+.head-info a:link {
+  @include copy-14;
+}
+
+.head-info-2 {
+  position: relative;
+  bottom: 20px;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.enhanced-results-table {
+  margin-top: 10px
+}
+
+.msbp-table, .msbp-table-title {
+  border-bottom: 1px solid $grey-3;
+  padding-bottom: 3px;
+  color: black
+}
+.msbp-table {
+  font-weight: normal;
 }
 
 .form-control {
@@ -101,24 +145,93 @@
   line-height: 1.31579;
 }
 
-.form-control:focus {
+#info_basic, #info_enhanced {
+  width: 39px;
+  height: 39px;
+  border: 2px solid black;
+  -webkit-appearance: radio;
+  box-sizing: border-box;
+  border-radius: 100%;
+  cursor: pointer;
+  position: relative;
+  bottom: 4px;
+  float: left;
+}
+
+.control_indicator {
+  position: relative;
+  bottom: 30px;
+  width: 39px;
+  height: 39px;
+  background: white;
+  border-radius: 100%;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.control_indicator:after {
+  content: "";
+  position: relative;
+  color: black;
+  border: 5px solid black;
+  left: 6px;
+	top: 6px;
+	width: 23px;
+	height: 23px;
+	border-radius: 50%;
+	background: black;
+  display: none;
+}
+
+.radio-tag {
+  margin-left: 15px;
+  position: relative;;
+  top: 3px;
+}
+
+.form-label input:checked ~ .control_indicator:after {
+  display: block;
+}
+
+.control_indicator:focus, .form-control:focus {
   outline-offset: 0;
   outline: 3px solid $yellow;
   border: 2px solid $black;
 }
 
-.form-group {
-  padding-bottom: 15px;
+#info_basic:focus, #info_enhanced:focus {
+  box-shadow: 0 0 0 3pt $yellow;
+}
+
+.enhanced-checkbox, .noscript-enhanced-checkbox {
+  background-color: $grey-3;
+  clear: left;
+  padding: 5px;
+  margin-left: 55px;
+}
+
+.enhanced-checkbox {
+  display: none;
+}
+
+.enhanced-option-wrapper {
+  margin-bottom: 0px;
 }
 
 .form-label {
-  font-family: "nta", Arial, sans-serif;
-  font-weight: 400;
-  text-transform: none;
-  font-size: 16px;
-  line-height: 1.25; }
+  @include heading-24;
+  display: block;
+  float: left;
+  clear: left;
+}
 
+.doc-link {
+  font-size: 14px;
+}
 
+.radio-label {
+  height: 60px
+}
 
 @media only screen and (max-width: 640px) {
   .new-search {

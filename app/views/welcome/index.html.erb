@@ -2,6 +2,22 @@
     <%= "Search Performance Explorer" %>
 <% end %>
 
+<% content_for :head do %>
+  <script>
+    $(document).ready(function() {
+      $('input[type="radio"]').click(function() {
+        if($(this).attr('id') == 'info_enhanced') {
+          $('.enhanced-checkbox').show();
+        }
+
+        else {
+          $('.enhanced-checkbox').hide();
+        }
+      });
+    });
+  </script>
+<% end %>
+
 <% content_for :content do %>
   <div id="wrapper">
     <h1 class="head-text">Search</h1><br><br>
@@ -10,17 +26,17 @@
       <form class="homepage-form" action="/result" method="get">
 
         <div class="form-group">
-          <label class="form-label" for="search_term_input">
+          <label class="form-label" for="search_term">
             Search term to compare
           </label>
-          <input class="form-control" id="search_term_input" type="text" name="search_term"></input>
+          <%= text_field_tag("search_term", "", class: "form-control") %>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="result_count">
             Required number of results
           </label>
-          <input class="form-control" id="result_count" name="count" type="number"></input>
+          <%= number_field_tag("count", "", class: "form-control") %>
         </div>
 
         <div class="form-group">
@@ -29,13 +45,58 @@
           </label>
           <select class="form-control" name="which_test" id="AB_select">
             <option value="search_match_length">Search Match Length</option>
+            <option value="format_boosting">Format Boosting</option>
           </select>
         </div>
 
+        <div class="form-group">
+          <label class="form-label radio-label" for="info_basic">
+            <%= radio_button_tag("info", "basic", true) %>
+            <span class="radio-tag">Basic Information</span>
+            <div class="control_indicator" ></div>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label radio-label" for="info_enhanced">
+            <%= radio_button_tag("info", "enhanced") %>
+            <span class="radio-tag">Enhanced Information</span>
+            <div class="control_indicator" ></div>
+          </label>
+        </div>
+
+        <div class="enhanced-checkbox">
+          <% enhanced_options = [ "historical", "popularity", "content_id", "document_collections",
+                                  "mainstream_browse_pages", "organisations", "taxons", "people",
+                                  "policies", "specialist_sectors"] %>
+          <% enhanced_options.each do |option| %>
+            <div class="form-group enhanced-option-wrapper">
+              <%= check_box_tag(option, "on", false, class: "enhanced-option") %>
+              <label class="enhanced-labels" for="<%= option %>" >
+                <%= option.split("_").map{|x| x.capitalize}.join(" ") %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+        
+        <noscript>
+          <div class="noscript-enhanced-checkbox">
+            <% enhanced_options = [ "historical", "popularity", "content_id", "document_collections",
+                                    "mainstream_browse_pages", "organisations", "taxons", "people",
+                                    "policies", "specialist_sectors"] %>
+            <% enhanced_options.each do |option| %>
+              <div class="form-group enhanced-option-wrapper">
+                <%= check_box_tag(option, "on", false, class: "enhanced-option") %>
+                <label class="enhanced-labels" for="<%= option %>" >
+                  <%= option.split("_").map{|x| x.capitalize}.join(" ") %>
+                </label>
+              </div>
+            <% end %>
+          </div>
+        </noscript>
 
         <input class="button" id="search_button" type="submit" value="Search"></input>
       </form>
-
     </div>
   </div>
 <% end %>

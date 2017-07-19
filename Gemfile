@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'govuk_admin_template'
 gem 'govuk_frontend_toolkit', :git => "https://github.com/alphagov/govuk_frontend_toolkit_gem.git", :submodules => true
-gem 'govuk-lint'
+gem 'gds-api-adapters'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -44,6 +44,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
+  gem 'govuk-lint'
+  gem 'pry'
 end
 
 group :development do
