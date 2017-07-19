@@ -3,9 +3,8 @@
 <% end %>
 
 <div class="wrapper">
-
+  <a name="top"></a>
   <div class="head-section">
-
     <div class="heading">
 
       <% if params["search_term"].blank? %>
@@ -20,16 +19,14 @@
     </div>
 
     <div class="new-search">
-
       <h2 class="head-text">New Search</h2>
 
       <form id="homepage-form" action="/result" method="get">
-
         <div class="form-group">
           <label class="form-label" for="search_term_input">
             Search term to compare
           </label>
-          <%= text_field_tag("search_term", "", class: "form-control") %>
+          <%= text_field_tag(:search_term, params[:search_term], class: "form-control") %>
         </div>
 
         <div class="form-group">
@@ -39,71 +36,118 @@
           <%= number_field_tag("count", "#{params["count"]}", class: "form-control", id: "result_count") %>
         </div>
 
+        <input type="hidden" name="basic_info" value="<%= params["basic_info"] %>"/>
         <input type="hidden" name="which_test" value="<%= params["which_test"] %>"/>
-
         <input class="button" id="search_button" type="submit" value="Search"></input>
 
       </form>
-
     </div>
   </div>
 
   <div class="grid-row">
-
-
-
-
-
-    <% findings_left, findings_right, a_list, a_list_titles = *Searching.new(params).call %>
+    <% results = Searching.new(params).call %>
     <table class="results-table" >
       <tr class="table-row" class="table-row">
+        <th></th>
         <th scope="col"><h3 class="heading-27" >A Results</h3></th>
         <th scope="col"><h3 class="heading-27" >B Results</h3></th>
         <th scope="col"><h3 class="heading-27" >Difference</h3></th>
       </tr>
-      <% b_counter = 0 %>
-      <% findings_right["results"].each do |each_bit| %>
+      <% results.results.each do |result| %>
         <tr class="table-row">
-          <% if a_list["#{each_bit["link"]}"] %>
-            <% score_difference = a_list["#{each_bit["link"]}"] - b_counter - 1 %>
-          <% else %>
-            <% score_difference = "++++"  %>
-          <% end %>
 
-          <% if a_list.key(b_counter + 1) %>
-            <% a_link = "https://gov.uk" + a_list.key(b_counter + 1) %>
-          <% end %>
-
-          <th>
-            <a href= "<%= a_link %>" >
-              <p class="table-body">
-                <% if a_list_titles[b_counter] %>
-                  <%= truncate(a_list_titles[b_counter], :length => 50 ) %>
-                <% else %>
-                  <%= "" %>
-                <% end %>
-              </p>
-            </a>
+          <th >
+            <p class="table-body table-column-with-padding">
+              <%= "#{result.position + 1 } -"%>
+            </p>
           </th>
 
-          <% link = "https://gov.uk" + each_bit["link"] %>
-          <th>
-            <a href = "<%= link %>" >
-              <p class="table-body">
-                <%= truncate(each_bit["title"], :length => 50 ) %>
-              </p>
-            </a>
-          </th>
+          <% sides = [result.left, result.right] %>
+          <% sides.each do |side| %>
+            <th class="results-column">
+              <p class="results-text" >
+                <a href = "<%= "#{result.link(side)}" %>" >
+                  <%= truncate(result.name(side), :length => 60 ) %>
+                </a>
+                <p><%= result.title(side) %></p><br>
+                <span class="head-info">
 
-          <% if score_difference == "++++"%>
+                  <% head_info_list = [] %>
+                  <% head_info_list << result.doc_format(side).split("_").join(" ").capitalize << result.date(side) %>
+                  <% if params["info"] == "enhanced" && params["historical"] == "on" ; head_info_list << result.historical(side) ; end %>
+                  <% if params["info"] == "enhanced" && params["popularity"] == "on" ; head_info_list << result.popularity(side) ; end %>
+                  <%= head_info_list.compact.join(", ") %>
+                </span>
+                <br>
+                <span class="head-info">
+                  <% if params["info"] == "enhanced" && params["content_id"] == "on" %>
+                    <%= result.content_id(@right) %>
+                    <br>
+                  <% end %>
+
+                  <% if params["info"] == "enhanced" && params["organisations"] == "on" %>
+                    <a href="<%= result.organisations(side)[1] %>"><%= result.organisations(side)[0] %></a>
+                  <% end %>
+                  <% if params["info"] == "enhanced" && params["people"] == "on" && result.people(side)[0] != nil %>
+                    <a href="<%= result.people(side)[1] %>"><%= result.people(side)[0] %></a>
+                  <% end %>
+                </span>
+                <br>
+                <span class="head-info-2">
+                  <%= truncate(result.description(side), :length => 200) %>
+                </span>
+                <span class="head-info">
+                  <% if params["info"] == "enhanced" && params["mainstream_browse_pages"] == "on"  %>
+                    <% result.mainstream_browse_pages(side) %>
+                  <% end %>
+                  <% if params["info"] == "enhanced" && params["taxons"] == "on" && result.taxons(side) != nil  %>
+                    <% result.taxons(side) %>
+                  <% end %>
+                  <% if params["info"] == "enhanced" && params["policies"] == "on" && result.policies(side) != nil  %>
+                    <% result.policies(side) %>
+                  <% end %>
+                  <% if params["info"] == "enhanced" && params["specialist_sectors"] == "on" %>
+                    <% result.specialist_sectors(side) %>
+                  <% end %>
+                  <% if params["info"] == "enhanced" && params["document_collections"] == "on" && result.document_collections(side) != nil  %>
+                    <% result.document_collections(side) %>
+                  <% end %>
+
+                  <table class="enhanced-results-table">
+                    <% result.enhanced_results_hash.each do |field, title_link_pair| %>
+                      <tr>
+                        <th class="msbp-table-title">
+                          <%= field %>
+                        </th>
+                      </tr>
+                      <% title_link_pair.each do |title, link| %>
+                        <tr>
+                          <th class="msbp-table">
+                            <% if link != "" %>
+                              <a href="<%= link %>"><%= title %></a>
+                            <% else %>
+                              <p><%= title %></p>
+                            <% end %>
+                          </th>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                  </table>
+                </span>
+              </p>
+            </th>
+          <% end %>
+
+
+          <% if result.score_difference == "++++" || result.score_difference > 0 %>
             <th>
               <div class="up-box">
                 <p class="table-body">
-                  <%= score_difference %>
+                  <%= "+#{result.score_difference}" %>
                 </p>
               </div>
             </th>
-          <% elsif score_difference == 0 %>
+          <% elsif result.score_difference == 0 %>
             <th>
               <div class="changeless-box">
                 <p class="table-body">
@@ -111,42 +155,29 @@
                 </p>
               </div>
             </th>
-          <% elsif score_difference > 0 %>
-            <th>
-              <div class="up-box">
-                <p class="table-body">
-                  <%= "+#{score_difference}" %>
-                </p>
-              </div>
-            </th>
           <% else %>
             <th>
               <div class="down-box">
                 <p class="table-body">
-                  <%= score_difference %>
+                  <%= result.score_difference %>
                 </p>
               </div>
             </th>
           <% end %>
-          <% b_counter += 1 %>
         </tr>
       <% end %>
       <tr class="table-row">
+        <th></th>
         <th>
-          <% number = findings_left["total"] - findings_left["results"].count %>
-          <% number = 0 if number < 0 %>
-          <%= findings_left["total"] %> results, <%= number %> not shown
+          <%= results.left_total %> results, <%= results.left_missing %> not shown
         </th>
         <th>
-          <% number = findings_right["total"] - findings_right["results"].count %>
-          <% number = 0 if number < 0 %>
-          <p class="table-body">
-            <%= "#{findings_right["total"]} results, #{number} not shown" %>
-          </p>
+          <%= results.right_total %> results, <%= results.right_missing %> not shown
         </th>
         <th>
         </th>
       </tr>
     </table>
   </div>
+  <a href="#top">Back to top</a>
 </div>
