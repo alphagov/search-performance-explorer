@@ -81,7 +81,7 @@
                 <br>
                 <span class="head-info">
                   <% if params["info"] == "enhanced" && params["content_id"] == "on" %>
-                    <%= result.content_id(@right) %>
+                    <%= "Content ID: " + result.content_id(side) %>
                     <br>
                   <% end %>
 

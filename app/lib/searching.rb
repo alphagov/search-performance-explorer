@@ -12,20 +12,18 @@ class Searching
   end
 
   def call
-    terms = params["search_term"].split.join("+")
-    url = "https://www.gov.uk/api/search.json?q=#{terms}&count=#{count}"
-
+    terms = @params["search_term"].split.join("+")
     rummager = GdsApi::Rummager.new(Plek.new.find('rummager'))
     findings_new_left = rummager.search(q:      "#{terms}",
                                         fields: [ "is_historic", "title", "link", "popularity", "public_timestamp", "description",
                                                   "format", "content_id", "document_collections", "mainstream_browse_pages",
                                                   "organisations", "taxons", "people", "policies", "specialist_sectors"],
-                                        count:  "#{count}", ab_tests: "#{params["which_test"]}:A", c: "#{Time.now.getutc}" )
+                                        count:  "#{count}", ab_tests: "#{params["which_test"]}:A", c: "#{Time.now.getutc}")
     findings_new_right = rummager.search(q:      "#{terms}",
                                         fields: [ "is_historic", "title", "link", "popularity", "public_timestamp", "description",
                                                   "format", "content_id", "document_collections", "mainstream_browse_pages",
                                                   "organisations", "taxons", "people", "policies", "specialist_sectors"],
-                                        count:  "#{count}", ab_tests: "#{params["which_test"]}:B", c: "#{Time.now.getutc}" )
+                                        count:  "#{count}", ab_tests: "#{params["which_test"]}:B", c: "#{Time.now.getutc}")
     Results.new(findings_new_left, findings_new_right)
   end
 
@@ -69,7 +67,7 @@ class Searching
       rescue
         nil
       else
-        "Content ID: #{side[position][0]['content_id']}"
+        side[position][0]['content_id']
       end
     end
     def date(side)
@@ -78,7 +76,7 @@ class Searching
       rescue
         nil
       else
-        @date_hash["#{side[position][0]['public_timestamp'][5..6]}"] + " #{left[position][0]['public_timestamp'][0..3]}"
+        @date_hash["#{side[position][0]['public_timestamp'][5..6]}"] + " #{side[position][0]['public_timestamp'][0..3]}"
       end
     end
     def description(side)
@@ -216,7 +214,7 @@ class Searching
         nil
       else
         side[position][0]['title']
-      end        
+      end
     end
     def specialist_sectors(side)
       begin

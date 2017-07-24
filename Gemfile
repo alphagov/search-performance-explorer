@@ -46,6 +46,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'govuk-lint'
   gem 'pry'
+  gem 'webmock'
+  gem 'json'
 end
 
 group :development do
