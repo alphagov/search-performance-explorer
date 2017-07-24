@@ -75,21 +75,25 @@
                   <% head_info_list = [] %>
                   <% head_info_list << result.doc_format(side).split("_").join(" ").capitalize << result.date(side) %>
                   <% if params["info"] == "enhanced" && params["historical"] == "on" ; head_info_list << result.historical(side) ; end %>
-                  <% if params["info"] == "enhanced" && params["popularity"] == "on" ; head_info_list << result.popularity(side) ; end %>
+                  <% if params["info"] == "enhanced" && params["popularity"] == "on" ; head_info_list << "Popularity: #{result.popularity(side)}" ; end %>
                   <%= head_info_list.compact.join(", ") %>
                 </span>
                 <br>
                 <span class="head-info">
-                  <% if params["info"] == "enhanced" && params["content_id"] == "on" %>
+                  <% if params["info"] == "enhanced" && params["content_id"] == "on" && result.content_id(side) != nil %>
                     <%= "Content ID: " + result.content_id(side) %>
                     <br>
                   <% end %>
 
-                  <% if params["info"] == "enhanced" && params["organisations"] == "on" %>
-                    <a href="<%= result.organisations(side)[1] %>"><%= result.organisations(side)[0] %></a>
+                  <% if params["info"] == "enhanced" && params["organisations"] == "on" && result.organisations(side) != nil%>
+                    <% result.organisations(side).each do |organisation| %>
+                      <a href="<%= organisation[1] %>"><%= organisation[0] %></a><br>
+                    <% end %>
                   <% end %>
-                  <% if params["info"] == "enhanced" && params["people"] == "on" && result.people(side)[0] != nil %>
-                    <a href="<%= result.people(side)[1] %>"><%= result.people(side)[0] %></a>
+                  <% if params["info"] == "enhanced" && params["people"] == "on" && result.people(side) != nil %>
+                    <% result.people(side).each do |person| %>
+                      <a href="<%= person[1] %>"><%= person[0] %></a><br>
+                    <% end %>
                   <% end %>
                 </span>
                 <br>

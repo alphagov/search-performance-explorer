@@ -90,13 +90,13 @@ class Searching
     end
     def document_collections(side)
       begin
-        left[position][0]['document_collections']
+        side[position][0]['document_collections']
       rescue
         nil
       else
-        if left[position][0]['document_collections'] != nil
+        if side[position][0]['document_collections'] != nil
           return_array = []
-          left[position][0]['document_collections'].each do |sector|
+          side[position][0]['document_collections'].each do |sector|
             return_array << [sector['title'], "https://www.gov.uk"+sector['link']]
           end
           @enhanced_results_hash["Document Collections"] = return_array.uniq
@@ -112,7 +112,8 @@ class Searching
       rescue
         nil
       else
-        side[position][0]['is_historic'] == "true" ? "Historical" : "Current"
+        return nil if side[position][0]['is_historic'] == nil
+        side[position][0]['is_historic'] == true ? "Historical" : "Current"
       end
     end
     def link(side)
@@ -121,8 +122,10 @@ class Searching
       rescue
         nil
       else
-        if side[position][0]['link'].start_with?("https://")
+        if side[position][0]['link'].start_with?("https://") || side[position][0]['link'].start_with?("http://")
           side[position][0]['link']
+        elsif side[position][0]['link'].start_with?("www.")
+          "https://#{side[position][0]['link']}"
         else
           "https://gov.uk" + side[position][0]['link']
         end
@@ -152,20 +155,32 @@ class Searching
     end
     def organisations(side)
       begin
-        side[position][0]['organisations'][0]['title']
+        side[position][0]['organisations']
       rescue
-        [nil, nil]
+        nil
       else
-        [side[position][0]['organisations'][0]['title'], "https://gov.uk#{side[position][0]['organisations'][0]['link']}"]
+        return_array = []
+        if side[position][0]['organisations'] != nil
+          side[position][0]['organisations'].each do |organisation|
+            return_array << [organisation['title'], "https://gov.uk#{organisation['link']}"]
+          end
+          return_array
+        end
       end
     end
     def people(side)
       begin
         side[position][0]['people'][0]['title']
       rescue
-        [nil, nil]
+        nil
       else
-        [side[position][0]['people'][0]['title'], "https://gov.uk#{side[position][0]['people'][0]['link']}"]
+        return_array = []
+        if side[position][0]['people'] != nil
+          side[position][0]['people'].each do |person|
+            return_array << [person['title'], "https://gov.uk#{person['link']}"]
+          end
+          return_array
+        end
       end
     end
     def policies(side)
@@ -189,7 +204,7 @@ class Searching
       rescue
         nil
       else
-        "Popularity: #{side[position][0]['popularity']}"
+        side[position][0]['popularity']
       end
     end
     def taxons(side)
