@@ -8,10 +8,126 @@
 .button {
   @include button;
   font-size: 1.4em;
+  float: left;
+  clear: left;
+  margin-top: 60px;
 }
 
-.wrapper {
-  @extend %site-width-container;
+.control-indicator {
+  position: relative;
+  bottom: 30px;
+  width: 39px;
+  height: 39px;
+  background: $white;
+  border-radius: 100%;
+  border: 2px solid $black;
+  cursor: pointer;
+}
+
+.control-indicator:after {
+  content: "";
+  position: relative;
+  color: $black;
+  border: 5px solid $black;
+  left: 6px;
+  top: 6px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: $black;
+  display: none;
+}
+
+.control-indicator:focus,
+.form-control:focus {
+  outline-offset: 0;
+  outline: 3px solid $yellow;
+  border: 2px solid $black;
+}
+
+.doc-link {
+  font-size: 14px;
+}
+
+.down-box,
+.down-box a:link,
+.down-box a:visited {
+  color: $red;
+}
+
+.e-table-cell,
+.e-table-title {
+  border-bottom: 1px solid $grey-3;
+  padding-bottom: 3px;
+  color: $black;
+}
+
+.e-table-cell {
+  font-weight: normal;
+}
+
+.enhanced-checkbox {
+  background-color: $grey-3;
+  clear: left;
+  padding: 5px;
+  margin-left: 55px;
+}
+
+.enhanced-checkbox {
+  display: none;
+}
+
+.enhanced-option-wrapper {
+  margin-bottom: 0;
+}
+
+.enhanced-results-table {
+  margin-top: 10px;
+}
+
+.form-control {
+  border: 2px solid $black;
+  border-radius: 0;
+  font-size: 19px;
+  line-height: 1.31579;
+}
+
+.form-label {
+  @include heading-24;
+  display: block;
+  float: left;
+  clear: left;
+}
+
+.form-label input:checked ~ .control-indicator:after {
+  display: block;
+}
+
+.grid-row {
+  @extend %grid-row;
+
+  .results-table {
+    @include grid-column( 3 / 3 );
+  }
+
+}
+
+.head-info {
+  @include copy-14;
+  color: $grey-1;
+  position: relative;
+  bottom: 20px;
+}
+
+.head-info a:link {
+  @include copy-14;
+}
+
+.head-info-2 {
+  position: relative;
+  bottom: 20px;
+  font-weight: normal;
+  font-size: 16px;
 }
 
 .head-section {
@@ -29,17 +145,8 @@
   }
 }
 
-.grid-row {
-  @extend %grid-row;
-
-  .ab-search-wrapper-left {
-    clear: both;
-    @include grid-column( 1 / 2 );
-  }
-
-  .ab-search-wrapper-right {
-    @include grid-column( 1 / 2 );
-  }
+.head-text {
+  @include heading-36;
 }
 
 .homepage-form-container {
@@ -51,74 +158,94 @@
   }
 }
 
-.up-box,
-.down-box,
-.changeless-box {
-  text-decoration: none;
-  padding: 2px;
+.info-basic,
+.info-enhanced {
+  width: 39px;
+  height: 39px;
+  border: 2px solid $black;
+  -webkit-appearance: radio;
+  box-sizing: border-box;
+  border-radius: 100%;
+  cursor: pointer;
+  position: relative;
+  bottom: 4px;
+  float: left;
 }
 
-.up-box a:link { color: $grass-green; }
-.down-box a:link { color: $red;}
-.up-box a:visited { color: $grass-green; }
-.down-box a:visited { color: $red;}
-.up-box {
-  color: $grass-green;
-  background-color: $grass-green-25;
+.info-basic:focus,
+.info-enhanced:focus {
+  box-shadow: 0 0 0 3pt $yellow;
 }
 
-.down-box {
-  color: $red;
-  background-color: $red-25;
-}
-
-.result-counter {
-  clear: both;
-  margin-top: 30px;
-  margin-bottom: 25%;
-}
-
-.head-text {
+.noscript-notice {
+  height: 50px;
+  width: 100%;
   @include heading-36;
+  background-color: $white;
+  text-decoration: underline;
 }
 
-.search-term {
-  @include heading-27;
+.radio-label {
+  height: 60px;
 }
 
-.results-text {
-  @include copy-16;
+.radio-tag {
+  margin-left: 15px;
+  position: relative;
+  top: 3px;
+}
+
+.results-column {
+  padding-right: 10px;
 }
 
 .results-header {
   @include heading-36;
 }
 
-.form-control {
-  border: 2px solid $black;
-  border-radius: 0;
-  font-size: 19px;
-  line-height: 1.31579;
+.results-text {
+  @include copy-16;
 }
 
-.form-control:focus {
-  outline-offset: 0;
-  outline: 3px solid $yellow;
-  border: 2px solid $black;
+.results-text a:link {
+  @include heading-24;
+  text-decoration: underline;
 }
 
-.form-group {
-  padding-bottom: 15px;
+.search-term {
+  @include heading-27;
 }
 
-.form-label {
-  font-family: "nta", Arial, sans-serif;
-  font-weight: 400;
-  text-transform: none;
-  font-size: 16px;
-  line-height: 1.25; }
+.table-column-with-padding {
+  margin-right: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
+.table-row {
+  border-bottom: solid 1px $grey-3;
+  margin-top: 10px;
+}
 
+.up-box,
+.up-box a:link,
+.up-box a:visited {
+  color: $grass-green;
+}
+
+.up-box,
+.down-box,
+.changeless-box {
+  text-decoration: none;
+  padding: 2px;
+  text-align: right;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.wrapper {
+  @extend %site-width-container;
+}
 
 @media only screen and (max-width: 640px) {
   .new-search {
