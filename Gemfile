@@ -31,8 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'govuk_admin_template'
-gem 'govuk_frontend_toolkit', :git => "https://github.com/alphagov/govuk_frontend_toolkit_gem.git", :submodules => true
-gem 'govuk-lint'
+gem 'govuk_frontend_toolkit', git: "https://github.com/alphagov/govuk_frontend_toolkit_gem.git", submodules: true
+gem 'gds-api-adapters'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -44,6 +44,11 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
+  gem 'govuk-lint'
+  gem 'pry'
+  gem 'webmock'
+  gem 'json'
+  gem 'rake'
 end
 
 group :development do

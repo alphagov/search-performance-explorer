@@ -3,157 +3,175 @@
 <% end %>
 
 <div class="wrapper">
-
+  <a name="top"></a>
   <div class="head-section">
-
     <div class="heading">
 
-      <% if params["search_term"] == "" %>
+      <% if params["search_term"].blank? %>
         <h1 class="head-text">You did not enter a search term</h1>
       <% else %>
         <h1 class="head-text">You searched for</h1>
-        <div class="search-term"><h1><%= params["search_term"] %></h1></div>
+        <h2 class="search-term"><%= params["search_term"] %></h2>
       <% end %>
-
       <h2 class="results-text">These are your results</h2>
 
     </div>
 
     <div class="new-search">
-
       <h2 class="head-text">New Search</h2>
 
       <form id="homepage-form" action="/result" method="get">
-
         <div class="form-group">
           <label class="form-label" for="search_term_input">
             Search term to compare
           </label>
-          <input class="form-control" id="search_term_input" type="text" name="search_term"></input>
+          <%= text_field_tag(:search_term, params[:search_term], class: "form-control") %>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="result_count">
             Required number of results
           </label>
-          <input class="form-control" id="result_count" name="count" type="number"></input>
+          <%= number_field_tag("count", "#{params["count"]}", class: "form-control", id: "result_count") %>
         </div>
 
-        <input type="hidden" name="which_test" value="search_match_length"/>
-
+        <input type="hidden" name="basic_info" value="<%= params["basic_info"] %>"/>
+        <input type="hidden" name="which_test" value="<%= params["which_test"] %>"/>
         <input class="button" id="search_button" type="submit" value="Search"></input>
 
       </form>
-
     </div>
   </div>
 
   <div class="grid-row">
 
+    <% results = Searching.new(params).call %>
+    <table class="results-table" >
+      <tr class="table-row">
+        <th></th>
+        <th scope="col"><h3 class="heading-27" >A Results</h3></th>
+        <th scope="col"><h3 class="heading-27" >B Results</h3></th>
+        <th scope="col"><h3 class="heading-27" >Difference</h3></th>
+      </tr>
+      <% results.results.each do |result| %>
+        <tr class="table-row">
 
+          <th >
+            <p class="table-body table-column-with-padding">
+              <%= "#{result.position + 1 } -"%>
+            </p>
+          </th>
 
-    <%# Sets the base bit of the url and adds the user
-        defined search term connected with '+' so it's in
-        the right format                                  %>
-    <% url = 'https://www.gov.uk/api/search.json?q=' %>
-    <% term = params["search_term"] %>
-    <% url += term.split.join("+") %>
+          <% sides = [result.left, result.right] %>
+          <% sides.each do |side| %>
+            <th class="results-column">
+              <p class="results-text" >
+                <a href = "<%= "#{link_format(result.link(side))}" %>" >
+                  <%= truncate(name(result.link(side)), :length => 60 ) %>
+                </a>
+                <p><%= result.title(side) %></p><br>
+                <span class="head-info">
 
+                  <%
+                  head_info_list = [display_format(result.doc_format(side)), date_format(result.date(side))]
+                  head_info_list << historical_or_current(result.historical(side)) if historical_enabled?
+                  head_info_list << display_popularity(result.popularity(side)) if popularity_enabled?
+                  %>
+                  <%= head_info_list.compact.join(", ") %>
+                  <br>
+                  <% if content_id_enabled? && result.content_id(side) != nil %>
+                    <%= display_content_id(result.content_id(side)) %>
+                    <br>
+                  <% end %>
 
-    <%# Allows the user to not enter a result count (default's 10)
-        and caps the displayed results at 1000 as per API limit.
-        Also adds the count to the URL that's passed in        %>
-    <% if params["count"] == "" %>
-      <% count = "10" %>
-    <% elsif params["count"].to_i > 1000 %>
-      <%count = "1000" %>
-    <% else %>
-      <%count = params["count"] %>
-    <% end %>
-    <% url += "&count=" + count %>
+                  <% if organisations_enabled? && result.organisations(side) != nil%>
+                    <% result.organisations(side).each do |organisation| %>
+                      <a href="<%= organisation[1] %>"><%= organisation[0] %></a><br>
+                    <% end %>
+                  <% end %>
+                  <% if people_enabled? && result.people(side) != nil %>
+                    <% result.people(side).each do |person| %>
+                      <a href="<%= person[1] %>"><%= person[0] %></a><br>
+                    <% end %>
+                  <% end %>
+                </span>
+                <br>
+                <span class="head-info-2">
+                  <%= truncate(result.description(side), :length => 200) %>
+                </span>
+                <span class="head-info">
+                  <%
+                  result.document_collections(side) if document_collections_enabled?
+                  result.mainstream_browse_pages(side) if mainstream_browse_pages_enabled?
+                  result.policies(side) if policies_enabled?
+                  result.specialist_sectors(side) if specialist_sectors_enabled?
+                  result.taxons(side) if taxons_enabled?
+                  %>
 
+                  <table class="enhanced-results-table">
+                    <% result.enhanced_results_hash.each do |field, title_link_pair| %>
+                      <tr>
+                        <th class="e-table-title">
+                          <%= field %>
+                        </th>
+                      </tr>
+                      <% title_link_pair.each do |title, link| %>
+                        <tr>
+                          <th class="e-table-cell">
+                            <% if link != "" %>
+                              <a href="<%= link %>"><%= title %></a>
+                            <% else %>
+                              <p><%= title %></p>
+                            <% end %>
+                          </th>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                  </table>
+                </span>
+              </p>
+            </th>
+          <% end %>
 
-    <%# Creates an empty hash to put the search results from our 'A'
-        test in and a counter to increment within each of the following
-        loops                           %>
-    <% a_list = {} %>
-    <% a_counter = 0 %>
-    <% b_counter = 0 %>
-    <div class="ab-search-wrapper-left">
-      <h2 class="results-header">A Results</h2>
-
-      <%# Adds the A test parameter to the URL  %>
-      <% uri = URI("#{url}&ab_tests=#{params["which_test"]}:A") %>
-
-      <%# Gets a result from the search API based on the URL we made %>
-      <% response = Net::HTTP.get(uri) %>
-      <% findings = JSON.parse(response) %>
-
-      <%# Loops over the 'results' section of our result %>
-      <% findings["results"].each do |each_bit| %>
-
-        <%# increments counter and creates hash entry based on link and counter %>
-        <% a_counter += 1 %>
-        <% a_list["#{each_bit["link"]}"] = a_counter %>
-
-        <%# displays this in the 'A' section %>
-        <div class="changeless-box">
-          <% link = "https://gov.uk" + each_bit["link"] %>
-          <a href = "<%= link %>" ><%= each_bit["title"] %></a>
-        </div>
-        <br><br>
+          <% if result.score_difference == "++++" || result.score_difference > 0 %>
+            <th>
+              <div class="up-box">
+                <p class="table-body">
+                  <%= "+#{result.score_difference}" %>
+                </p>
+              </div>
+            </th>
+          <% elsif result.score_difference == 0 %>
+            <th>
+              <div class="changeless-box">
+                <p class="table-body">
+                  N/A
+                </p>
+              </div>
+            </th>
+          <% else %>
+            <th>
+              <div class="down-box">
+                <p class="table-body">
+                  <%= result.score_difference %>
+                </p>
+              </div>
+            </th>
+          <% end %>
+        </tr>
       <% end %>
-    </div>
-
-    <div class="ab-search-wrapper-right">
-      <h2 class="results-header">B Results</h2>
-      <% uri = URI("#{url}&ab_tests=#{params["which_test"]}:B") %>
-      <% response = Net::HTTP.get(uri) %>
-      <% findings = JSON.parse(response) %>
-      <% findings["results"].each do |each_bit| %>
-
-        <% b_counter += 1 %>
-        <% if a_list["#{each_bit["link"]}"] != nil %>
-          <% score_difference = a_list["#{each_bit["link"]}"] - b_counter %>
-        <% else %>
-          <% score_difference = "++++"  %>
-        <% end %>
-
-        <% if score_difference == "++++"%>
-          <div class="up-box">
-            <% link = "https://gov.uk" + each_bit["link"] %>
-            <a href = "<%= link %>" ><%= each_bit["title"] %></a>
-            <%= score_difference %>
-          </div>
-        <% elsif score_difference == 0 %>
-          <div class="changeless-box">
-            <% link = "https://gov.uk" + each_bit["link"] %>
-            <a href = "<%= link %>" ><%= each_bit["title"] %></a>
-          </div>
-        <% elsif score_difference > 0 %>
-          <div class="up-box">
-            <% link = "https://gov.uk" + each_bit["link"] %>
-            <a href = "<%= link %>" ><%= each_bit["title"] %></a>
-            <%= "+#{score_difference}" %>
-          </div>
-        <% else %>
-          <div class="down-box">
-            <% link = "https://gov.uk" + each_bit["link"] %>
-            <a href = "<%= link %>" ><%= each_bit["title"] %></a>
-            <%= score_difference %>
-          </div>
-        <% end %>
-
-      <br><br>
-      <% end %>
-    </div>
-
+      <tr class="table-row">
+        <th></th>
+        <th>
+          <%= "#{results.left_total} results, #{results.left_missing} not shown" %>
+        </th>
+        <th>
+          <%= "#{results.right_total} results, #{results.right_missing} not shown" %>
+        </th>
+        <th>
+        </th>
+      </tr>
+    </table>
   </div>
-
-  <div class="result-counter">
-    <% number = findings["total"] - count.to_i %>
-    <% number = 0 if number < 0 %>
-    <%= findings["total"] %> results, <%= number %> not shown
-  </div>
-
+  <a href="#top">Back to top</a>
 </div>

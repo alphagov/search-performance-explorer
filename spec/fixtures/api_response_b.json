@@ -1,0 +1,677 @@
+{
+  "results": [
+    {
+      "title": "Tax your vehicle",
+      "link": "/vehicle-tax",
+      "popularity": 0.07692308,
+      "public_timestamp": "2014-12-09T16:21:03.000+00:00",
+      "description": "Renew or tax your vehicle for the first time using a reminder letter, your log book, the 'new keeper's details' section of a log book - and how to tax if you don't have any documents",
+      "format": "transaction",
+      "content_id": "fa748fae-3de4-4266-ae85-0797ada3f40c",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 219928.95,
+      "_id": "/vehicle-tax",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Check if a vehicle is taxed",
+      "link": "/check-vehicle-tax",
+      "popularity": 0.05263158,
+      "public_timestamp": "2014-12-04T00:01:05.000+00:00",
+      "description": "Check and report if a vehicle has up-to-date vehicle tax or is 'off road' (SORN)",
+      "format": "transaction",
+      "content_id": "0889f128-e479-465f-b3e1-a3db6a3879cf",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Department for Transport",
+          "content_id": "4c717efc-f47b-478e-a76d-ce1ae0af1946",
+          "acronym": "DfT",
+          "link": "/government/organisations/department-for-transport",
+          "slug": "department-for-transport",
+          "organisation_type": "ministerial_department",
+          "organisation_state": "live"
+        },
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 204805.4,
+      "_id": "/check-vehicle-tax",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Register your vehicle as off the road (SORN)",
+      "link": "/make-a-sorn",
+      "popularity": 0.01724138,
+      "public_timestamp": "2014-12-04T00:01:05.000+00:00",
+      "description": "Register your vehicle as off the road - you won't need to pay vehicle tax until you put it on the road again",
+      "format": "transaction",
+      "content_id": "2164c153-1101-41f8-83b3-399556a26ffb",
+      "mainstream_browse_pages": [
+        "driving/manufacture-adapt-vehicle",
+        "driving/vehicle-tax-mot-insurance",
+        "driving/buy-sell-scrap-vehicle",
+        "driving/number-plate"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        },
+        {
+          "title": "Department for Transport",
+          "content_id": "4c717efc-f47b-478e-a76d-ce1ae0af1946",
+          "acronym": "DfT",
+          "link": "/government/organisations/department-for-transport",
+          "slug": "department-for-transport",
+          "organisation_type": "ministerial_department",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 193537.47,
+      "_id": "/make-a-sorn",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Vehicle tax Direct Debit payments",
+      "link": "/vehicle-tax-direct-debit",
+      "popularity": 0.004219409,
+      "public_timestamp": "2015-06-25T17:05:24.000+01:00",
+      "description": "Set up, change or cancel your car tax Direct Debit, swap to another payment method, and what to do if you miss a Direct Debit payment",
+      "format": "guide",
+      "content_id": "e41bd8f3-148c-4285-ad16-131c716bc067",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 175959.58,
+      "_id": "/vehicle-tax-direct-debit",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Apply for vehicle tax in advance",
+      "link": "/vehicle-tax-advance",
+      "popularity": 0.00033783785,
+      "public_timestamp": "2016-04-05T18:36:44.872+01:00",
+      "description": "Tax your vehicle up to 2 months in advance if it's due to run out while you're away from home",
+      "format": "answer",
+      "content_id": "38e8c238-26ec-4116-b796-5048c20b17b7",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 162349.45,
+      "_id": "/vehicle-tax-advance",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Cancel your vehicle tax and get a refund",
+      "link": "/vehicle-tax-refund",
+      "popularity": 0.007751938,
+      "public_timestamp": "2015-03-11T11:11:36.000+00:00",
+      "description": "Your vehicle tax is cancelled and you get a refund for any full months of remaining tax when you tell DVLA you no longer have the vehicle or it's off the road",
+      "format": "answer",
+      "content_id": "fff88e3b-ae66-43e4-afd0-6fc1f227b452",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance",
+        "driving/manufacture-adapt-vehicle",
+        "driving/buy-sell-scrap-vehicle",
+        "driving/number-plate"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 147113.75,
+      "_id": "/vehicle-tax-refund",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Tax your vehicle without a V11 reminder",
+      "link": "/car-tax-disc-without-v11-reminder",
+      "popularity": 0.0065789474,
+      "public_timestamp": "2015-01-14T11:58:09.000+00:00",
+      "description": "Renew your or get vehicle tax if you don't have your V11 reminder - renew online or at the Post Office with your V5C",
+      "format": "answer",
+      "content_id": "5165dcf5-4e9a-4ed0-96a3-e35c6c1060e0",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 134889.75,
+      "_id": "/car-tax-disc-without-v11-reminder",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Vehicle tax rates",
+      "link": "/vehicle-tax-rate-tables",
+      "popularity": 0.0078125,
+      "public_timestamp": "2015-04-01T01:01:09.000+01:00",
+      "description": "Tables showing the rates for vehicle tax for different types of vehicle",
+      "format": "guide",
+      "content_id": "db364fa7-96c5-42c2-a3db-ce06d4a7c97e",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance",
+        "driving/manufacture-adapt-vehicle"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 120227.83,
+      "_id": "/vehicle-tax-rate-tables",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Calculate vehicle tax rates",
+      "link": "/calculate-vehicle-tax-rates",
+      "popularity": 0.008695652,
+      "public_timestamp": "2015-07-24T16:46:33.000+01:00",
+      "description": "Use the online tool to find the tax rate for all vehicle types",
+      "format": "transaction",
+      "content_id": "f8490f74-437e-467a-9fa3-0e5f60e0bee0",
+      "mainstream_browse_pages": [
+        "driving/manufacture-adapt-vehicle",
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        },
+        {
+          "title": "Department for Transport",
+          "content_id": "4c717efc-f47b-478e-a76d-ce1ae0af1946",
+          "acronym": "DfT",
+          "link": "/government/organisations/department-for-transport",
+          "slug": "department-for-transport",
+          "organisation_type": "ministerial_department",
+          "organisation_state": "live"
+        },
+        {
+          "title": "Vehicle Certification Agency",
+          "content_id": "685a3312-e096-4fde-b6c7-c8cf324d4784",
+          "acronym": "VCA",
+          "link": "/government/organisations/vehicle-certification-agency",
+          "slug": "vehicle-certification-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "exempt"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 103844.99,
+      "_id": "/calculate-vehicle-tax-rates",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Report an untaxed vehicle",
+      "link": "/report-untaxed-vehicle",
+      "popularity": 0.0026041667,
+      "public_timestamp": "2017-05-05T12:27:38.188+01:00",
+      "description": "Anonymously report a vehicle on the public road that hasn't got a tax disc ",
+      "format": "answer",
+      "content_id": "3d1aa2d2-82ba-42a9-8eea-7f34fda526b3",
+      "mainstream_browse_pages": [
+        "justice/reporting-crimes-compensation",
+        "driving/vehicle-tax-mot-insurance",
+        "driving/driving-enforcing-the-law"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 90903.96,
+      "_id": "/report-untaxed-vehicle",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Change your vehicle's tax class",
+      "link": "/change-vehicle-tax-class",
+      "popularity": 0.00057670125,
+      "public_timestamp": "2016-03-31T09:36:42.188+01:00",
+      "description": "Change the amount of vehicle tax you pay when you change your vehicle's engine size, fuel type, or if it becomes exempt from vehicle tax",
+      "format": "guide",
+      "content_id": "2779c632-4630-4997-af0c-cf2bb8632bc3",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance",
+        "driving/manufacture-adapt-vehicle"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 75376.53,
+      "_id": "/change-vehicle-tax-class",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Apply to tax a Heavy Goods Vehicle (HGV)",
+      "link": "/vehicle-tax-hgv",
+      "popularity": 0.0001321877,
+      "public_timestamp": "2016-10-31T00:01:07.617+00:00",
+      "description": "To apply for an HGV vehicle licence download and fill in form V85 and apply in person at a Post Office that deals with vehicle tax",
+      "format": "answer",
+      "content_id": "f648952b-f6f8-49cc-b6c8-3a65f7c27dae",
+      "mainstream_browse_pages": [
+        "driving/drivers-lorries-buses",
+        "driving/vehicle-tax-mot-insurance",
+        "driving/businesses"
+      ],
+      "organisations": [
+        {
+          "title": "Department for Transport",
+          "content_id": "4c717efc-f47b-478e-a76d-ce1ae0af1946",
+          "acronym": "DfT",
+          "link": "/government/organisations/department-for-transport",
+          "slug": "department-for-transport",
+          "organisation_type": "ministerial_department",
+          "organisation_state": "live"
+        },
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 61580.1,
+      "_id": "/vehicle-tax-hgv",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Vehicles exempt from vehicle tax",
+      "link": "/vehicle-exempt-from-vehicle-tax",
+      "popularity": 0.0013315579,
+      "public_timestamp": "2015-04-03T00:01:07.000+01:00",
+      "description": "Types of vehicle that are exempt from vehicle tax, including vehicles used by disabled people, mobility scooters, and historic vehicles",
+      "format": "answer",
+      "content_id": "b2c17c88-1701-427e-b1bb-02b05eef9c44",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 46918.176,
+      "_id": "/vehicle-exempt-from-vehicle-tax",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Get vehicle information from DVLA",
+      "link": "/get-vehicle-information-from-dvla",
+      "popularity": 0.035714287,
+      "public_timestamp": "2014-12-19T19:00:05.000+00:00",
+      "description": "Check a vehicle's details, tax and SORN status and expiry dates on the Driver Vehicle and Licensing Agency (DVLA) database - online and telephone enquiries",
+      "format": "transaction",
+      "content_id": "4ca3fd7e-efdb-4a24-9a84-60ba3c614588",
+      "mainstream_browse_pages": [
+        "driving/number-plate",
+        "driving/vehicle-and-driver-information"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 32256.246,
+      "_id": "/get-vehicle-information-from-dvla",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Check the MOT status of a vehicle",
+      "link": "/check-mot-status",
+      "popularity": 0.041666668,
+      "public_timestamp": "2014-12-10T11:41:36.000+00:00",
+      "description": "Find out the MOT test status of a vehicle - check the date of the MOT test, the odometer reading (mileage) and the expiry date of an MOT test pass\r\n",
+      "format": "transaction",
+      "content_id": "dc57162b-59f4-4d0f-9b83-a67f74ffccf5",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Standards Agency",
+          "content_id": "d39237a5-678b-4bb5-a372-eb2cb036933d",
+          "acronym": "DVSA",
+          "link": "/government/organisations/driver-and-vehicle-standards-agency",
+          "slug": "driver-and-vehicle-standards-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "specialist_sectors": [
+        {
+          "slug": "mot/get-check-mot",
+          "title": "Get and check an MOT",
+          "content_id": "928f63c0-bc24-4675-be34-0dfb29385e0a",
+          "link": "/topic/mot/get-check-mot"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 8653.75,
+      "_id": "/check-mot-status",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Getting an MOT",
+      "link": "/getting-an-mot",
+      "popularity": 0.0014947683,
+      "public_timestamp": "2014-12-10T12:43:54.000+00:00",
+      "description": "How to MOT your vehicle, MOT fees table, what the certificate covers, MOT exemptions, appeal if your vehicle fails its MOT test",
+      "format": "guide",
+      "content_id": "4a1f8cf7-3779-41d3-9b62-bf0297ff9545",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Standards Agency",
+          "content_id": "d39237a5-678b-4bb5-a372-eb2cb036933d",
+          "acronym": "DVSA",
+          "link": "/government/organisations/driver-and-vehicle-standards-agency",
+          "slug": "driver-and-vehicle-standards-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "specialist_sectors": [
+        {
+          "slug": "mot/get-check-mot",
+          "title": "Get and check an MOT",
+          "content_id": "928f63c0-bc24-4675-be34-0dfb29385e0a",
+          "link": "/topic/mot/get-check-mot"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 2899.0974,
+      "_id": "/getting-an-mot",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Personal tax account: sign in or set up",
+      "link": "/personal-tax-account",
+      "popularity": 0.024390243,
+      "public_timestamp": "2015-12-15T10:28:29.000+00:00",
+      "description": "Sign in to or register a personal tax account to check and manage HMRC records: includes Income Tax, change of address, Self Assessment, company car tax and Marriage Allowance",
+      "format": "transaction",
+      "content_id": "f4f2c99e-6d0a-4f2f-b3d0-ff2d00e33887",
+      "mainstream_browse_pages": [
+        "tax/dealing-with-hmrc",
+        "tax/income-tax"
+      ],
+      "organisations": [
+        {
+          "title": "HM Revenue & Customs",
+          "content_id": "6667cce2-e809-4e21-ae09-cb0bdc1ddda3",
+          "acronym": "HMRC",
+          "link": "/government/organisations/hm-revenue-customs",
+          "slug": "hm-revenue-customs",
+          "organisation_type": "non_ministerial_department",
+          "organisation_state": "live"
+        }
+      ],
+      "specialist_sectors": [
+        {
+          "slug": "personal-tax/income-tax",
+          "title": "Income Tax",
+          "content_id": "5ab272ee-88f8-415e-872b-41ae81d70cad",
+          "link": "/topic/personal-tax/income-tax"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 0.0066469265,
+      "_id": "/personal-tax-account",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Check or update your company car tax",
+      "link": "/update-company-car-details",
+      "popularity": 0.000683527,
+      "public_timestamp": "2014-12-16T14:47:51.000+00:00",
+      "description": "Tell HMRC about changes to your PAYE company car or fuel benefit details",
+      "format": "transaction",
+      "content_id": "83193c89-0e12-4b8a-9eac-5a68fd5e6ef4",
+      "mainstream_browse_pages": [
+        "business/expenses-employee-benefits"
+      ],
+      "organisations": [
+        {
+          "title": "HM Revenue & Customs",
+          "content_id": "6667cce2-e809-4e21-ae09-cb0bdc1ddda3",
+          "acronym": "HMRC",
+          "link": "/government/organisations/hm-revenue-customs",
+          "slug": "hm-revenue-customs",
+          "organisation_type": "non_ministerial_department",
+          "organisation_state": "live"
+        }
+      ],
+      "specialist_sectors": [
+        {
+          "slug": "business-tax/paye",
+          "title": "PAYE",
+          "content_id": "6e1d83bc-d37a-447c-bdac-31be4b441417",
+          "link": "/topic/business-tax/paye"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 0.0005769005,
+      "_id": "/update-company-car-details",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "title": "Check you’re not buying a stolen vehicle",
+      "link": "/checks-when-buying-a-used-car",
+      "popularity": 0.0028818443,
+      "public_timestamp": "2015-02-16T22:19:00.000+00:00",
+      "description": "Check registration, MOT, tax, vehicle identification number and other details to help make sure a used car isn't stolen",
+      "format": "answer",
+      "content_id": "fb5b3d6b-73ff-4213-8320-f0aa4bbe5e63",
+      "mainstream_browse_pages": [
+        "driving/vehicle-tax-mot-insurance",
+        "driving/number-plate",
+        "driving/buy-sell-scrap-vehicle",
+        "driving/vehicle-and-driver-information"
+      ],
+      "organisations": [
+        {
+          "title": "Driver and Vehicle Licensing Agency",
+          "content_id": "70580624-93b5-4aed-823b-76042486c769",
+          "acronym": "DVLA",
+          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
+          "slug": "driver-and-vehicle-licensing-agency",
+          "organisation_type": "executive_agency",
+          "organisation_state": "live"
+        }
+      ],
+      "index": "mainstream",
+      "es_score": 0.0003357569,
+      "_id": "/checks-when-buying-a-used-car",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    },
+    {
+      "is_historic": false,
+      "title": "Income Tax: company car tax rates and bands for 2017 to 2018 and 2018 to 2019",
+      "link": "/government/publications/income-tax-company-car-tax-rates-and-bands-for-2017-to-2018-and-2018-to-2019",
+      "popularity": 0.000076271834,
+      "public_timestamp": "2014-12-10T12:52:00.000+00:00",
+      "description": "This Tax Information and Impact Note is about company car tax rates and bands for 2017 to 2018 and 2018 to 2019",
+      "format": "publication",
+      "content_id": "1bb0c89e-c9df-48aa-8215-5ceb7c82137d",
+      "document_collections": [
+        {
+          "slug": "tax-information-and-impact-notes-tiins",
+          "title": "Tax information and impact notes",
+          "content_id": "5ee68053-7631-11e4-a3cb-005056011aef",
+          "link": "/government/collections/tax-information-and-impact-notes-tiins"
+        }
+      ],
+      "organisations": [
+        {
+          "title": "HM Revenue & Customs",
+          "content_id": "6667cce2-e809-4e21-ae09-cb0bdc1ddda3",
+          "acronym": "HMRC",
+          "link": "/government/organisations/hm-revenue-customs",
+          "slug": "hm-revenue-customs",
+          "organisation_type": "non_ministerial_department",
+          "organisation_state": "live"
+        }
+      ],
+      "specialist_sectors": [
+        {
+          "slug": "dealing-with-hmrc/tax-agent-guidance",
+          "title": "Tax agent and adviser guidance",
+          "content_id": "c3133eb2-4d53-4905-88a2-d2e4547cc41e",
+          "link": "/topic/dealing-with-hmrc/tax-agent-guidance"
+        }
+      ],
+      "index": "government",
+      "es_score": 0.0001918551,
+      "_id": "/government/publications/income-tax-company-car-tax-rates-and-bands-for-2017-to-2018-and-2018-to-2019",
+      "elasticsearch_type": "edition",
+      "document_type": "edition"
+    }
+  ],
+  "total": 51400,
+  "start": 0,
+  "aggregates": {},
+  "suggested_queries": []
+}
