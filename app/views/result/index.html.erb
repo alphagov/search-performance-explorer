@@ -44,7 +44,7 @@
   </div>
 
   <div class="grid-row">
-
+    <% usable_params = params %>
     <% results = Searching.new(params).call %>
     <table class="results-table" >
       <tr class="table-row">
@@ -74,8 +74,8 @@
 
                   <%
                   head_info_list = [display_format(result.doc_format(side)), date_format(result.date(side))]
-                  head_info_list << historical_or_current(result.historical(side)) if historical_enabled?
-                  head_info_list << display_popularity(result.popularity(side)) if popularity_enabled?
+                  head_info_list << historical_or_current(result.historical(side)) if historical_enabled? == true
+                  head_info_list << display_popularity(result.popularity(side)) if popularity_enabled? == true
                   %>
                   <%= head_info_list.compact.join(", ") %>
                   <br>

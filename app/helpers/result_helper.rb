@@ -1,5 +1,4 @@
 module ResultHelper
-  usable_params = {}
 
   things_to_check = %w(
     content_id document_collections historical mainstream_browse_pages
@@ -8,7 +7,7 @@ module ResultHelper
 
   things_to_check.each do |thing|
     define_method("#{thing}_enabled?") do
-      false if usable_params['info'] == "basic" || usable_params[thing] != "on"
+      return false if params['info'] == "basic" || params[thing] != "on"
       true
     end
   end

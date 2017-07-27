@@ -47,25 +47,34 @@ class Searching
       @enhanced_results_hash = {}
     end
 
-#    simple_methods = %w(content_id date description doc_format historical link popularity title)
+    simple_methods = %w(content_id date description doc_format historical link popularity title)
 
-    def content_id(side) # => simple
+    simple_methods.each do |method|
+      define_method "#{method}" do |side|
       if side[position]
-        side[position][0]['content_id']
+        method = "format" if method == "doc_format"
+        side[position][0][method]
+      end
       end
     end
 
-    def date(side) # => simple
-      if side[position]
-        side[position][0]['public_timestamp']
-      end
-    end
-
-    def description(side) # => simple
-      if side[position]
-        side[position][0]['description']
-      end
-    end
+#    def content_id(side) # => simple
+#      if side[position]
+#        side[position][0]['content_id']
+#      end
+#    end
+#
+#    def date(side) # => simple
+#      if side[position]
+#        side[position][0]['public_timestamp']
+#      end
+#    end
+#
+#    def description(side) # => simple
+#      if side[position]
+#        side[position][0]['description']
+#      end
+#    end
 
     def document_collections(side)# => enhanced_results_hash
       if side[position]
@@ -79,23 +88,23 @@ class Searching
       end
     end
 
-    def doc_format(side) # => simple
-      if side[position]
-        side[position][0]['format']
-      end
-    end
+#    def doc_format(side) # => simple
+#      if side[position]
+#        side[position][0]['format']
+#      end
+#    end
+#
+#    def historical(side) # => simple
+ #     if side[position]
+ #       side[position][0]['is_historic']
+ #     end
+ #   end
 
-    def historical(side) # => simple
-      if side[position]
-        side[position][0]['is_historic']
-      end
-    end
-
-    def link(side) # => simple
-      if side[position]
-        side[position][0]['link']
-      end
-    end
+ #   def link(side) # => simple
+ #     if side[position]
+ #       side[position][0]['link']
+ #     end
+ #   end
 
     def mainstream_browse_pages(side)# => enhanced_results_hash
       if side[position]
@@ -145,11 +154,11 @@ class Searching
       end
     end
 
-    def popularity(side) # => simple
-      if side[position]
-        side[position][0]['popularity']
-      end
-    end
+#    def popularity(side) # => simple
+#      if side[position]
+#        side[position][0]['popularity']
+#      end
+#    end
 
     def taxons(side) # => enhanced_results_hash
       if side[position]
@@ -163,11 +172,11 @@ class Searching
       end
     end
 
-    def title(side) # simple
-      if side[position]
-        side[position][0]['title']
-      end
-    end
+#    def title(side) # simple
+#      if side[position]
+#        side[position][0]['title']
+#      end
+#    end
 
     def specialist_sectors(side) # => enhanced_results_hash
       if side[position]
