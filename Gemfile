@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'govuk_admin_template'
-gem 'govuk_frontend_toolkit', :git => "https://github.com/alphagov/govuk_frontend_toolkit_gem.git", :submodules => true
+gem 'govuk_frontend_toolkit', git: "https://github.com/alphagov/govuk_frontend_toolkit_gem.git", submodules: true
 gem 'gds-api-adapters'
 
 # Use Capistrano for deployment
@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry'
   gem 'webmock'
   gem 'json'
+  gem 'rake'
 end
 
 group :development do

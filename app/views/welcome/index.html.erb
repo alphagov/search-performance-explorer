@@ -19,6 +19,12 @@
 <% end %>
 
 <% content_for :content do %>
+  <noscript>
+    <div class="noscript-notice">
+      <p>JavaScript is turned off and this site won't function properly</p>
+    </div>
+  </noscript>
+
   <div id="wrapper">
     <h1 class="head-text">Search</h1><br><br>
 
@@ -51,24 +57,25 @@
 
         <div class="form-group">
           <label class="form-label radio-label" for="info_basic">
-            <%= radio_button_tag("info", "basic", true) %>
+            <%= radio_button_tag("info", "basic", true, class: "info-basic") %>
             <span class="radio-tag">Basic Information</span>
-            <div class="control_indicator" ></div>
+            <div class="control-indicator" ></div>
           </label>
         </div>
 
         <div class="form-group">
           <label class="form-label radio-label" for="info_enhanced">
-            <%= radio_button_tag("info", "enhanced") %>
+            <%= radio_button_tag("info", "enhanced", false, class: "info-enhanced") %>
             <span class="radio-tag">Enhanced Information</span>
-            <div class="control_indicator" ></div>
+            <div class="control-indicator" ></div>
           </label>
         </div>
 
         <div class="enhanced-checkbox">
-          <% enhanced_options = [ "historical", "popularity", "content_id", "document_collections",
-                                  "mainstream_browse_pages", "organisations", "taxons", "people",
-                                  "policies", "specialist_sectors"] %>
+          <% enhanced_options =  %w(content_id document_collections historical
+                                    mainstream_browse_pages organisations people
+                                    policies popularity taxons specialist_sectors
+                                    ) %>
           <% enhanced_options.each do |option| %>
             <div class="form-group enhanced-option-wrapper">
               <%= check_box_tag(option, "on", false, class: "enhanced-option") %>
@@ -78,22 +85,6 @@
             </div>
           <% end %>
         </div>
-        
-        <noscript>
-          <div class="noscript-enhanced-checkbox">
-            <% enhanced_options = [ "historical", "popularity", "content_id", "document_collections",
-                                    "mainstream_browse_pages", "organisations", "taxons", "people",
-                                    "policies", "specialist_sectors"] %>
-            <% enhanced_options.each do |option| %>
-              <div class="form-group enhanced-option-wrapper">
-                <%= check_box_tag(option, "on", false, class: "enhanced-option") %>
-                <label class="enhanced-labels" for="<%= option %>" >
-                  <%= option.split("_").map{|x| x.capitalize}.join(" ") %>
-                </label>
-              </div>
-            <% end %>
-          </div>
-        </noscript>
 
         <input class="button" id="search_button" type="submit" value="Search"></input>
       </form>

@@ -13,7 +13,6 @@
         <h1 class="head-text">You searched for</h1>
         <h2 class="search-term"><%= params["search_term"] %></h2>
       <% end %>
-
       <h2 class="results-text">These are your results</h2>
 
     </div>
@@ -45,9 +44,10 @@
   </div>
 
   <div class="grid-row">
+
     <% results = Searching.new(params).call %>
     <table class="results-table" >
-      <tr class="table-row" class="table-row">
+      <tr class="table-row">
         <th></th>
         <th scope="col"><h3 class="heading-27" >A Results</h3></th>
         <th scope="col"><h3 class="heading-27" >B Results</h3></th>
@@ -66,31 +66,30 @@
           <% sides.each do |side| %>
             <th class="results-column">
               <p class="results-text" >
-                <a href = "<%= "#{result.link(side)}" %>" >
-                  <%= truncate(result.name(side), :length => 60 ) %>
+                <a href = "<%= "#{link_format(result.link(side))}" %>" >
+                  <%= truncate(name(result.link(side)), :length => 60 ) %>
                 </a>
                 <p><%= result.title(side) %></p><br>
                 <span class="head-info">
 
-                  <% head_info_list = [] %>
-                  <% head_info_list << result.doc_format(side).split("_").join(" ").capitalize << result.date(side) %>
-                  <% if params["info"] == "enhanced" && params["historical"] == "on" ; head_info_list << result.historical(side) ; end %>
-                  <% if params["info"] == "enhanced" && params["popularity"] == "on" ; head_info_list << "Popularity: #{result.popularity(side)}" ; end %>
+                  <%
+                  head_info_list = [display_format(result.doc_format(side)), date_format(result.date(side))]
+                  head_info_list << historical_or_current(result.historical(side)) if historical_enabled?
+                  head_info_list << display_popularity(result.popularity(side)) if popularity_enabled?
+                  %>
                   <%= head_info_list.compact.join(", ") %>
-                </span>
-                <br>
-                <span class="head-info">
-                  <% if params["info"] == "enhanced" && params["content_id"] == "on" && result.content_id(side) != nil %>
-                    <%= "Content ID: " + result.content_id(side) %>
+                  <br>
+                  <% if content_id_enabled? && result.content_id(side) != nil %>
+                    <%= display_content_id(result.content_id(side)) %>
                     <br>
                   <% end %>
 
-                  <% if params["info"] == "enhanced" && params["organisations"] == "on" && result.organisations(side) != nil%>
+                  <% if organisations_enabled? && result.organisations(side) != nil%>
                     <% result.organisations(side).each do |organisation| %>
                       <a href="<%= organisation[1] %>"><%= organisation[0] %></a><br>
                     <% end %>
                   <% end %>
-                  <% if params["info"] == "enhanced" && params["people"] == "on" && result.people(side) != nil %>
+                  <% if people_enabled? && result.people(side) != nil %>
                     <% result.people(side).each do |person| %>
                       <a href="<%= person[1] %>"><%= person[0] %></a><br>
                     <% end %>
@@ -101,32 +100,24 @@
                   <%= truncate(result.description(side), :length => 200) %>
                 </span>
                 <span class="head-info">
-                  <% if params["info"] == "enhanced" && params["mainstream_browse_pages"] == "on"  %>
-                    <% result.mainstream_browse_pages(side) %>
-                  <% end %>
-                  <% if params["info"] == "enhanced" && params["taxons"] == "on" && result.taxons(side) != nil  %>
-                    <% result.taxons(side) %>
-                  <% end %>
-                  <% if params["info"] == "enhanced" && params["policies"] == "on" && result.policies(side) != nil  %>
-                    <% result.policies(side) %>
-                  <% end %>
-                  <% if params["info"] == "enhanced" && params["specialist_sectors"] == "on" %>
-                    <% result.specialist_sectors(side) %>
-                  <% end %>
-                  <% if params["info"] == "enhanced" && params["document_collections"] == "on" && result.document_collections(side) != nil  %>
-                    <% result.document_collections(side) %>
-                  <% end %>
+                  <%
+                  result.document_collections(side) if document_collections_enabled?
+                  result.mainstream_browse_pages(side) if mainstream_browse_pages_enabled?
+                  result.policies(side) if policies_enabled?
+                  result.specialist_sectors(side) if specialist_sectors_enabled?
+                  result.taxons(side) if taxons_enabled?
+                  %>
 
                   <table class="enhanced-results-table">
                     <% result.enhanced_results_hash.each do |field, title_link_pair| %>
                       <tr>
-                        <th class="msbp-table-title">
+                        <th class="e-table-title">
                           <%= field %>
                         </th>
                       </tr>
                       <% title_link_pair.each do |title, link| %>
                         <tr>
-                          <th class="msbp-table">
+                          <th class="e-table-cell">
                             <% if link != "" %>
                               <a href="<%= link %>"><%= title %></a>
                             <% else %>
@@ -141,7 +132,6 @@
               </p>
             </th>
           <% end %>
-
 
           <% if result.score_difference == "++++" || result.score_difference > 0 %>
             <th>
@@ -173,10 +163,10 @@
       <tr class="table-row">
         <th></th>
         <th>
-          <%= results.left_total %> results, <%= results.left_missing %> not shown
+          <%= "#{results.left_total} results, #{results.left_missing} not shown" %>
         </th>
         <th>
-          <%= results.right_total %> results, <%= results.right_missing %> not shown
+          <%= "#{results.right_total} results, #{results.right_missing} not shown" %>
         </th>
         <th>
         </th>

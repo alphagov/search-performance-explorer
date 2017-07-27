@@ -23,16 +23,16 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
 
-  path =  File.join(
-            File.dirname(File.dirname(File.absolute_path(__FILE__))),
-            '/app/assets/json/api_response_a.json')
+  path = File.join(
+    File.dirname(File.dirname(File.absolute_path(__FILE__))),
+    '/spec/fixtures/api_response_a.json'
+    )
   file = File.read(path)
 
   config.before(:each) do
     stub_request(:get, /rummager.dev.gov.uk/).
-    with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'rummager.dev.gov.uk', 'User-Agent'=>'gds-api-adapters/46.0.0 ()'}).
-    to_return(status: 200, body: "#{file}", headers: {})
-
+    with(headers: { 'Accept' => 'application/json', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'rummager.dev.gov.uk', 'User-Agent' => 'gds-api-adapters/46.0.0 ()' }).
+    to_return(status: 200, body: file.to_s, headers: {})
   end
 
   config.expect_with :rspec do |expectations|
