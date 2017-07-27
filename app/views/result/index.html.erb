@@ -73,8 +73,8 @@
                 <span class="head-info">
 
                   <%
-                  head_info_list = [display_format(result.doc_format(side)), date_format(result.date(side))]
-                  head_info_list << historical_or_current(result.historical(side)) if historical_enabled? == true
+                  head_info_list = [display_format(result.doc_format(side)), date_format(result.public_timestamp(side))]
+                  head_info_list << is_historical_or_current(result.is_historic(side)) if is_historic_enabled? == true
                   head_info_list << display_popularity(result.popularity(side)) if popularity_enabled? == true
                   %>
                   <%= head_info_list.compact.join(", ") %>

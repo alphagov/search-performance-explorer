@@ -1,7 +1,6 @@
 module ResultHelper
-
   things_to_check = %w(
-    content_id document_collections historical mainstream_browse_pages
+    content_id document_collections is_historic mainstream_browse_pages
     organisations people policies popularity taxons specialist_sectors
   )
 

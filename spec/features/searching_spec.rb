@@ -41,11 +41,11 @@ describe Searching do
       end
     end
 
-    describe 'date' do
+    describe 'public timestamp' do
       it "returns the timestamp" do
         raw_date = results_hash[0].left[0][0]['public_timestamp']
         expect(raw_date).to eql("2014-12-09T16:21:03.000+00:00")
-        expect(results_hash[0].date(results_hash[0].left)).to eql(raw_date)
+        expect(results_hash[0].public_timestamp(results_hash[0].left)).to eql(raw_date)
       end
     end
 
@@ -79,11 +79,11 @@ describe Searching do
       end
     end
 
-    describe 'historical' do
+    describe 'is historical' do
       it 'returns true, false or nil' do
-        expect(results_hash[0].historical(results_hash[0].left)).to eql(nil)
-        expect(results_hash[5].historical(results_hash[5].left)).to eql(true)
-        expect(results_hash[19].historical(results_hash[19].left)).to eql(false)
+        expect(results_hash[0].is_historic(results_hash[0].left)).to eql(nil)
+        expect(results_hash[5].is_historic(results_hash[5].left)).to eql(true)
+        expect(results_hash[19].is_historic(results_hash[19].left)).to eql(false)
       end
     end
 

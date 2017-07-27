@@ -47,10 +47,10 @@ class Searching
       @enhanced_results_hash = {}
     end
 
-    simple_methods = %w(content_id date description doc_format historical link popularity title)
+    simple_methods = %w(content_id public_timestamp description doc_format is_historic link popularity title)
 
     simple_methods.each do |method|
-      define_method "#{method}" do |side|
+      define_method method do |side|
         if side[position]
           method = "format" if method == "doc_format"
           side[position][0][method]
