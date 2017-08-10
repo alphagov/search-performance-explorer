@@ -29,18 +29,16 @@
           <label class="form-label" for="search_term_input">
             Search term to compare
           </label>
-          <input class="form-control" id="search_term_input" type="text" name="search_term"></input>
+          <%= text_field_tag(:search_term, params[:search_term], class: "form-control") %>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="result_count">
             Required number of results
           </label>
-          <input class="form-control" id="result_count" name="count" type="number"></input>
+          <%= number_field_tag("count", "#{params["count"]}", class: "form-control", id: "result_count") %>
         </div>
-
-        <input type="hidden" name="which_test" value="search_match_length"/>
-
+        <input type="hidden" name="which_test" value="<%= params["which_test"] %>"/>
         <input class="button" id="search_button" type="submit" value="Search"></input>
 
       </form>
