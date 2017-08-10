@@ -8,20 +8,12 @@ feature 'visiting the homepage' do
 
   scenario 'the visitor can input text and search result number and search' do
     visit '/'
-    fill_in('search_term_input',  with: 'water')
-    fill_in('result_count', with: '50')
+    fill_in('search_term', with: 'car tax')
+    fill_in('count', with: '20')
     click_button 'Search'
-    expect(page).to have_text("water")
-    within("div.ab-search-wrapper-left") do
-      expect(page).to have_css("div.changeless-box", count: 50)
-    end
-  end
-
-  scenario 'when "search" is clicked without search term top 10 results are displayed' do
-    visit '/'
-    click_button 'Search'
-    within("div.ab-search-wrapper-left") do
-      expect(page).to have_css("div.changeless-box", count: 10)
+    expect(page).to have_text("car tax")
+    within("table.results-table") do
+      expect(page).to have_css("tr.table-row", count: 22)
     end
   end
 end
