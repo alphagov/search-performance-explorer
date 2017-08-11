@@ -26,4 +26,18 @@ describe DisplayFormatHelper do
       expect(helper.link_format("/example")).to eq("https://gov.uk/example")
     end
   end
+
+  describe "#historical_or_current" do
+    it 'returns "Current" if given false' do
+      expect(helper.historical_or_current(false)).to eq("Current")
+    end
+    it 'returns "Historical" if given true' do
+      expect(helper.historical_or_current(true)).to eq("Historical")
+    end
+    it 'returns nil if given anything else' do
+      expect(helper.historical_or_current(nil)).to eq(nil)
+      expect(helper.historical_or_current("Frodo")).to eq(nil)
+      expect(helper.historical_or_current(144)).to eq(nil)
+    end
+  end
 end
