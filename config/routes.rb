@@ -8,5 +8,4 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount GovukAdminTemplate::Engine, at: "/style-guide"
   end
-
 end
