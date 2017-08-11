@@ -21,6 +21,8 @@ class Searching
       format
       content_id
       is_historic
+      organisations
+      people
       popularity
       )
     findings_new_left = rummager.search(
