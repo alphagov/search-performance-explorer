@@ -7,6 +7,7 @@ module DisplayFormatHelper
   def head_info_list_maker(info)
     head_info_list = [info['format'].humanize, date_format(info['public_timestamp'])]
     head_info_list << historical_or_current(info['is_historic']) if enabled?("historical")
+    head_info_list << "Popularity: #{info['popularity']}" if enabled?("popularity")
     head_info_list
   end
 
