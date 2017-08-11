@@ -2,6 +2,21 @@
     <%= "Search Performance Explorer" %>
 <% end %>
 
+<% content_for :head do %>
+  <script>
+    $(document).ready(function() {
+      $('input[type="radio"]').click(function() {
+        if($(this).attr('id') == 'info_enhanced') {
+          $('.enhanced-checkbox').show();
+        }
+        else {
+          $('.enhanced-checkbox').hide();
+        }
+      });
+    });
+  </script>
+<% end %>
+
 <% content_for :content do %>
   <div id="wrapper">
     <h1 class="head-text">Search</h1><br><br>
