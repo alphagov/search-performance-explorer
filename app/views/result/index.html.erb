@@ -65,6 +65,7 @@
                 <p><%= side['title'] %></p><br>
                 <span class="head-info">
                   <%= head_info_list_maker(side).compact.join(", ") %>
+                  <%= render(:partial => "content_id", :locals => {:side => side}) %>
                 </span>
                 <br>
                 <span class="head-info-2">

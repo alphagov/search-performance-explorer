@@ -19,6 +19,7 @@ class Searching
       public_timestamp
       description
       format
+      content_id
       is_historic
       popularity
       )
