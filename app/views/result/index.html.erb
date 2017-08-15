@@ -76,6 +76,9 @@
                 <span class="head-info-2">
                   <%= truncate(side['description'], :length => 200) %>
                 </span>
+
+                <%= render(:partial => "enhanced_results_table", :locals => {:side => side}) %>
+
               </p>
             </th>
           <% end %>

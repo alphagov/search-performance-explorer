@@ -1,0 +1,45 @@
+<%
+  things = %w(
+    document_collections
+    mainstream_browse_pages
+    policies
+    specialist_sectors
+    taxons
+  )
+  enhanced_results_hash = {}
+  things.each do |thing|
+    if enabled?(thing) && side[thing].present?
+      return_array = []
+      side[thing].each do |t|
+        if thing == 'taxons' || thing == 'policies'
+          return_array << [t.humanize.tr("-", " "), '']
+        elsif thing == "mainstream_browse_pages"
+          return_array << [t, link_format("https://gov.uk/browse/#{t}")]
+        else
+          return_array << [t['title'], link_format(t['link'])]
+        end
+        enhanced_results_hash[thing.humanize] = return_array.uniq
+      end
+    end
+  end
+%>
+<table class="enhanced-results-table">
+  <% enhanced_results_hash.each do |field, title_link_pair| %>
+    <tr>
+      <th class="e-table-title">
+        <%= field %>
+      </th>
+    </tr>
+    <% title_link_pair.each do |a| %>
+      <tr>
+        <th class="e-table-cell">
+          <% if a[1] != "" %>
+            <a href="<%= a[1] %>"><%= a[0] %></a>
+          <% else %>
+            <p><%= a[0] %></p>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

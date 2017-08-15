@@ -14,16 +14,21 @@ class Searching
   def call
     rummager = GdsApi::Rummager.new(Plek.new.find('rummager'))
     fields = %w(
-      title
-      link
-      public_timestamp
       description
       format
+      link
+      public_timestamp
+      title
       content_id
+      document_collections
       is_historic
+      mainstream_browse_pages
       organisations
       people
+      policies
       popularity
+      specialist_sectors
+      taxons
       )
     findings_new_left = rummager.search(
       q: params["search_term"],

@@ -13,13 +13,6 @@
   margin-top: 20px;
 }
 
-.wrapper {
-  @extend %site-width-container;
-  float: left;
-  clear: left;
-  margin-top: 60px;
-}
-
 .control-indicator {
   position: relative;
   bottom: 30px;
@@ -60,6 +53,17 @@
 .down-box a:link,
 .down-box a:visited {
   color: $red;
+}
+
+.e-table-cell,
+.e-table-title {
+  border-bottom: 1px solid $grey-3;
+  padding-bottom: 3px;
+  color: $black;
+}
+
+.e-table-cell {
+  font-weight: normal;
 }
 
 .enhanced-checkbox {
@@ -162,6 +166,15 @@
   @include heading-36;
 }
 
+.homepage-form-container {
+  margin-bottom: 20%;
+  @extend %grid-row;
+
+  .homepage-form {
+    @include grid-column( 2 / 3 );
+  }
+}
+
 .info-basic,
 .info-enhanced {
   width: 39px;
@@ -179,15 +192,6 @@
 .info-basic:focus,
 .info-enhanced:focus {
   box-shadow: 0 0 0 3pt $yellow;
-}
-
-.homepage-form-container {
-  margin-bottom: 20%;
-  @extend %grid-row;
-
-  .homepage-form {
-    @include grid-column( 2 / 3 );
-  }
 }
 
 .noscript-notice {
@@ -258,6 +262,9 @@
 
 .wrapper {
   @extend %site-width-container;
+  float: left;
+  clear: left;
+  margin-top: 60px;
 }
 
 @media only screen and (max-width: 640px) {
