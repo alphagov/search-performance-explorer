@@ -8,6 +8,7 @@ RSpec.describe ResultHelper do
         'specialist_sectors' => 'on'
       }
     end
+
     it 'always returns false' do
       expect(helper.enabled?("mainstream_browse_pages")).to eq(false)
       expect(helper.enabled?("specialist_sectors")).to eq(false)
@@ -21,6 +22,7 @@ RSpec.describe ResultHelper do
         'specialist_sectors' => 'on'
       }
     end
+
     it 'always returns true only for parameters that are enabled' do
       expect(helper.enabled?("mainstream_browse_pages")).to eq(false)
       expect(helper.enabled?("specialist_sectors")).to eq(false)

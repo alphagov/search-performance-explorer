@@ -6,9 +6,11 @@ describe DisplayFormatHelper do
     it 'responds to the mehtod' do
       expect(helper.respond_to?(:date_format)).to eq(true)
     end
+
     it 'returns nil if no date is given' do
       expect(helper.date_format(nil)).to eq(nil)
     end
+
     it 'returns the date in a readable format' do
       expect(helper.date_format("2014-12-09T16:21:03.000+00:00")).to eq("December 2014")
     end
@@ -19,9 +21,11 @@ describe DisplayFormatHelper do
       expect(helper.link_format("http://www.example.com")).to eq("http://www.example.com")
       expect(helper.link_format("https://www.exampletron.com")).to eq("https://www.exampletron.com")
     end
+
     it 'adds https if the link starts with www.' do
       expect(helper.link_format("www.example.com")).to eq("https://www.example.com")
     end
+
     it 'adds https://gov.uk if the it\'s not an external link' do
       expect(helper.link_format("/example")).to eq("https://gov.uk/example")
     end
@@ -31,9 +35,11 @@ describe DisplayFormatHelper do
     it 'returns "Current" if given false' do
       expect(helper.historical_or_current(false)).to eq("Current")
     end
+
     it 'returns "Historical" if given true' do
       expect(helper.historical_or_current(true)).to eq("Historical")
     end
+
     it 'returns nil if given anything else' do
       expect(helper.historical_or_current(nil)).to eq(nil)
       expect(helper.historical_or_current("Frodo")).to eq(nil)

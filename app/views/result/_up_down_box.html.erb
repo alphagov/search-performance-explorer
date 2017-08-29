@@ -1,0 +1,17 @@
+<%
+if score_difference == "0"
+  score_difference = ["N/A", "changeless-box"]
+elsif score_difference.start_with?("-")
+  score_difference = [score_difference, "down-box"]
+else
+  score_difference = ["+#{score_difference}", "up-box"]
+end
+%>
+
+<th>
+  <div class="<%= score_difference[1] %>">
+    <p class="table-body">
+      <%= score_difference[0] %>
+    </p>
+  </div>
+</th>

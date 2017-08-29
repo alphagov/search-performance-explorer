@@ -60,69 +60,53 @@
             <th class="results-column">
               <p class="results-text" >
 
-                <a href = "<%= "#{link_format(side['link'])}" %>" >
-                  <%= truncate(name(side['link']), :length => 60 ) %>
+                <a href = "<%= "#{link_format(side.info['link'])}" %>" >
+                  <%= truncate(side.name, :length => 60 ) %>
                 </a>
 
-                <p><%= side['title'] %></p><br>
+                <p><%= side.info['title'] %></p><br>
 
                 <span class="head-info">
-                  <%= head_info_list_maker(side).compact.join(", ") %>
-                  <%= render(:partial => "content_id", :locals => {:side => side}) %>
-                  <%= render(:partial => "people_and_organisations", :locals => {:side => side}) %>
+                  <%
+                  head_fields = []
+                  head_fields << "popularity" if enabled?("popularity")
+                  head_fields << "historical" if enabled?("historical") %>
+                  <%= side.get_head_info_list(head_fields).compact.join(", ") %>
+                  <%= render(:partial => "content_id", :locals => {:side => side.info}) %>
+                  <%= render(:partial => "people_and_organisations", :locals => {:side => side.info}) %>
                 </span>
 
                 <br>
                 <span class="head-info-2">
-                  <%= truncate(side['description'], :length => 200) %>
+                  <%= truncate(side.info['description'], :length => 200) %>
                 </span>
-
-                <%= render(:partial => "enhanced_results_table", :locals => {:side => side}) %>
+                <%
+                  enhanced_fields = []
+                  %w(
+                  document_collections mainstream_browse_pages policies specialist_sectors taxons
+                  ).each { |thing| enhanced_fields << thing if enabled?(thing) && side.info[thing].present? }
+                %>
+                <%= render(:partial => "enhanced_results_table", :locals => {:enhanced_results => side.get_enhanced_results(enhanced_fields)}) %>
 
               </p>
             </th>
           <% end %>
 
-          <% score_difference = results.score_difference(results.right[i]['link'], i) %>
-          <% if score_difference == "0" %>
-            <th>
-              <div class="changeless-box">
-                <p class="table-body">
-                  N/A
-                </p>
-              </div>
-            </th>
-          <% elsif score_difference.start_with?("-") %>
-            <th>
-              <div class="down-box">
-                <p class="table-body">
-                  <%= score_difference %>
-                </p>
-              </div>
-            </th>
-          <% else %>
-            <th>
-              <div class="up-box">
-                <p class="table-body">
-                  <%= "+#{score_difference}" %>
-                </p>
-              </div>
-            </th>
-          <% end %>
+          <% score_difference = results.score_difference(results.right[i].info['link'], i) %>
+          <%= render(:partial => "up_down_box", :locals => {:score_difference => score_difference}) %>
 
         </tr>
       <% end %>
 
       <tr class="table-row">
-        <th></th>
+        <th/>
         <th>
           <%= "#{results.left_total} results, #{results.left_missing} not shown" %>
         </th>
         <th>
           <%= "#{results.right_total} results, #{results.right_missing} not shown" %>
         </th>
-        <th>
-        </th>
+        <th/>
       </tr>
     </table>
   </div>
