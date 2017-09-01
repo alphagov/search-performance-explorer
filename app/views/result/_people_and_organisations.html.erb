@@ -1,7 +1,6 @@
-<% %w(people organisations).each do |thing|
-  if enabled?(thing) && side[thing].present?
-    side[thing].each do |person_or_organisation| %>
-      <br><a href="<%= link_format(person_or_organisation['link']) %>"><%= person_or_organisation['title'] %></a>
-    <% end
-  end
-end %>
+<%
+a = side.second_head(fields)
+a.each do |person|
+%>
+  <br><a href="<%= person[1] %>"><%= person[0] %></a>
+<% end %>

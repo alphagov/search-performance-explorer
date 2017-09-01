@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'result_helper'
+require 'rails_helper'
+
 RSpec.describe ResultHelper do
   context 'when enhanched info is disabled' do
     let(:params) do

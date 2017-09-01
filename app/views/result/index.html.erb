@@ -60,41 +60,64 @@
             <th class="results-column">
               <p class="results-text" >
 
-                <a href = "<%= "#{link_format(side.info['link'])}" %>" >
+                <a href = "<%= side.link %>" >
                   <%= truncate(side.name, :length => 60 ) %>
                 </a>
 
-                <p><%= side.info['title'] %></p><br>
+                <p><%= side['title'] %></p><br>
 
                 <span class="head-info">
-                  <%
-                  head_fields = []
-                  head_fields << "popularity" if enabled?("popularity")
-                  head_fields << "historical" if enabled?("historical") %>
+                  <% head_fields = Searching::HEAD_FIELDS.select { |field| enabled?(field) } %>
                   <%= side.get_head_info_list(head_fields).compact.join(", ") %>
-                  <%= render(:partial => "content_id", :locals => {:side => side.info}) %>
-                  <%= render(:partial => "people_and_organisations", :locals => {:side => side.info}) %>
+                  <%=
+                    render(
+                      :partial => "content_id",
+                      :locals => {
+                        :side => side
+                      }
+                    )
+                  %>
+                  <% second_fields = Searching::SECONDARY_HEAD_FIELDS.select { |field| enabled?(field) } %>
+                  <%=
+                    render(
+                      :partial => "people_and_organisations",
+                      :locals => {
+                        :side => side,
+                        :fields => second_fields
+                      }
+                    )
+                  %>
                 </span>
 
                 <br>
                 <span class="head-info-2">
-                  <%= truncate(side.info['description'], :length => 200) %>
+                  <%= truncate(side['description'], :length => 200) %>
                 </span>
-                <%
-                  enhanced_fields = []
-                  %w(
-                  document_collections mainstream_browse_pages policies specialist_sectors taxons
-                  ).each { |thing| enhanced_fields << thing if enabled?(thing) && side.info[thing].present? }
+
+
+                <% enhanced_fields = Searching::ENHANCED_FIELDS.select { |field| enabled?(field) } %>
+                <%=
+                  render(
+                    :partial => "enhanced_results_table",
+                    :locals => {
+                      :enhanced_results => side.enhanced_results(enhanced_fields)
+                    }
+                  )
                 %>
-                <%= render(:partial => "enhanced_results_table", :locals => {:enhanced_results => side.get_enhanced_results(enhanced_fields)}) %>
 
               </p>
             </th>
           <% end %>
 
-          <% score_difference = results.score_difference(results.right[i].info['link'], i) %>
-          <%= render(:partial => "up_down_box", :locals => {:score_difference => score_difference}) %>
-
+          <% score_difference = results.score_difference(results.right[i]['link'], i) %>
+          <%=
+            render(
+              :partial => "up_down_box",
+              :locals => {
+                :score_difference => score_difference
+              }
+            )
+          %>
         </tr>
       <% end %>
 
