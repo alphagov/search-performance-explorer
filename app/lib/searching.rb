@@ -86,15 +86,11 @@ class Searching
       @info = info
     end
 
-    def date_format(date)
-      DateTime.parse(date).strftime("%B %Y") unless date.nil?
-    end
-
     def enhanced_results(enhanced_fields)
       return_hash = {}
       enhanced_fields.each do |field|
         next unless @info[field].present?
-        return_hash[field.titleize] = @info[field].map { |t| link_title_array(t, field)}
+        return_hash[field.titleize] = @info[field].map { |t| link_title_array(t, field) }
       end
       return_hash
     end
@@ -106,17 +102,12 @@ class Searching
       head_info_list
     end
 
-    def historical_or_current(check)
-      return "Historical" if check == true
-      return "Current" if check == false
-    end
-
     def link
       format_link(@info['link'])
     end
 
     def name
-      make_readable(URI(@info["link"]).path)
+      make_readable(@info['link']).strip
     end
 
     def second_head(fields)
@@ -124,17 +115,27 @@ class Searching
     end
 
   private
+
+    def date_format(date)
+      DateTime.parse(date).strftime("%B %Y") unless date.nil?
+    end
+
     def format_link(link, extra = "")
       return link if link == nil || link.start_with?("https://", "http://")
       return "https://#{link}" if link.start_with?("www.")
-      return "https://gov.uk" + extra + link
+      "https://gov.uk" + extra + link
+    end
+
+    def historical_or_current(check)
+      return if check.nil?
+      check ? "Historical" : "Current"
     end
 
     def link_title_array(link, field)
-      return [link['title'], format_link(link['link'])] if %w(specialist_sectors document_collections).include?(field)
       return [make_readable(link), ''] if field == "taxons"
       return [make_readable(link), format_link(link, "/government/policies/")] if field == "policies"
       return [make_readable(link), format_link(link, "/browse/")] if field == "mainstream_browse_pages"
+      [link['title'], format_link(link['link'])]
     end
 
     def make_readable(text)

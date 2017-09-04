@@ -2,98 +2,109 @@ require 'rails_helper'
 
 RSpec.describe Searching::Result do
   let(:sample_data) do
-    {
-      "title": "Tax your vehicle",
-      "link": "/vehicle-tax",
-      "popularity": 0.07692308,
-      "description": "Renew or tax your vehicle for the first time using a reminder letter, your log book, the 'new keeper's details' section of a log book - and how to tax if you don't have any documents",
-      "format": "transaction",
-      "content_id": "fa748fae-3de4-4266-ae85-0797ada3f40c",
-      "mainstream_browse_pages": [
-        "driving/vehicle-tax-mot-insurance"
-      ],
-      "policies": [
-        "personal-tax-reform",
-        "business-tax-reform"
-      ],
-      "taxons": [
-        "2b669b7d-c9d8-40b7-8b55-aa68a0615daa",
-        "bb4c54b9-5b3c-4c2e-8473-a57e2442f386"
-      ],
-      "organisations": [
-        {
-          "title": "Department for Transport",
-          "link": "/government/organisations/department-for-transport",
-        },
-        {
-          "title": "Driver and Vehicle Licensing Agency",
-          "link": "/government/organisations/driver-and-vehicle-licensing-agency",
-        }
-      ]
-    }
+    {}
   end
+
   subject do
     described_class.new(sample_data)
   end
 
-  describe "#date_format" do
-    let(:sample_data) do
-      {"public_timestamp": "2014-12-09T16:21:03.000+00:00"}
-    end
-    it 'can return the date in a more readable fashion' do
-      expect(subject.date_format(subject[:public_timestamp])).to eq("December 2014")
-      expect(subject.date_format("2035-04-09T16:21:03.000+00:00")).to eq("April 2035")
-    end
-  end
-
-  describe "#historical_or_current" do
-    it 'returns "Current" if given false' do
-      expect(subject.historical_or_current(false)).to eq("Current")
-    end
-
-    it 'returns "Historical" if given true' do
-      expect(subject.historical_or_current(true)).to eq("Historical")
-    end
-  end
-
-  describe "#link_format" do
-    it 'returns an unchanged link if it starts with http or https' do
-      expect(subject.link_format("http://www.example.com")).to eq("http://www.example.com")
-      expect(subject.link_format("https://www.exampletron.com")).to eq("https://www.exampletron.com")
-    end
-
-    it 'adds https if the link starts with www.' do
-      expect(subject.link_format("www.example.com")).to eq("https://www.example.com")
-    end
-
-    it 'adds https://gov.uk if the it\'s not an external link' do
-      expect(subject.link_format("/example")).to eq("https://gov.uk/example")
-    end
-  end
-
-  describe "#make_readable" do
-    it "removes hyphons" do
-      expect(subject.make_readable("test-the-readability-improver")).to eql("test the readability improver")
-    end
-
-    it "adds a space around each side of a /" do
-      expect(subject.make_readable("gov.uk/browse/benifits")).to eql("gov.uk / browse / benifits")
-    end
-  end
-
   describe "#name" do
-    it "takes a gov.uk link, removes \"https://www.gov.uk/\" and makes the result more readable" do
-
-      expect(subject.name).to
+    let(:sample_data) do
+      { "link" => "/vehicle-tax" }
+    end
+    it "makes the link path more readable" do
+      expect(subject.name).to eql("/ vehicle tax")
     end
   end
 
   context "returning enhanced results" do
-#    it "gets data out of the information hash" do
-#      expected_hash = {
-#        "mainstream_browse_pages" =>
-#      }
-#      expect()
-#    end
+    let(:sample_data) do
+      {
+        "mainstream_browse_pages" => ["driving/vehicle-tax-mot-insurance"],
+        "taxons" => [
+          "2b669b7d-c9d8-40b7-8b55-aa68a0615daa",
+          "bb4c54b9-5b3c-4c2e-8473-a57e2442f386"
+        ]
+      }
+    end
+    it "gets mainstream browse pages out of the information hash and formats their link" do
+      expected_hash = {
+        "Mainstream Browse Pages" => [
+          ["driving / vehicle tax mot insurance", "https://gov.uk/browse/driving/vehicle-tax-mot-insurance"]
+        ]
+      }
+      expect(subject.enhanced_results(%w(mainstream_browse_pages))).to eql(expected_hash)
+    end
+    it "gets taxons out of the information hash and returns them with an empty string" do
+      expected_hash = {
+        "Taxons" => [
+          ["2b669b7d c9d8 40b7 8b55 aa68a0615daa", ""],
+          ["bb4c54b9 5b3c 4c2e 8473 a57e2442f386", ""]
+        ]
+      }
+      expect(subject.enhanced_results(%w(taxons))).to eql(expected_hash)
+    end
+    it "returns an empty hash when the field isn't present" do
+      expected_hash = {}
+      expect(subject.enhanced_results(%w(policies))).to eql(expected_hash)
+    end
+  end
+
+  context "people and organisations" do
+    let(:sample_data) do
+      {
+        "people" => [
+          {
+            "title" => "The Rt Hon David Evennett MP",
+            "link" => "/government/people/david-evennett"
+          },
+          {
+            "title" => "The Rt Hon John Whittingdale",
+            "link" => "/government/people/john-whittingdale"
+          }
+        ],
+        "organisations" => [
+          {
+            "title" => "Driver and Vehicle Licensing Agency",
+            "link" => "/government/organisations/driver-and-vehicle-licensing-agency"
+          }
+        ]
+      }
+    end
+    it "returns the links for people pages and their link in an array" do
+      expected_array = [
+        ["The Rt Hon David Evennett MP", "https://gov.uk/government/people/david-evennett"],
+        ["The Rt Hon John Whittingdale", "https://gov.uk/government/people/john-whittingdale"]
+      ]
+      expect(subject.second_head(%w(people))).to eql(expected_array)
+    end
+
+    it "returns the links for organisation pages and their link in an array" do
+      expected_array = [
+        ["Driver and Vehicle Licensing Agency", "https://gov.uk/government/organisations/driver-and-vehicle-licensing-agency"]
+      ]
+      expect(subject.second_head(%w(organisations))).to eql(expected_array)
+    end
+  end
+
+  context "primary head information" do
+    let(:sample_data) do
+      {
+        "format" => "answer",
+        "public_timestamp" => "2015-04-03T00:01:07.000+01:00",
+        "is_historic" => true,
+        "popularity" => 0.0013315579
+      }
+    end
+    it "returns the format and date in readable formats if no arguments are passed in" do
+      expected_array = ["Answer", "April 2015"]
+      expect(subject.get_head_info_list([])).to eql(expected_array)
+    end
+
+    it "returns a full array of all elements if is historic and popularity are passed in" do
+      expected_array = ["Answer", "April 2015", "Historical", "Popularity: 0.0013315579"]
+      expect(subject.get_head_info_list(%w(is_historic popularity))).to eql(expected_array)
+    end
   end
 end
