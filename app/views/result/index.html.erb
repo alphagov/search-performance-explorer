@@ -48,6 +48,8 @@
         <th scope="col"><h3 class="heading-27" >Difference</h3></th>
       </tr>
 
+      <%# head_fields = Searching::HEAD_FIELDS.select { |field| enabled?(field) } %>
+
       <% results.rows.each_with_index do |row, i| %>
         <tr class="table-row">
           <th >
@@ -67,8 +69,7 @@
                 <p><%= side['title'] %></p><br>
 
                 <span class="head-info">
-                  <% head_fields = Searching::HEAD_FIELDS.select { |field| enabled?(field) } %>
-                  <%= side.get_head_info_list(head_fields).compact.join(", ") %>
+                  <%= side.get_head_info_list(@head_fields).compact.join(", ") %>
                   <%=
                     render(
                       :partial => "content_id",
@@ -77,13 +78,12 @@
                       }
                     )
                   %>
-                  <% second_fields = Searching::SECONDARY_HEAD_FIELDS.select { |field| enabled?(field) } %>
                   <%=
                     render(
                       :partial => "people_and_organisations",
                       :locals => {
                         :side => side,
-                        :fields => second_fields
+                        :fields => @secondary_head_fields
                       }
                     )
                   %>
@@ -94,42 +94,38 @@
                   <%= truncate(side['description'], :length => 200) %>
                 </span>
 
-
-                <% enhanced_fields = Searching::ENHANCED_FIELDS.select { |field| enabled?(field) } %>
                 <%=
                   render(
                     :partial => "enhanced_results_table",
                     :locals => {
-                      :enhanced_results => side.enhanced_results(enhanced_fields)
+                      :enhanced_results => side.enhanced_results(@enhanced_results_fields)
                     }
                   )
                 %>
-
               </p>
             </th>
           <% end %>
 
           <% score_difference = results.score_difference(results.right[i]['link'], i) %>
-          <%=
-            render(
-              :partial => "up_down_box",
-              :locals => {
-                :score_difference => score_difference
-              }
-            )
-          %>
+          <th>
+            <div class="<%= score_difference[1] %>">
+              <p class="table-body">
+                <%= score_difference[0] %>
+              </p>
+            </div>
+          </th>
         </tr>
       <% end %>
 
       <tr class="table-row">
-        <th/>
+        <th></th>
         <th>
           <%= "#{results.left_total} results, #{results.left_missing} not shown" %>
         </th>
         <th>
           <%= "#{results.right_total} results, #{results.right_missing} not shown" %>
         </th>
-        <th/>
+        <th></th>
       </tr>
     </table>
   </div>

@@ -5,13 +5,13 @@
         <%= field %>
       </th>
     </tr>
-      <% title_link_pair.each do |a| %>
+    <% title_link_pair.each do |title, link| %>
       <tr>
         <th class="e-table-cell">
-          <% if a[1] != "" %>
-            <a href="<%= a[1] %>"><%= a[0] %></a>
+          <% if link != "" %>
+            <a href="<%= link %>"><%= title %></a>
           <% else %>
-            <p><%= a[0] %></p>
+            <p><%= title %></p>
           <% end %>
         </th>
       </tr>

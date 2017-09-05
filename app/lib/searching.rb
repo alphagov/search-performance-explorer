@@ -14,6 +14,14 @@ class Searching
     people
     organisations
   ).freeze
+  FIELDS = %w(
+    description
+    format
+    link
+    public_timestamp
+    title
+    content_id
+  ).freeze + ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS
   require 'gds_api/rummager'
   attr_reader :params
   def initialize(params)
@@ -28,24 +36,16 @@ class Searching
 
   def call
     rummager = GdsApi::Rummager.new(Plek.new.find('rummager'))
-    fields = %w(
-      description
-      format
-      link
-      public_timestamp
-      title
-      content_id
-    ) + ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS
     findings_new_left = rummager.search(
       q: params["search_term"],
-      fields: fields,
+      fields: FIELDS,
       count: count.to_s,
       ab_tests: "#{params['which_test']}:A",
       c: Time.now.getutc.to_s
       )
     findings_new_right = rummager.search(
       q: params["search_term"],
-      fields: fields,
+      fields: FIELDS,
       count: count.to_s,
       ab_tests: "#{params['which_test']}:B",
       c: Time.now.getutc.to_s
@@ -70,12 +70,14 @@ class Searching
     end
 
     def search_left_list_for_link(link)
-      r = left.find { |result| result["link"].include?(link) }
-      left.index(r) if r
+      left.index { |result| result["link"].include?(link) }
     end
 
     def score_difference(link, position)
-      search_left_list_for_link(link) ? (search_left_list_for_link(link) - position).to_s : "++++"
+      sd = search_left_list_for_link(link).present? ? (search_left_list_for_link(link) - position) : "++++"
+      return ["+#{sd}", "up-box"] if sd == "++++" || sd.positive?
+      return ["N/A", "changeless-box"] if sd.zero?
+      [sd.to_s, "down-box"]
     end
   end
 
@@ -90,7 +92,7 @@ class Searching
       return_hash = {}
       enhanced_fields.each do |field|
         next unless @info[field].present?
-        return_hash[field.titleize] = @info[field].map { |t| link_title_array(t, field) }
+        return_hash[field.titleize] = @info[field].map { |t| link_title_pair(t, field) }
       end
       return_hash
     end
@@ -131,7 +133,7 @@ class Searching
       check ? "Historical" : "Current"
     end
 
-    def link_title_array(link, field)
+    def link_title_pair(link, field)
       return [make_readable(link), ''] if field == "taxons"
       return [make_readable(link), format_link(link, "/government/policies/")] if field == "policies"
       return [make_readable(link), format_link(link, "/browse/")] if field == "mainstream_browse_pages"

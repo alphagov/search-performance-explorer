@@ -55,22 +55,15 @@
         </div>
 
         <div class="enhanced-checkbox">
-          <% %w(
-            content_id
-            document_collections
-            is_historic
-            mainstream_browse_pages
-            organisations
-            people
-            policies
-            popularity
-            taxons
-            specialist_sectors
-          ).each do |option| %>
+          <%
+          (Searching::ENHANCED_FIELDS +
+          Searching::HEAD_FIELDS +
+          Searching::SECONDARY_HEAD_FIELDS +
+          %w( content_id )).sort.each do |option| %>
             <div class="enhanced-option-wrapper">
               <%= check_box_tag(option, "on", false, class: "enhanced-option") %>
               <label class="enhanced-labels" for="<%= option %>" >
-                <%= option.titleize %>
+                <%= option == "content_id" ? "Content ID" : option.titleize %>
               </label>
             </div>
           <% end %>
