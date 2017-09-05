@@ -48,8 +48,6 @@
         <th scope="col"><h3 class="heading-27" >Difference</h3></th>
       </tr>
 
-      <%# head_fields = Searching::HEAD_FIELDS.select { |field| enabled?(field) } %>
-
       <% results.rows.each_with_index do |row, i| %>
         <tr class="table-row">
           <th >
@@ -106,11 +104,15 @@
             </th>
           <% end %>
 
-          <% score_difference = results.score_difference(results.right[i]['link'], i) %>
+          <%
+          right_position = results.search_left_list_for_link(results.right[i]['link'])
+          score_difference = results.score_difference(results.right[i]['link'], i)
+          %>
+
           <th>
-            <div class="<%= score_difference[1] %>">
+            <div class="<%= compare(i, right_position) %>-box">
               <p class="table-body">
-                <%= score_difference[0] %>
+                <%= score_difference.zero? ? "N/A" : score_difference %>
               </p>
             </div>
           </th>

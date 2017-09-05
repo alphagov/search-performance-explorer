@@ -55,11 +55,7 @@
         </div>
 
         <div class="enhanced-checkbox">
-          <%
-          (Searching::ENHANCED_FIELDS +
-          Searching::HEAD_FIELDS +
-          Searching::SECONDARY_HEAD_FIELDS +
-          %w( content_id )).sort.each do |option| %>
+          <% Searching::OPTION_FIELDS.sort.each do |option| %>
             <div class="enhanced-option-wrapper">
               <%= check_box_tag(option, "on", false, class: "enhanced-option") %>
               <label class="enhanced-labels" for="<%= option %>" >

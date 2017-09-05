@@ -14,14 +14,18 @@ class Searching
     people
     organisations
   ).freeze
-  FIELDS = %w(
+  OTHER_FIELDS = %w(
     description
     format
     link
     public_timestamp
     title
     content_id
-  ).freeze + ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS
+  ).freeze
+
+  FIELDS = OTHER_FIELDS + ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS
+  OPTION_FIELDS = ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS + %w(content_id)
+
   require 'gds_api/rummager'
   attr_reader :params
   def initialize(params)
@@ -54,6 +58,7 @@ class Searching
   end
 
   class Results
+    NOT_FOUND = "++++".freeze
     attr_reader :left_total, :left_missing, :right_total, :right_missing, :left, :right, :result_count
     def initialize(left, right)
       @result_count = right['results'].count > left['results'].count ? right['results'].count : left['results'].count
@@ -74,10 +79,7 @@ class Searching
     end
 
     def score_difference(link, position)
-      sd = search_left_list_for_link(link).present? ? (search_left_list_for_link(link) - position) : "++++"
-      return ["+#{sd}", "up-box"] if sd == "++++" || sd.positive?
-      return ["N/A", "changeless-box"] if sd.zero?
-      [sd.to_s, "down-box"]
+      search_left_list_for_link(link).present? ? (search_left_list_for_link(link) - position) : NOT_FOUND
     end
   end
 
