@@ -1,8 +1,4 @@
 module ResultHelper
-  def enabled?(thing)
-    params['info'] == "enhanced" && params[thing] == "on"
-  end
-
   def compare(left, right)
     return 'up' if right == Searching::Results::NOT_FOUND
     change = right - left
