@@ -59,48 +59,63 @@
           <% row.each do |side| %>
             <th class="results-column">
               <p class="results-text" >
-                <a href = "<%= "#{link_format(side['link'])}" %>" >
-                  <%= truncate(name(side['link']), :length => 60 ) %>
+
+                <a href = "<%= side.link %>" >
+                  <%= truncate(side.name, :length => 60 ) %>
                 </a>
+
                 <p><%= side['title'] %></p><br>
+
                 <span class="head-info">
-                  <%= head_info_list_maker(side).compact.join(", ") %>
+                  <%= side.get_head_info_list(@head_fields).compact.join(", ") %>
+                  <%=
+                    render(
+                      :partial => "content_id",
+                      :locals => {
+                        :side => side
+                      }
+                    )
+                  %>
+                  <%=
+                    render(
+                      :partial => "people_and_organisations",
+                      :locals => {
+                        :side => side,
+                        :fields => @secondary_head_fields
+                      }
+                    )
+                  %>
                 </span>
+
                 <br>
                 <span class="head-info-2">
                   <%= truncate(side['description'], :length => 200) %>
                 </span>
+
+                <%=
+                  render(
+                    :partial => "enhanced_results_table",
+                    :locals => {
+                      :enhanced_results => side.enhanced_results(@enhanced_results_fields)
+                    }
+                  )
+                %>
               </p>
             </th>
           <% end %>
 
-          <% score_difference = results.score_difference(results.right[i]['link'], i) %>
-          <% if score_difference == "0" %>
-            <th>
-              <div class="changeless-box">
-                <p class="table-body">
-                  N/A
-                </p>
-              </div>
-            </th>
-          <% elsif score_difference.start_with?("-") %>
-            <th>
-              <div class="down-box">
-                <p class="table-body">
-                  <%= score_difference %>
-                </p>
-              </div>
-            </th>
-          <% else %>
-            <th>
-              <div class="up-box">
-                <p class="table-body">
-                  <%= "+#{score_difference}" %>
-                </p>
-              </div>
-            </th>
-          <% end %>
+          <%
+          right_position = results.search_left_list_for_link(results.right[i]['link'])
+          score_difference = results.score_difference(results.right[i]['link'], i)
+          %>
 
+          <th>
+            <div class="<%= compare(i, right_position) %>-box">
+              <p class="table-body">
+                <%= score_difference.zero? ? "N/A" : score_difference %>
+              </p>
+            </div>
+          </th>
         </tr>
       <% end %>
 
@@ -112,8 +127,7 @@
         <th>
           <%= "#{results.right_total} results, #{results.right_missing} not shown" %>
         </th>
-        <th>
-        </th>
+        <th></th>
       </tr>
     </table>
   </div>

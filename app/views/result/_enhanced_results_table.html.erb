@@ -1,0 +1,20 @@
+<table class="enhanced-results-table">
+  <% enhanced_results.each do |field, title_link_pair| %>
+    <tr>
+      <th class="e-table-title">
+        <%= field %>
+      </th>
+    </tr>
+    <% title_link_pair.each do |title, link| %>
+      <tr>
+        <th class="e-table-cell">
+          <% if link != "" %>
+            <a href="<%= link %>"><%= title %></a>
+          <% else %>
+            <p><%= title %></p>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

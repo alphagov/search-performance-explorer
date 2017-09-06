@@ -1,7 +1,4 @@
-require_relative '../../app/lib/searching.rb'
-require 'spec_helper'
-require 'capybara/rspec'
-require 'json'
+require 'rails_helper'
 
 describe Searching do
   let(:regular_search) { described_class.new("search_term" => "car tax", "count" => 20) }
