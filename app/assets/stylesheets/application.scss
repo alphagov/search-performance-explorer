@@ -13,6 +13,23 @@
   margin-top: 20px;
 }
 
+.changeless-box .table-body,
+.found-box .table-body {
+  visibility: hidden;
+  position: relative;
+}
+
+.changeless-box .table-body:after,
+.found-box .table-body:after {
+  visibility: visible;
+  position: absolute;
+  right: 0;
+}
+
+.changeless-box .table-body:after{
+  content: 'N/A';
+}
+
 .control-indicator {
   position: relative;
   bottom: 30px;
@@ -104,6 +121,10 @@
 
 .form-label input:checked ~ .control-indicator:after {
   display: block;
+}
+
+.found-box .table-body:after {
+  content: '++++';
 }
 
 .grid-row {
@@ -246,7 +267,10 @@
 
 .up-box,
 .up-box a:link,
-.up-box a:visited {
+.up-box a:visited,
+.found-box,
+.found-box a:link,
+.found-box a:visited {
   color: $grass-green;
 }
 

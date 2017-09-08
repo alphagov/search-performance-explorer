@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe ResultHelper do
   context 'when the result cannot be found in the list on the right' do
-    it 'returns up' do
-      expect(compare(3, Results::NOT_FOUND)).to eql('up')
-      expect(compare(6, Results::NOT_FOUND)).to eql('up')
+    it 'returns found' do
+      expect(compare(3, nil)).to eql('found')
+      expect(compare(6, nil)).to eql('found')
     end
   end
 

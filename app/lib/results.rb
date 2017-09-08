@@ -1,5 +1,4 @@
 class Results
-  NOT_FOUND = "++++".freeze
   attr_reader :left_total, :left_missing, :right_total, :right_missing, :left, :right, :result_count
   def initialize(left, right)
     @result_count = right['results'].count > left['results'].count ? right['results'].count : left['results'].count
@@ -16,10 +15,10 @@ class Results
   end
 
   def search_left_list_for_link(link)
-    left.index { |result| result["link"].include?(link) }
+    left.index { |result| result["link"] == link }
   end
 
   def score_difference(link, position)
-    search_left_list_for_link(link).present? ? (search_left_list_for_link(link) - position) : NOT_FOUND
+    search_left_list_for_link(link).present? ? (search_left_list_for_link(link) - position) : nil
   end
 end
