@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Searching::Result do
+RSpec.describe Result do
   subject { described_class.new(sample_data) }
 
   describe "#name" do

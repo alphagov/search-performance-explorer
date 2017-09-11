@@ -1,6 +1,6 @@
 module ResultHelper
   def compare(left, right)
-    return 'up' if right == Results::NOT_FOUND
+    return 'found' if right == nil
     change = right - left
     return 'up' if change.positive?
     change.negative? ? 'down' : 'changeless'

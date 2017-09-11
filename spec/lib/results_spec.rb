@@ -60,8 +60,8 @@ RSpec.describe Searching::Results do
     end
     it 'can return the correct offset for a result' do
       expect(subject.score_difference("Position 3", 0)).to eq(2)
-      expect(subject.score_difference("Position 4", 1)).to eq("++++")
-      expect(subject.score_difference("Position 5", 2)).to eq("++++")
+      expect(subject.score_difference("Position 4", 1)).to eq(nil)
+      expect(subject.score_difference("Position 5", 2)).to eq(nil)
     end
   end
   context 'when all data is the same on both sides' do
