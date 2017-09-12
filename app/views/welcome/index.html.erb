@@ -33,22 +33,21 @@
           <label class="form-label" for="AB_select">
             A/B test being used
           </label>
-          <select class="form-control" name="which_test" id="AB_select">
+          <select class="form-control" name="which_test" id="AB_select" onchange="showForm()">
             <option value="search_match_length">Search Match Length</option>
             <option value="none">None</option>
           </select>
         </div>
 
-        <div class="host-wrapper">
+        <div class="host-wrapper" id="host-wrapper">
           <div class="host-form-group">
             <label class="form-label" for="host-select-a">
               Host A
             </label>
-            <select class="form-control" name="which_test" id="host-select-a">
+            <select class="form-control" id="host-select-a" name="host-a">
               <option value="production">Production</option>
               <option value="staging">Staging</option>
               <option value="integration">Integration</option>
-              <option value="other">Other</option>
             </select>
           </div>
 
@@ -56,11 +55,10 @@
             <label class="form-label" for="host-select-b">
               Host B
             </label>
-            <select class="form-control" name="which_test" id="host-select-b">
+            <select class="form-control" id="host-select-b" name="host-b">
               <option value="production">Production</option>
               <option value="staging">Staging</option>
               <option value="integration">Integration</option>
-              <option value="other">Other</option>
             </select>
           </div>
         </div>
@@ -108,5 +106,17 @@
         }
       });
     });
+  </script>
+
+  <script type="text/javascript">
+    function showForm() {
+        var abSelect = document.getElementById("AB_select").value;
+        if (abSelect == "search_match_length") {
+            document.getElementById("host-wrapper").style.display = "none";
+        }
+        if (abSelect == "none") {
+            document.getElementById("host-wrapper").style.display = "block";
+        }
+    }
   </script>
 <% end %>

@@ -33,7 +33,7 @@ class Searching
   end
 
   def count
-    return 10 if params["count"].blank?
+    return 10 if params["count"].blank? || params["count"].to_i.negative?
     return 1000 if params["count"].to_i > 1000
     params["count"]
   end
