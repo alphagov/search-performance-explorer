@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="result_count">
+          <label class="form-label" for="count">
             Required number of results
           </label>
           <%= number_field_tag("count", "", class: "form-control") %>
@@ -35,7 +35,34 @@
           </label>
           <select class="form-control" name="which_test" id="AB_select">
             <option value="search_match_length">Search Match Length</option>
+            <option value="none">None</option>
           </select>
+        </div>
+
+        <div class="host-wrapper">
+          <div class="host-form-group">
+            <label class="form-label" for="host-select-a">
+              Host A
+            </label>
+            <select class="form-control" name="which_test" id="host-select-a">
+              <option value="production">Production</option>
+              <option value="staging">Staging</option>
+              <option value="integration">Integration</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="host-form-group-right">
+            <label class="form-label" for="host-select-b">
+              Host B
+            </label>
+            <select class="form-control" name="which_test" id="host-select-b">
+              <option value="production">Production</option>
+              <option value="staging">Staging</option>
+              <option value="integration">Integration</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
         </div>
 
         <div class="form-group">

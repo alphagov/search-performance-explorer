@@ -196,6 +196,25 @@
   }
 }
 
+.host-form-group,
+.host-form-group-right {
+  width: 49%;
+}
+
+.host-form-group {
+  float: left;
+}
+
+.host-form-group-right {
+  float: right;
+}
+
+.host-wrapper {
+  width: 100%;
+  float: left;
+  margin-bottom: 30px;
+}
+
 .info-basic,
 .info-enhanced {
   width: 39px;
