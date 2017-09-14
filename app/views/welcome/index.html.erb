@@ -45,9 +45,9 @@
               Host A
             </label>
             <select class="form-control" id="host-select-a" name="host-a">
-              <option value="production">Production</option>
-              <option value="staging">Staging</option>
-              <option value="integration">Integration</option>
+              <% Searching::HOSTS.keys.each do |host| %>
+                <option value="<%= host %>"><%= host.titleize %></option>
+              <% end %>
             </select>
           </div>
 
@@ -56,9 +56,9 @@
               Host B
             </label>
             <select class="form-control" id="host-select-b" name="host-b">
-              <option value="production">Production</option>
-              <option value="staging">Staging</option>
-              <option value="integration">Integration</option>
+              <% Searching::HOSTS.keys.each do |host| %>
+                <option value="<%= host %>"><%= host.titleize %></option>
+              <% end %>
             </select>
           </div>
         </div>
