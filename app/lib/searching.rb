@@ -29,7 +29,6 @@ class Searching
   HOSTS = {
     "production" => Plek.new.find('rummager'),
     "staging" => "https://www-origin.staging.publishing.service.gov.uk",
-    "integration" => "https://www-origin.integration.publishing.service.gov.uk",
     "development" => "http://rummager.dev.gov.uk"
   }.freeze
 
@@ -41,6 +40,7 @@ class Searching
 
   def count
     return 10 if params["count"].blank? || params["count"].to_i.negative?
+    return 100 if params["count"].to_i > 100 && [params["host-a"], params["host-b"]].include?("staging")
     return 1000 if params["count"].to_i > 1000
     params["count"]
   end
