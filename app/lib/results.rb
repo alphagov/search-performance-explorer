@@ -4,16 +4,18 @@ class Results
     @result_count = right['results'].count > left['results'].count ? right['results'].count : left['results'].count
     @left = (0..result_count - 1).map { |i| Result.new(left['results'][i]) }
     @right = (0..result_count - 1).map { |i| Result.new(right['results'][i]) }
-    if left['total'].present?
-      @left_total = left['total']
-    else
-      @left_total = left['result_count']
-    end
-    if right['total'].present?
-      @right_total = right['total']
-    else
-      @right_total = right['result_count']
-    end
+
+    @left_total = if left['total'].present?
+                    left['total']
+                  else
+                    left['result_count']
+                  end
+    @right_total =  if right['total'].present?
+                      right['total']
+                    else
+                      right['result_count']
+                    end
+
     @left_missing = @left_total - left['results'].count
     @right_missing = @right_total - right['results'].count
   end

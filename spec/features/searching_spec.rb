@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Searching do
-  let(:regular_search) { described_class.new("search_term" => "car tax", "count" => 20) }
+  let(:regular_search) { described_class.new("host-a" => "production", "host-b" => "production", "search_term" => "car tax", "count" => 20) }
   # this is the search that was used in our sample JSON file (spec/fixtures/json/api_response_a)
   let(:results_hash) { regular_search.call.results }
 

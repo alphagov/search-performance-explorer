@@ -40,27 +40,18 @@
         </div>
 
         <div class="host-wrapper" id="host-wrapper">
-          <div class="host-form-group">
-            <label class="form-label" for="host-select-a">
-              Host A
+        <% %w(a b).each do |host_letter| %>
+          <div class="host-form-group-<%= host_letter %>">
+            <label class="form-label" for="host-select-<%= host_letter %>">
+              <%= "Host #{host_letter.capitalize}" %>
             </label>
-            <select class="form-control" id="host-select-a" name="host-a">
+            <select class="form-control" id="host-select-<%= host_letter %>" name="host-<%= host_letter %>">
               <% Searching::HOSTS.keys.each do |host| %>
                 <option value="<%= host %>"><%= host.titleize %></option>
               <% end %>
             </select>
           </div>
-
-          <div class="host-form-group-right">
-            <label class="form-label" for="host-select-b">
-              Host B
-            </label>
-            <select class="form-control" id="host-select-b" name="host-b">
-              <% Searching::HOSTS.keys.each do |host| %>
-                <option value="<%= host %>"><%= host.titleize %></option>
-              <% end %>
-            </select>
-          </div>
+        <% end %>
         </div>
 
         <div class="form-group">

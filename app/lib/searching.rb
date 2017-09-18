@@ -27,9 +27,8 @@ class Searching
   OPTION_FIELDS = ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS + %w(content_id).freeze
 
   HOSTS = {
-    "production" => Plek.new.find('rummager'),
-    "staging" => "https://www-origin.staging.publishing.service.gov.uk",
-    "development" => "http://rummager.dev.gov.uk"
+    "production" => "http://rummager.dev.gov.uk",
+    "staging" => "https://www-origin.staging.publishing.service.gov.uk"
   }.freeze
 
   require 'gds_api/rummager'
