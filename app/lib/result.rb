@@ -2,11 +2,7 @@ class Result
   require 'uri'
   delegate :[], to: :@info
   def initialize(info)
-    @info = if info.present?
-              info
-            else
-              {}
-            end
+    @info = info || {}
   end
 
   def enhanced_results(enhanced_fields)
