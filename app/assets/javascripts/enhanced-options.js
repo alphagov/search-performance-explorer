@@ -5,7 +5,6 @@ $(document).ready(function() {
   enhancedRadio.addEventListener("change", enhancedOptions);
   basicRadio.addEventListener("change", enhancedOptions);
 
-
   function enhancedOptions() {
     if (enhancedRadio.checked == true) {
       enhancedCheckbox.style.display = 'block';
@@ -13,5 +12,6 @@ $(document).ready(function() {
       enhancedCheckbox.style.display = 'none';
     }
   }
+  
   enhancedOptions()
 });
