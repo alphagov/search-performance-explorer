@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="result_count">
+          <label class="form-label" for="count">
             Required number of results
           </label>
           <%= number_field_tag("count", "", class: "form-control") %>
@@ -33,9 +33,34 @@
           <label class="form-label" for="AB_select">
             A/B test being used
           </label>
-          <select class="form-control" name="which_test" id="AB_select">
-            <option value="search_match_length">Search Match Length</option>
-          </select>
+          <%=
+            select_tag(
+              "which_test",
+              options_for_select({"Search Match Length" => "search_match_length", "None" => "none"}),
+              {class: "form-control", id: "AB_select"}
+            )
+          %>
+        </div>
+
+        <div class="host-wrapper" id="host-wrapper">
+          <% %w(a b).each do |host_letter| %>
+            <div class="host-form-group-<%= host_letter %>">
+              <label class="form-label" for="host-select-<%= host_letter %>">
+                <%= "Host #{host_letter.capitalize}" %>
+              </label>
+
+              <%=
+                host_hash = Hash.new
+                Searching::HOSTS.keys.each { |host| host_hash[host.titleize] = host }
+                select_tag(
+                  "host-#{host_letter}",
+                  options_for_select( host_hash ),
+                  {class: "form-control", id: "host-select-#{host_letter}"}
+                )
+              %>
+
+            </div>
+          <% end %>
         </div>
 
         <div class="form-group">
@@ -54,7 +79,7 @@
           </label>
         </div>
 
-        <div class="enhanced-checkbox">
+        <div class="enhanced-checkbox" id="enhanced-checkbox">
           <% Searching::OPTION_FIELDS.sort.each do |option| %>
             <div class="enhanced-option-wrapper">
               <%= check_box_tag(option, "on", false, class: "enhanced-option") %>
@@ -69,17 +94,4 @@
       </form>
     </div>
   </div>
-
-  <script>
-    $(document).ready(function() {
-      $('input[type="radio"]').click(function() {
-        if($(this).attr('id') == 'info_enhanced') {
-          $('.enhanced-checkbox').show();
-        }
-        else {
-          $('.enhanced-checkbox').hide();
-        }
-      });
-    });
-  </script>
 <% end %>

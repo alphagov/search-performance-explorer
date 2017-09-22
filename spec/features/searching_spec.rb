@@ -1,7 +1,15 @@
 require 'rails_helper'
 
-describe Searching do
-  let(:regular_search) { described_class.new("search_term" => "car tax", "count" => 20) }
+RSpec.describe Searching do
+  before do
+    filename = File.join(Rails.root, 'spec/fixtures/api_response.json')
+    file = File.read(filename)
+
+    stub_request(:get, /rummager.dev.gov.uk/).
+    to_return(status: 200, body: file.to_s, headers: {})
+  end
+
+  let(:regular_search) { described_class.new("host-a" => "development", "host-b" => "development", "search_term" => "car tax", "count" => 20) }
   # this is the search that was used in our sample JSON file (spec/fixtures/json/api_response_a)
   let(:results_hash) { regular_search.call.results }
 
@@ -29,7 +37,7 @@ describe Searching do
 
   describe 'external request' do
     it 'creates a class that sends a request to rummager' do
-      expect(regular_search.call.class).to eql(described_class::Results)
+      expect(regular_search.call.class).to eql(Results)
     end
   end
 end

@@ -26,7 +26,7 @@
   right: 0;
 }
 
-.changeless-box .table-body:after{
+.changeless-box .table-body:after {
   content: 'N/A';
 }
 
@@ -89,7 +89,6 @@
   padding: 5px;
   margin-left: 55px;
   margin-bottom: 20px;
-  display: none;
 }
 
 .enhanced-labels {
@@ -115,7 +114,6 @@
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
-  font-size: 16px;
   line-height: 1.25;
 }
 
@@ -196,6 +194,25 @@
   }
 }
 
+.host-form-group-a,
+.host-form-group-b {
+  width: 49%;
+}
+
+.host-form-group-a {
+  float: left;
+}
+
+.host-form-group-b {
+  float: right;
+}
+
+.host-wrapper {
+  width: 100%;
+  float: left;
+  margin-bottom: 30px;
+}
+
 .info-basic,
 .info-enhanced {
   width: 39px;
@@ -235,6 +252,7 @@
 
 .results-column {
   padding-right: 10px;
+  width: 50%;
 }
 
 .results-header {
