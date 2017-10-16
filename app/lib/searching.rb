@@ -28,8 +28,9 @@ class Searching
 
   HOSTS = {
     "production" => "https://www.gov.uk/api",
+    "integration" => "https://www-origin.integration.publishing.service.gov.uk/api",
     "staging" => "https://www-origin.staging.publishing.service.gov.uk/api",
-    "development" => "http://rummager.dev.gov.uk",
+    "development" => "http://rummager.dev.gov.uk"
   }.freeze
 
   require 'gds_api/rummager'
@@ -46,19 +47,22 @@ class Searching
   end
 
   def call
-    findings_new_left = rummager_data(HOSTS[params["host-a"]], 'A')
-    findings_new_right = rummager_data(HOSTS[params["host-b"]], 'B')
+    findings_new_left = rummager_data(params["host-a"], 'A')
+    findings_new_right = rummager_data(params["host-b"], 'B')
     Results.new(findings_new_left, findings_new_right)
   end
 
-  def rummager_data(host, test)
-    rummager = GdsApi::Rummager.new(host)
+  def rummager_data(host_name, test)
+    rummager = GdsApi::Rummager.new(HOSTS[host_name])
     rummager.search(
-      q: params["search_term"],
-      fields: FIELDS,
-      count: count.to_s,
-      ab_tests: "#{params['which_test']}:#{test}",
-      c: Time.now.getutc.to_s
+      {
+        q: params["search_term"],
+        fields: FIELDS,
+        count: count.to_s,
+        ab_tests: "#{params['which_test']}:#{test}",
+        c: Time.now.getutc.to_s
+      },
+      'Authorization' => ENV["#{host_name.upcase}_AUTH_TOKEN"]
     )
   end
 end
