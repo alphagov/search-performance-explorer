@@ -4,6 +4,13 @@
 
 <div class="wrapper">
   <a name="top"></a>
+  <button class="button show-hide-search" id="show-hide-search">Show Search</button>
+
+  <div class="new-search" id="new-search">
+    <h2>New Search</h2>
+    <%= render "shared/search_box" %>
+  </div>
+
   <div class="head-section">
 
     <div class="heading">
@@ -16,36 +23,21 @@
       <h2 class="results-text">These are your results</h2>
     </div>
 
-    <div class="new-search">
-      <h2 class="head-text">New Search</h2>
-      <form id="homepage-form" action="/result" method="get">
-        <div class="form-group">
-          <label class="form-label" for="search_term_input">
-            Search term to compare
-          </label>
-          <%= text_field_tag(:search_term, params[:search_term], class: "form-control") %>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="result_count">
-            Required number of results
-          </label>
-          <%= number_field_tag("count", "#{params["count"]}", class: "form-control", id: "result_count") %>
-        </div>
-        <input type="hidden" name="which_test" value="<%= params["which_test"] %>"/>
-        <input class="button" id="search_button" type="submit" value="Search"></input>
-      </form>
-    </div>
-
   </div>
   <div class="grid-row">
     <% results = Searching.new(params).call %>
     <table class="results-table" >
       <tr class="table-row">
         <th></th>
-        <th scope="col"><h3 class="heading-27" >A Results</h3></th>
-        <th scope="col"><h3 class="heading-27" >B Results</h3></th>
-        <th scope="col"><h3 class="heading-27" >Difference</h3></th>
+        <th scope="col"><h3 class="medium-heading" ><%= "A/B test - #{params["which_test"].titleize}" %></h3></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr class="table-row">
+        <th></th>
+        <th scope="col"><h3 class="small-heading" ><%= "#{params['host-a'].capitalize} Results" %></h3></th>
+        <th scope="col"><h3 class="small-heading" ><%= "#{params['host-b'].capitalize} Results" %></h3></th>
+        <th scope="col"><h3 class="small-heading" >Difference</h3></th>
       </tr>
 
       <% results.rows.each_with_index do |row, i| %>

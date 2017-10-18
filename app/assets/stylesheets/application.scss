@@ -185,6 +185,14 @@
   @include heading-36;
 }
 
+.medium-heading {
+  @include heading-24;
+}
+
+.small-heading {
+  @include copy-19;
+}
+
 .homepage-form-container {
   margin-bottom: 20%;
   @extend %grid-row;
@@ -268,8 +276,28 @@
   text-decoration: underline;
 }
 
+.search-header {
+  @include heading-27;
+  width: 100px;
+  overflow: hidden;
+  float: left;
+}
+
 .search-term {
   @include heading-27;
+}
+
+.show-hide-search,
+.show-hide-search:focus {
+  right: 15px;
+  position: relative;
+  margin-bottom: 15px;
+  background-color: $grey-2;
+  color: $black;
+}
+
+.show-hide-search:hover {
+  background-color: $grey-1;
 }
 
 .table-column-with-padding {

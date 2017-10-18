@@ -1,0 +1,81 @@
+<div class="homepage-form-container">
+  <form class="homepage-form" action="/result" method="get">
+
+    <div class="form-group">
+      <label class="form-label" for="search_term">
+        Search term to compare
+      </label>
+      <%= text_field_tag("search_term", "", class: "form-control", value: params['search_term']) %>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="count">
+        Required number of results
+      </label>
+      <%= number_field_tag("count", "", class: "form-control", value: params['count']) %>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="AB_select">
+        A/B test being used
+      </label>
+      <%=
+        select_tag(
+          "which_test",
+          options_for_select({"Search Match Length" => "search_match_length", "None" => "none"}, params['which_test']),
+          {class: "form-control", id: "AB_select"}
+        )
+      %>
+    </div>
+
+    <div class="host-wrapper" id="host-wrapper">
+      <% %w(a b).each do |host_letter| %>
+        <div class="host-form-group-<%= host_letter %>">
+          <label class="form-label" for="host-select-<%= host_letter %>">
+            <%= "Host #{host_letter.capitalize}" %>
+          </label>
+
+          <%=
+            host_hash = Hash.new
+            Searching::HOSTS.keys.each { |host| host_hash[host.titleize] = host }
+            select_tag(
+              "host-#{host_letter}",
+              options_for_select( host_hash, params["host-#{host_letter}"] ),
+              {class: "form-control", id: "host-select-#{host_letter}"}
+            )
+          %>
+
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label radio-label" for="info_basic">
+        <%= radio_button_tag("info", "basic", true, class: "info-basic") %>
+        <span class="radio-tag">Basic Information</span>
+        <div class="control-indicator" ></div>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label radio-label" for="info_enhanced">
+        <%= radio_button_tag("info", "enhanced", params['info'] == "enhanced", class: "info-enhanced") %>
+        <span class="radio-tag">Enhanced Information</span>
+        <div class="control-indicator" ></div>
+      </label>
+    </div>
+
+    <div class="enhanced-checkbox" id="enhanced-checkbox">
+      <% Searching::OPTION_FIELDS.sort.each do |option| %>
+        <div class="enhanced-option-wrapper">
+          <%= check_box_tag(option, "on", params[option] == "on", class: "enhanced-option") %>
+          <label class="enhanced-labels" for="<%= option %>" >
+            <%= option == "content_id" ? "Content ID" : option.titleize %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+
+    <input class="button" id="search_button" type="submit" value="Search"></input>
+  </form>
+</div>
