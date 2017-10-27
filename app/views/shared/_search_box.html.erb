@@ -1,81 +1,58 @@
 <div class="homepage-form-container">
-  <form class="homepage-form" action="/result" method="get">
+  <%= form_for :search, url: "/result", method: 'get', html: { class: "homepage-form" } do |f| %>
 
     <div class="form-group">
-      <label class="form-label" for="search_term">
-        Search term to compare
-      </label>
-      <%= text_field_tag("search_term", "", class: "form-control", value: params['search_term']) %>
+      <%= f.label :search_term, "Search term to compare", class: "form-label" %>
+      <%= f.text_field :search_term, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="count">
-        Required number of results
-      </label>
-      <%= number_field_tag("count", "", class: "form-control", value: params['count']) %>
+      <%= f.label :count, 'Required number of results', class: "form-label" %>
+      <%= f.number_field :count, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="AB_select">
-        A/B test being used
-      </label>
-      <%=
-        select_tag(
-          "which_test",
-          options_for_select({"Search Match Length" => "search_match_length", "None" => "none"}, params['which_test']),
-          {class: "form-control", id: "AB_select"}
-        )
-      %>
+      <%= f.label :which_test, "A/B test being used", class: "form-label" %>
+      <%= f.select :which_test, { "Search Match Length" => "search_match_length", "None" => "none" }, {}, class: "form-control AB_select" %>
     </div>
 
     <div class="host-wrapper" id="host-wrapper">
-      <% %w(a b).each do |host_letter| %>
-        <div class="host-form-group-<%= host_letter %>">
-          <label class="form-label" for="host-select-<%= host_letter %>">
-            <%= "Host #{host_letter.capitalize}" %>
-          </label>
+      <div class="host-form-group-a">
+        <%= f.label :host_a, "Host A", class: "form-label" %>
+        <%= f.select :host_a, Searching::HOSTS.keys.map {|a| [a.capitalize, a] }, {}, {class: "form-control", id: "host-select-a"} %>
+      </div>
 
-          <%=
-            host_hash = Hash.new
-            Searching::HOSTS.keys.each { |host| host_hash[host.titleize] = host }
-            select_tag(
-              "host-#{host_letter}",
-              options_for_select( host_hash, params["host-#{host_letter}"] ),
-              {class: "form-control", id: "host-select-#{host_letter}"}
-            )
-          %>
-
-        </div>
-      <% end %>
+      <div class="host-form-group-b">
+        <%= f.label :host_b, "Host B", class: "form-label" %>
+        <%= f.select :host_b, Searching::HOSTS.keys.map {|a| [a.capitalize, a] }, {}, {class: "form-control", id: "host-select-b"} %>
+      </div>
     </div>
 
     <div class="form-group">
-      <label class="form-label radio-label" for="info_basic">
-        <%= radio_button_tag("info", "basic", true, class: "info-basic") %>
+      <%= f.label :info_basic, class: "form-label radio-label" do %>
+        <%= f.radio_button :info, "basic", class: "search-info-level", checked: true %>
         <span class="radio-tag">Basic Information</span>
-        <div class="control-indicator" ></div>
-      </label>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label radio-label" for="info_enhanced">
-        <%= radio_button_tag("info", "enhanced", params['info'] == "enhanced", class: "info-enhanced") %>
-        <span class="radio-tag">Enhanced Information</span>
-        <div class="control-indicator" ></div>
-      </label>
-    </div>
-
-    <div class="enhanced-checkbox" id="enhanced-checkbox">
-      <% Searching::OPTION_FIELDS.sort.each do |option| %>
-        <div class="enhanced-option-wrapper">
-          <%= check_box_tag(option, "on", params[option] == "on", class: "enhanced-option") %>
-          <label class="enhanced-labels" for="<%= option %>" >
-            <%= option == "content_id" ? "Content ID" : option.titleize %>
-          </label>
-        </div>
+        <div class="control-indicator"></div>
       <% end %>
+
+      <%= f.label :info_enhanced, class: "form-label radio-label" do %>
+        <%= f.radio_button :info, "enhanced", class: "search-info-level" %>
+        <span class="radio-tag">Enhanced Information</span>
+        <div class="control-indicator"></div>
+      <% end %>
+
+      <div class="enhanced-checkbox" id="enhanced-checkbox">
+        <% Searching::OPTION_FIELDS.sort.each do |option| %>
+          <div class="enhanced-option-wrapper">
+            <%= f.label option, class: "enhanced-labels" do %>
+              <%= f.check_box option, {class: "enhanced-option"}, "on" %>
+              <%= option == "content_id" ? "Content ID" : option.titleize %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
 
-    <input class="button" id="search_button" type="submit" value="Search"></input>
-  </form>
+    <%= f.submit 'Search', class: "button" %>
+  <% end %>
 </div>

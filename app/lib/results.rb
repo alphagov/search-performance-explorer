@@ -15,7 +15,7 @@ class Results
   end
 
   def search_left_list_for_link(link)
-    left.index { |result| result["link"] == link }
+    left.index { |result| result.link == link }
   end
 
   def score_difference(link, position)

@@ -40,15 +40,15 @@ class Searching
   end
 
   def count
-    count = params["count"].to_i
+    count = params["search"]["count"].to_i
     return 10 if count.zero? || count.negative?
     return 1000 if count > 1000
     count
   end
 
   def call
-    findings_new_left = rummager_data(params["host-a"], 'A')
-    findings_new_right = rummager_data(params["host-b"], 'B')
+    findings_new_left = rummager_data(params["search"]["host_a"], 'A')
+    findings_new_right = rummager_data(params["search"]["host_b"], 'B')
     Results.new(findings_new_left, findings_new_right)
   end
 
@@ -56,10 +56,10 @@ class Searching
     rummager = GdsApi::Rummager.new(HOSTS[host_name])
     rummager.search(
       {
-        q: params["search_term"],
+        q: params['search']['search_term'],
         fields: FIELDS,
         count: count.to_s,
-        ab_tests: "#{params['which_test']}:#{test}",
+        ab_tests: "#{params['search']['which_test']}:#{test}",
         c: Time.now.getutc.to_s
       },
       'Authorization' => ENV["#{host_name.upcase}_AUTH_TOKEN"]

@@ -1,16 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Searching do
-  before do
-    filename = File.join(Rails.root, 'spec/fixtures/api_response.json')
-    file = File.read(filename)
-
-    stub_request(:get, /rummager.dev.gov.uk/).
-    to_return(status: 200, body: file.to_s, headers: {})
-  end
-
-  let(:regular_search) { described_class.new("host-a" => "development", "host-b" => "development", "search_term" => "car tax", "count" => 20) }
-  # this is the search that was used in our sample JSON file (spec/fixtures/json/api_response_a)
+  let(:regular_search) { described_class.new("search" => { "count" => "20", "search_term" => "car tax", "host-a" => "production", "host-b" => "production" }) }
   let(:results_hash) { regular_search.call.results }
 
   describe 'initialization' do
@@ -21,7 +12,7 @@ RSpec.describe Searching do
 
   describe 'result count' do
     it "defaults to 10 results if no count is enetered" do
-      small_search = described_class.new("search_term" => "car tax", "count" => "")
+      small_search = described_class.new("search" => { "count" => "", "search_term" => "car tax" })
       expect(small_search.count).to eql(10)
     end
 
@@ -30,14 +21,8 @@ RSpec.describe Searching do
     end
 
     it "caps the count at 1000 for very large searches" do
-      large_search = described_class.new("search_term" => "car tax", "count" => 1001)
+      large_search = described_class.new("search" => { "count" => "1001", "search_term" => "car tax" })
       expect(large_search.count).to eql(1000)
-    end
-  end
-
-  describe 'external request' do
-    it 'creates a class that sends a request to rummager' do
-      expect(regular_search.call.class).to eql(Results)
     end
   end
 end

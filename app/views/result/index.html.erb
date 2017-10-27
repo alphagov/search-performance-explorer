@@ -14,33 +14,32 @@
   <div class="head-section">
 
     <div class="heading">
-      <% if params["search_term"].blank? %>
-        <h1 class="head-text">You did not enter a search term</h1>
-      <% else %>
+      <% if @search.search_term? %>
         <h1 class="head-text">You searched for</h1>
         <h2 class="search-term"><%= params["search_term"] %></h2>
+      <% else %>
+        <h1 class="head-text">You did not enter a search term</h1>
       <% end %>
       <h2 class="results-text">These are your results</h2>
     </div>
 
   </div>
   <div class="grid-row">
-    <% results = Searching.new(params).call %>
     <table class="results-table" >
       <tr class="table-row">
         <th></th>
-        <th scope="col"><h3 class="medium-heading" ><%= "A/B test - #{params["which_test"].titleize}" %></h3></th>
+        <th scope="col"><h3 class="medium-heading" ><%= "A/B test - #{@search.which_test.titleize}" %></h3></th>
         <th></th>
         <th></th>
       </tr>
       <tr class="table-row">
         <th></th>
-        <th scope="col"><h3 class="small-heading" ><%= "#{params['host-a'].capitalize} Results" %></h3></th>
-        <th scope="col"><h3 class="small-heading" ><%= "#{params['host-b'].capitalize} Results" %></h3></th>
+        <th scope="col"><h3 class="small-heading" ><%= "#{@search.host_a.capitalize} Results" %></h3></th>
+        <th scope="col"><h3 class="small-heading" ><%= "#{@search.host_b.capitalize} Results" %></h3></th>
         <th scope="col"><h3 class="small-heading" >Difference</h3></th>
       </tr>
 
-      <% results.rows.each_with_index do |row, i| %>
+      <% @results.rows.each_with_index do |row, i| %>
         <tr class="table-row">
           <th >
             <p class="table-body table-column-with-padding">
@@ -96,15 +95,10 @@
             </th>
           <% end %>
 
-          <%
-          right_position = results.search_left_list_for_link(results.right[i]['link'])
-          score_difference = results.score_difference(results.right[i]['link'], i)
-          %>
-
           <th>
-            <div class="<%= compare(i, right_position) %>-box">
+            <div class="<%= compare(i, @results.search_left_list_for_link(row[1].link)) %>-box">
               <p class="table-body">
-                <%= score_difference %>
+                <%= @results.score_difference(row[1].link, i) %>
               </p>
             </div>
           </th>
@@ -114,10 +108,10 @@
       <tr class="table-row">
         <th></th>
         <th>
-          <%= "#{results.left_total} results, #{results.left_missing} not shown" %>
+          <%= "#{@results.left_total} results, #{@results.left_missing} not shown" %>
         </th>
         <th>
-          <%= "#{results.right_total} results, #{results.right_missing} not shown" %>
+          <%= "#{@results.right_total} results, #{@results.right_missing} not shown" %>
         </th>
         <th></th>
       </tr>
