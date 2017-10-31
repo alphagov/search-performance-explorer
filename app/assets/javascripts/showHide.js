@@ -7,8 +7,10 @@ $(document).ready(function() {
   function showHideSearch() {
     if (newSearch.style.display == "none") {
       newSearch.style.display = "block";
+      showHideButton.innerHTML = "Hide Search"
     } else {
       newSearch.style.display = "none"
+      showHideButton.innerHTML = "Show Search"
     }
   }
 
