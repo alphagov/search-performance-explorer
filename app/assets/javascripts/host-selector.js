@@ -1,15 +1,13 @@
 $(document).ready(function() {
-  var abSelect = document.getElementById("AB_select");
-  var hostWrapper = document.getElementById("host-wrapper");
-  abSelect.addEventListener("change", showForm);
+  var abSelect = $("#search_which_test");
 
-  function showForm() {
-    if (abSelect.value == "search_match_length") {
-      hostWrapper.style.display = "none";
+  abSelect.change(function() {
+    if (abSelect.val() == "none") {
+      $("#host-wrapper").show();
     } else {
-      hostWrapper.style.display = "block";
+      $("#host-wrapper").hide();
     }
-  }
+  });
 
-  showForm()
+  abSelect.change();
 });

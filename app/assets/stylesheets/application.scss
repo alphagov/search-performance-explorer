@@ -185,6 +185,14 @@
   @include heading-36;
 }
 
+.medium-heading {
+  @include heading-24;
+}
+
+.small-heading {
+  @include copy-19;
+}
+
 .homepage-form-container {
   margin-bottom: 20%;
   @extend %grid-row;
@@ -213,8 +221,8 @@
   margin-bottom: 30px;
 }
 
-.info-basic,
-.info-enhanced {
+.search-info-level,
+.search_info_basic {
   width: 39px;
   height: 39px;
   border: 2px solid $black;
@@ -227,8 +235,7 @@
   float: left;
 }
 
-.info-basic:focus,
-.info-enhanced:focus {
+.search-info-level:focus {
   box-shadow: 0 0 0 3pt $yellow;
 }
 
@@ -268,8 +275,29 @@
   text-decoration: underline;
 }
 
+.search-header {
+  @include heading-27;
+  width: 100px;
+  overflow: hidden;
+  float: left;
+}
+
 .search-term {
   @include heading-27;
+}
+
+.show-hide-search,
+.show-hide-search:focus {
+  right: 15px;
+  position: relative;
+  margin-bottom: 15px;
+  background-color: $grey-2;
+  color: $black;
+  width: 17%;
+}
+
+.show-hide-search:hover {
+  background-color: $grey-1;
 }
 
 .table-column-with-padding {
@@ -290,6 +318,7 @@
 .found-box a:link,
 .found-box a:visited {
   color: $grass-green;
+  @include copy-19
 }
 
 .up-box,
@@ -300,6 +329,7 @@
   text-align: right;
   padding-top: 5px;
   padding-bottom: 5px;
+  @include heading-27
 }
 
 .wrapper {
