@@ -221,8 +221,7 @@
   margin-bottom: 30px;
 }
 
-.search-info-level,
-.search_info_basic {
+.search-info-level {
   width: 39px;
   height: 39px;
   border: 2px solid $black;
@@ -318,7 +317,7 @@
 .found-box a:link,
 .found-box a:visited {
   color: $grass-green;
-  @include copy-19
+  @include copy-19;
 }
 
 .up-box,
@@ -329,7 +328,7 @@
   text-align: right;
   padding-top: 5px;
   padding-bottom: 5px;
-  @include heading-27
+  @include heading-27;
 }
 
 .wrapper {
