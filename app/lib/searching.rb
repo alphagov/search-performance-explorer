@@ -53,16 +53,8 @@ class Searching
   end
 
   def rummager_data(host_name, test)
-    rummager = GdsApi::Rummager.new(HOSTS[host_name])
-    rummager.search(
-      {
-        q: params['search']['search_term'],
-        fields: FIELDS,
-        count: count.to_s,
-        ab_tests: "#{params['search']['which_test']}:#{test}",
-        c: Time.now.getutc.to_s
-      },
-      'Authorization' => ENV["#{host_name.upcase}_AUTH_TOKEN"]
-    )
+    url = "https://www-origin.staging.publishing.service.gov.uk/api/search.json?q=#{params['search']['search_term']}&fields=#{FIELDS.join(',')}&count=#{count.to_s}&ab_tests=#{params['search']['which_test']}:#{test}&c=#{Time.now.getutc.to_s}"
+    response = RestClient::Request.execute(:method => :get, :url => url)
+    JSON.parse(response.body)
   end
 end
