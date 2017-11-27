@@ -53,8 +53,8 @@ class Searching
   end
 
   def rummager_data(host_name, test)
-    url = "https://www-origin.staging.publishing.service.gov.uk/api/search.json?q=#{params['search']['search_term']}&fields=#{FIELDS.join(',')}&count=#{count.to_s}&ab_tests=#{params['search']['which_test']}:#{test}&c=#{Time.now.getutc.to_s}"
-    response = RestClient::Request.execute(:method => :get, :url => url)
+    url = "https://www-origin.integration.publishing.service.gov.uk/api/search.json?q=#{params['search']['search_term']}&fields=#{FIELDS.join(',')}&count=#{count.to_s}&ab_tests=#{params['search']['which_test']}:#{test}&c=#{Time.now.getutc.to_s}"
+    response = RestClient::Request.execute(method: :get, url: url, user: ENV['RUMMAGER_INTEGRATION_USERNAME'], password: ENV['RUMMAGER_INTEGRATION_PASSWORD'])
     JSON.parse(response.body)
   end
 end
