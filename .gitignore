@@ -22,3 +22,5 @@
 
 # Ignore application configuration
 /config/application.yml
+
+search_check_results.csv

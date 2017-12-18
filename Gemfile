@@ -38,6 +38,9 @@ gem 'govuk_frontend_toolkit', git: "https://github.com/alphagov/govuk_frontend_t
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Used by healthcheck
+gem "logging", "~> 2.2.2"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i(mri mingw x64_mingw)
