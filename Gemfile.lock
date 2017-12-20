@@ -159,7 +159,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (3.11.0)
     rack (2.0.3)
     rack-cache (1.7.1)
       rack (>= 0.4)
@@ -305,7 +305,7 @@ DEPENDENCIES
   logging (~> 2.2.2)
   pg (~> 0.18)
   pry
-  puma (~> 3.7)
+  puma (~> 3.11)
   rails (~> 5.1.4)
   rake
   rspec-rails
