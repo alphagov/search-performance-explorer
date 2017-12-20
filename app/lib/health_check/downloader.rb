@@ -23,7 +23,7 @@ module HealthCheck
     end
 
     def fetch_data(url:)
-      data = open(url).read
+      data = RestClient.get(url).body
       @logger.info "Downloaded #{url}"
       data
     end
