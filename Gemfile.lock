@@ -305,6 +305,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 5.1.4)
+  rainbow
   rake
   rest-client (~> 2.0.2)
   rspec-rails
