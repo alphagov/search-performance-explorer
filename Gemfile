@@ -34,7 +34,7 @@ gem 'figaro'
 gem 'gds-api-adapters'
 gem 'govuk_admin_template'
 gem 'govuk_frontend_toolkit', git: "https://github.com/alphagov/govuk_frontend_toolkit_gem.git", submodules: true
-
+gem "rainbow"
 gem 'rest-client', '~> 2.0.2'
 
 # Use Capistrano for deployment
