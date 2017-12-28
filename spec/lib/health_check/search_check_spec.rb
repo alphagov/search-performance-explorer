@@ -7,7 +7,7 @@ RSpec.describe HealthCheck::SearchCheck do
 
   context "#result" do
     it "delegate to it's corresponding results class" do
-      expect(HealthCheck::SearchCheckResult).to receive(:new).with({ check: subject, search_results:  @search_results })
+      expect(HealthCheck::SearchCheckResult).to receive(:new).with(check: subject, search_results: @search_results)
       subject.result(@search_results)
     end
   end

@@ -17,7 +17,7 @@ module HealthCheck
     end
 
     def valid_weight?
-      weight > 0
+      weight.positive?
     end
 
     def valid?
