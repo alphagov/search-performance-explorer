@@ -13,11 +13,11 @@ module HealthCheck
 
       # base_url can be in the form of example.org/search.json?debug=something
       # or example.org/search.json.
-      if @base_url.to_s.include?('?')
-        url = url_components.join('&')
-      else
-        url = url_components.join('?')
-      end
+      url = if @base_url.to_s.include?('?')
+              url_components.join('&')
+            else
+              url_components.join('?')
+            end
 
       request = Net::HTTP::Get.new(url)
       request.basic_auth(*@authentication) if @authentication
@@ -37,7 +37,7 @@ module HealthCheck
     end
 
     def to_s
-      "JSON endpoint #{@base_url} [auth=#{@authentication ? "yes" : "no"}]"
+      "JSON endpoint #{@base_url} [auth=#{@authentication ? 'yes' : 'no'}]"
     end
 
   private

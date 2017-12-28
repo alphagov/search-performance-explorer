@@ -5,12 +5,11 @@ Logging.color_scheme('bright',
     pass: :green,
     fail: :red,
     error: :red,
-    fatal: [:white, :on_red]
+    fatal: %i(white on_red)
   },
   date: :blue,
   logger: :cyan,
-  message: :blue
-)
+  message: :blue)
 
 Logging.appenders.stdout(
   'stdout',
