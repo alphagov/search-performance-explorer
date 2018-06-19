@@ -1,0 +1,88 @@
+#!/usr/bin/env ruby
+require_relative '../config/environment'
+require 'gds_api/rummager'
+
+PROJECT_ROOT = File.dirname(__FILE__) + "/../"
+DATA_DIR = PROJECT_ROOT + "data/"
+LIBRARY_PATH = PROJECT_ROOT + "lib/"
+
+[PROJECT_ROOT, LIBRARY_PATH].each do |path|
+  $LOAD_PATH.unshift(path) unless $LOAD_PATH.include?(path)
+end
+
+DEFAULT_JSON_URL = "https://www.gov.uk/api/".freeze
+
+rummager = GdsApi::Rummager.new(DEFAULT_JSON_URL)
+
+file = File.read(DATA_DIR + '/click_model.json')
+model = JSON.parse(file)
+
+class Evaluator
+  attr_reader :attractiveness
+  attr_reader :satisfyingness
+
+  def initialize(model)
+    @attractiveness = JSON.parse(model['attr'])
+    @satisfyingness = JSON.parse(model['sat'])
+  end
+
+  def score(query, content_ids, at_rank: 5)
+    current = discounted_cumulative_gain(query, content_ids.take(at_rank))
+    best = discounted_cumulative_gain(query, best_ordering(query).take(at_rank))
+
+    current / best
+  end
+
+  def relevance(query, content_id)
+    a = attractiveness[query][content_id]
+    s = satisfyingness[query][content_id]
+
+    if a.nil? || s.nil? || a["_denominator"] < 10
+      0
+    else
+      (a["_numerator"] * s["_numerator"]).to_f / (a["_denominator"] * s["_denominator"])
+    end
+  end
+
+  def queries
+    attractiveness.keys
+  end
+
+  def best_ordering(query)
+    possible_results = attractiveness[query].keys
+    possible_results.sort_by {|content_id| -relevance(query, content_id)}
+  end
+
+  def discounted_cumulative_gain(query, content_ids)
+    score = 0
+    content_ids.each_with_index do |content_id, i|
+      r = relevance(query, content_id)
+
+      score += r / Math.log2(i + 2)
+    end
+
+    score
+  end
+end
+
+evaluator = Evaluator.new(model)
+
+scores = []
+evaluator.queries.each do |query|
+  search_results = rummager.search(
+    {
+      q: query,
+      fields: %w(content_id title),
+      count: 20,
+    }
+  )
+
+  search_ordering = search_results["results"].map {|result| result["content_id"]}
+  query_score = evaluator.score(query, search_ordering)
+  scores << query_score
+
+  puts "#{query}: #{query_score.round(2)}"
+end
+
+ave = scores.sum.fdiv(scores.size) * 100
+puts "\nTOTAL SCORE: #{ave.round(1)}%"
