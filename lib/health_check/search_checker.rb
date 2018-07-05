@@ -19,7 +19,7 @@ module HealthCheck
       @file_output = produce_report ? SearchCheckReport.new : File.open(File::NULL, 'w')
     end
 
-    def run!
+    def run
       Logging.logger[self].info("Connecting to #{@search_client}")
 
       checks.each do |check|

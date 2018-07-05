@@ -14,7 +14,7 @@ module HealthCheck
       @model = model
     end
 
-    def run!
+    def run
       evaluator = HealthCheck::Evaluator.new(model)
 
       scores = []

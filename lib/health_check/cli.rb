@@ -64,7 +64,7 @@ module HealthCheck
         test_data: check_file,
       )
 
-      health_check.run!
+      health_check.run
       health_check.print_summary
     end
 
@@ -75,13 +75,13 @@ module HealthCheck
       calculator = HealthCheck::SuggestionChecker.new(
         search_client: search_client,
         test_data: check_file,
-      ).run!
+      ).run
 
       calculator.summarise("Overall score")
     end
 
     def run_click_model_benchmark
-      ClickModelBenchmark.new(search_client: search_client).run!
+      ClickModelBenchmark.new(search_client: search_client).run
     end
 
     def search_client
