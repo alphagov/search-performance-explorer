@@ -123,15 +123,15 @@ module HealthCheck
     end
 
     def add_actions(parser)
-      parser.on "--type=TYPE", "Which tests to run. 'suggestions' or 'results' (default)" do |type|
+      parser.on "--type=TYPE", "Which tests to run. If omited the script will benchmark search against analytics for popular searches. If set to 'curated' the script will run a series of checks from a spreadsheet. If set to 'suggestions' the script will check a list of spelling corrections." do |type|
         opts[:type] = type
       end
 
-      parser.on "-d", "--download", "Download search healthcheck data" do
+      parser.on "-d", "--download", "Download search healthcheck data (for types 'suggestions' and 'curated')" do
         opts[:download] = true
       end
 
-      parser.on "--limit=N", "Limit to the first n tests" do |n|
+      parser.on "--limit=N", "Limit to the first n tests (for --type curated) only" do |n|
         opts[:limit] = n.to_i
       end
     end
