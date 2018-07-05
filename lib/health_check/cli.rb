@@ -21,7 +21,7 @@ module HealthCheck
       }
     end
 
-    def run!
+    def run
       opt_parser = OptionParser.new do |parser|
         add_actions(parser)
         add_client_options(parser)
@@ -34,6 +34,8 @@ module HealthCheck
       warn "Unable to continue: bad response from search API:"
       $sterr.puts e.backtrace
     end
+
+  private
 
     def call
       if opts[:verbose]
@@ -52,8 +54,6 @@ module HealthCheck
         run_click_model_benchmark
       end
     end
-
-  private
 
     def run_search_result_tests
       check_file_path = DATA_DIR + "search-results.csv"

@@ -9,4 +9,4 @@ end
 
 require "health_check/cli"
 
-HealthCheck::CLI.new.run!
+HealthCheck::CLI.new.run
