@@ -1,3 +1,5 @@
+require "logging"
+
 Logging.init :debug, :info, :warn, :pass, :fail, :error, :fatal
 
 Logging.color_scheme('bright',

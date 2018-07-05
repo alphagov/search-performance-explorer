@@ -1,8 +1,10 @@
+require "logging"
+
 module HealthCheck
   class SearchCheckResult
     def initialize(check:, search_results:)
       @check = check
-      @search_results = search_results
+      @search_results = search_results.map { |result| result["link"] }
     end
 
     def write_to_log

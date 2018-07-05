@@ -1,3 +1,5 @@
+require "logging"
+
 module HealthCheck
   class Calculator
     attr_reader :success_count, :total_count

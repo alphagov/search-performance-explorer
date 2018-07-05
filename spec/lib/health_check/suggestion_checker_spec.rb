@@ -28,7 +28,7 @@ RSpec.describe HealthCheck::SuggestionChecker do
       result = described_class.new(
         search_client: HealthCheck::JsonSearchClient.new,
         test_data: StringIO.new(data)
-      ).run!
+      ).run
 
       expect(result.success_count).to eq 3
       expect(result.total_count).to eq 5

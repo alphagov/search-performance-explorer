@@ -1,3 +1,5 @@
+require "logging"
+
 module HealthCheck
   class Downloader
     def initialize(options = {})

@@ -1,3 +1,8 @@
+require "logging"
+require 'health_check/calculator'
+require 'health_check/check_file_parser'
+require 'health_check/search_check_report'
+
 module HealthCheck
   class SearchChecker
     attr_reader :search_client
@@ -14,7 +19,7 @@ module HealthCheck
       @file_output = produce_report ? SearchCheckReport.new : File.open(File::NULL, 'w')
     end
 
-    def run!
+    def run
       Logging.logger[self].info("Connecting to #{@search_client}")
 
       checks.each do |check|
