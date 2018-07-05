@@ -12,42 +12,9 @@ module HealthCheck
 
     def run!
       opt_parser = OptionParser.new do |parser|
-        parser.banner = %{Usage: #{File.basename(__FILE__)}
-
-        Runs a health check.
-        }
-        parser.on "-d", "--download", "Download search healthcheck data" do
-          opts[:download] = true
-        end
-
-        parser.on "-h", "--help", "Show this message" do
-          puts parser
-          exit
-        end
-
-        parser.on "--limit=N", "Limit to the first n tests" do |n|
-          opts[:limit] = n.to_i
-        end
-
-        parser.on "-a", "--auth=AUTH", "Basic auth credentials (of the form 'user:pass'" do |auth|
-          opts[:auth] = HealthCheck::BasicAuthCredentials.call(auth)
-        end
-
-        parser.on "--rate_limit_token=TOKEN", "Token to bypass rate limiting" do |token|
-          opts[:rate_limit_token] = token
-        end
-
-        parser.on "-j", "--json=URL", "Connect to a Rummager search endpoint at the the given url (default) (eg. #{DEFAULT_JSON_URL})" do |json|
-          opts[:json] = json
-        end
-
-        parser.on "-v", "--verbose", "Show verbose logging output" do
-          opts[:verbose] = true
-        end
-
-        parser.on "--type=TYPE", "Which tests to run. 'suggestions' or 'results' (default)" do |type|
-          opts[:type] = type
-        end
+        add_actions(parser)
+        add_client_options(parser)
+        add_help_options(parser)
       end
 
       opt_parser.parse!
@@ -123,6 +90,50 @@ module HealthCheck
       end
 
       file
+    end
+
+    def add_client_options(parser)
+      parser.on "-a", "--auth=AUTH", "Basic auth credentials (of the form 'user:pass'" do |auth|
+        opts[:auth] = HealthCheck::BasicAuthCredentials.call(auth)
+      end
+
+      parser.on "--rate_limit_token=TOKEN", "Token to bypass rate limiting" do |token|
+        opts[:rate_limit_token] = token
+      end
+
+      parser.on "-j", "--json=URL", "Connect to a Rummager search endpoint at the the given url (default) (eg. #{DEFAULT_JSON_URL})" do |json|
+        opts[:json] = json
+      end
+    end
+
+    def add_help_options(parser)
+      parser.on "-h", "--help", "Show this message" do
+        puts parser
+        exit
+      end
+
+      parser.on "-v", "--verbose", "Show verbose logging output" do
+        opts[:verbose] = true
+      end
+
+      parser.banner = %{Usage: #{File.basename(__FILE__)}
+
+      Runs a health check.
+      }
+    end
+
+    def add_actions(parser)
+      parser.on "--type=TYPE", "Which tests to run. 'suggestions' or 'results' (default)" do |type|
+        opts[:type] = type
+      end
+
+      parser.on "-d", "--download", "Download search healthcheck data" do
+        opts[:download] = true
+      end
+
+      parser.on "--limit=N", "Limit to the first n tests" do |n|
+        opts[:limit] = n.to_i
+      end
     end
   end
 end
