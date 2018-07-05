@@ -24,19 +24,33 @@ module HealthCheck
         )
 
         search_ordering = search_results[:results].map { |result| result["content_id"] }
-        query_score = evaluator.score(query, search_ordering)
-        scores << query_score
 
-        puts "#{query}: #{query_score.round(2)}"
+        query_score = evaluator.score(query, search_ordering)
+        report_query(query, query_score)
+
+        scores << query_score
       end
 
+      # This weights all the queries evenly - ideally it would weight query scores according
+      # to usage.
       ave = scores.sum.fdiv(scores.size) * 100
-      puts "\nTOTAL SCORE: #{ave.round(1)}%"
+      report_average_score(ave)
     end
 
   private
 
     attr_reader :rummager
     attr_reader :model
+
+    def report_query(query, query_score)
+      title = Rainbow(query).yellow + ": "
+      puts title.ljust(40) + query_score.round(2).to_s
+    end
+
+    def report_average_score(ave)
+      puts Rainbow("-" * 35).cyan
+      puts Rainbow("TOTAL SCORE:").cyan.ljust(39) + Rainbow("#{ave.round(1)}%").cyan
+      puts Rainbow("-" * 35).cyan
+    end
   end
 end
