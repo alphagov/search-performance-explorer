@@ -7,7 +7,7 @@ RSpec.describe HealthCheck::SearchCheckResult do
     context "'should' checks" do
       context 'desired result is within the desired ranking' do
         let(:check) { HealthCheck::SearchCheck.new("carmen", "should", "/a", 1, 200) }
-        let(:search_results) { ["https://www.gov.uk/a"] }
+        let(:search_results) { [{ "link" => "https://www.gov.uk/a" }] }
 
         it "return a successful Result" do
           expect(true).to eq(subject.success)
@@ -18,7 +18,7 @@ RSpec.describe HealthCheck::SearchCheckResult do
 
       context "desired result is outside of the desired ranking" do
         let(:check) { HealthCheck::SearchCheck.new("carmen", "should", "/a", 1, 200) }
-        let(:search_results) { ["https://www.gov.uk/b", "https://www.gov.uk/a"] }
+        let(:search_results) { [{ "link" => "https://www.gov.uk/b" }, { "link" => "https://www.gov.uk/a" }] }
 
         it "return a failure Result" do
           expect(subject.success).to be_falsey
@@ -29,7 +29,7 @@ RSpec.describe HealthCheck::SearchCheckResult do
 
       context "desired result isn't in the results" do
         let(:check) { HealthCheck::SearchCheck.new("carmen", "should", "/a", 1, 200) }
-        let(:search_results) { ["https://www.gov.uk/b", "https://www.gov.uk/c"] }
+        let(:search_results) { [{ "link" => "https://www.gov.uk/b" }, { "link" => "https://www.gov.uk/c" }] }
 
         it "return a failure Result" do
           expect(subject.success).to be_falsey
@@ -44,7 +44,7 @@ RSpec.describe HealthCheck::SearchCheckResult do
   context "'should not' checks" do
     context "an undesirable result is in the top N" do
       let(:check) { HealthCheck::SearchCheck.new("carmen", "should not", "/a", 1, 200) }
-      let(:search_results) { ["https://www.gov.uk/a", "https://www.gov.uk/b"] }
+      let(:search_results) { [{ "link" => "https://www.gov.uk/a" }, { "link" => "https://www.gov.uk/b" }] }
 
       it "fail" do
         expect(subject.success).to be_falsey
@@ -55,7 +55,7 @@ RSpec.describe HealthCheck::SearchCheckResult do
 
     context "an undesirable result is after the top N" do
       let(:check) { HealthCheck::SearchCheck.new("carmen", "should not", "/a", 1, 200) }
-      let(:search_results) { ["https://www.gov.uk/b", "https://www.gov.uk/a"] }
+      let(:search_results) { [{ "link" => "https://www.gov.uk/b" }, { "link" => "https://www.gov.uk/a" }] }
 
       it "pass" do
         expect(subject.success).to be_truthy
@@ -66,7 +66,7 @@ RSpec.describe HealthCheck::SearchCheckResult do
 
     context "an undesirable result doesn't appear" do
       let(:check) { HealthCheck::SearchCheck.new("carmen", "should not", "/x", 1, 200) }
-      let(:search_results) { ["https://www.gov.uk/a", "https://www.gov.uk/b"] }
+      let(:search_results) { [{ "link" => "https://www.gov.uk/a" }, { "link" => "https://www.gov.uk/b" }] }
 
       it "pass" do
         expect(subject.success).to be_truthy

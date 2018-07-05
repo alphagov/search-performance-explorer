@@ -23,7 +23,7 @@ RSpec.describe HealthCheck::JsonSearchClient do
 
   it "support the search format" do
     stub_search("cheese")
-    expected = { results: ["/a", "/b"], suggested_queries: %w[A B] }
+    expected = { results: [{ "link" => "/a" }, { "link" => "/b" }], suggested_queries: %w[A B] }
     base_url = URI.parse("http://www.gov.uk/api/search.json")
 
     expect(described_class.new(base_url: base_url).search("cheese")).to eq(expected)
@@ -32,7 +32,7 @@ RSpec.describe HealthCheck::JsonSearchClient do
   it "call the search API with a rate limit token if provided" do
     stub_search("cheese", "Rate-Limit-Token" => "some_token")
 
-    expected = { results: ["/a", "/b"], suggested_queries: %w[A B] }
+    expected = { results: [{ "link" => "/a" }, { "link" => "/b" }], suggested_queries: %w[A B] }
     base_url = URI.parse("http://www.gov.uk/api/search.json")
 
     response = described_class.new(base_url: base_url, rate_limit_token: "some_token").search("cheese")

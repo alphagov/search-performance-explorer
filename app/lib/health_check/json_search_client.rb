@@ -28,7 +28,7 @@ module HealthCheck
       when Net::HTTPSuccess # 2xx
         json_response = JSON.parse(response.body)
         {
-          results: extract_results(json_response),
+          results: json_response['results'],
           suggested_queries: json_response['suggested_queries']
         }
       else
@@ -47,14 +47,6 @@ module HealthCheck
         http = Net::HTTP.new(@base_url.host, @base_url.port)
         http.use_ssl = (@base_url.scheme == "https")
         http
-      end
-    end
-
-    def extract_results(json_response)
-      if json_response.is_a?(Hash) && json_response.has_key?('results')
-        json_response['results'].map { |result| result["link"] }
-      else
-        raise "Unexpected response format: #{json_response.inspect}"
       end
     end
   end
