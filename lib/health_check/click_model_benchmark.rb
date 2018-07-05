@@ -1,4 +1,6 @@
 require "gds_api/rummager"
+require "health_check/evaluator"
+require "rainbow"
 
 module HealthCheck
   class ClickModelBenchmark

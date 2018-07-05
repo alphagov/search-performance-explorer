@@ -1,4 +1,6 @@
 require 'csv'
+require "logging"
+require 'health_check/search_check'
 
 module HealthCheck
   class CheckFileParser
@@ -28,7 +30,7 @@ module HealthCheck
           else
             logger.error("Skipping invalid or incomplete row: #{row.to_s.chomp}")
           end
-        rescue => e
+        rescue StandardError => e
           logger.error("Skipping invalid or incomplete row: #{row.to_s.chomp} because: #{e.message}")
         end
       end

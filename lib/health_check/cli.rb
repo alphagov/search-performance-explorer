@@ -1,3 +1,14 @@
+require "logging"
+require "net/http"
+require "optparse"
+require "health_check/basic_auth_credentials"
+require "health_check/click_model_benchmark"
+require "health_check/downloader"
+require "health_check/json_search_client"
+require "health_check/logging_config"
+require "health_check/search_checker"
+require "health_check/suggestion_checker"
+
 module HealthCheck
   DEFAULT_JSON_URL = "https://www.gov.uk/api/search.json".freeze
 

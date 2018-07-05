@@ -1,3 +1,5 @@
+require "logging"
+
 module HealthCheck
   class SearchCheckResult
     def initialize(check:, search_results:)

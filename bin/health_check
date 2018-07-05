@@ -1,8 +1,4 @@
 #!/usr/bin/env ruby
-
-require_relative "../config/environment"
-require "optparse"
-
 PROJECT_ROOT = File.dirname(__FILE__) + "/../"
 DATA_DIR = PROJECT_ROOT + "data/"
 LIBRARY_PATH = PROJECT_ROOT + "lib/"
@@ -11,7 +7,6 @@ LIBRARY_PATH = PROJECT_ROOT + "lib/"
   $LOAD_PATH.unshift(path) unless $LOAD_PATH.include?(path)
 end
 
-require "logging"
-require "health_check/logging_config"
+require "health_check/cli"
 
 HealthCheck::CLI.new.run!
