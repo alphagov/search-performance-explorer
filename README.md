@@ -3,7 +3,6 @@ Tools for exploring how the GOV.UK search is performing and comparing multiple i
 
 ## Technical documentation
 This is a Ruby on Rails application that compares the results of an A/B test.
-It is only for internal use and is not public facing.
 
 The repository also contains some other utilities for developing and testing search.
 
