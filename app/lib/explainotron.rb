@@ -1,5 +1,5 @@
 module Explainotron
-  def self.explain!(query, hostname: Plek.find('rummager'))
+  def self.explain!(query, hostname: Plek.find('search'))
     client = GdsApi::Rummager.new(hostname)
 
     Results.new(
