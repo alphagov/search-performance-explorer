@@ -9,6 +9,7 @@ class Result
     return_hash = {}
     enhanced_fields.each do |field|
       next unless @info[field].present?
+
       return_hash[field.titleize] = @info[field].map { |t| link_title_pair(t, field) }
     end
     return_hash
@@ -42,11 +43,13 @@ private
   def format_link(link, extra = "")
     return link if link == nil || link.start_with?("https://", "http://")
     return "https://#{link}" if link.start_with?("www.")
+
     "https://gov.uk" + extra + link
   end
 
   def historical_or_current(check)
     return if check.nil?
+
     check ? "Historical" : "Current"
   end
 
@@ -54,6 +57,7 @@ private
     return [make_readable(link), ''] if field == "taxons"
     return [make_readable(link), format_link(link, "/government/policies/")] if field == "policies"
     return [make_readable(link), format_link(link, "/browse/")] if field == "mainstream_browse_pages"
+
     [link['title'], format_link(link['link'])]
   end
 
@@ -63,6 +67,7 @@ private
 
   def organisations
     return [] unless @info["organisations"].present?
+
     @info['organisations'].map do |details|
       [details['title'], format_link(details['link'])]
     end
@@ -70,6 +75,7 @@ private
 
   def people
     return [] unless @info["people"].present?
+
     @info['people'].map do |details|
       [details['title'], format_link(details['link'])]
     end

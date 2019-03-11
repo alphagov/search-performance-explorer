@@ -93,7 +93,7 @@ module HealthCheck
     end
 
     def open_file(filename)
-      file = open(filename)
+      file = File.open(filename)
 
       # Take the first n + 1 lines (including header row) from the check file
       if opts[:limit]

@@ -43,7 +43,7 @@ module HealthCheck
   private
 
     def http_client
-      @_http_client ||= begin
+      @http_client ||= begin
         http = Net::HTTP.new(@base_url.host, @base_url.port)
         http.use_ssl = (@base_url.scheme == "https")
         http

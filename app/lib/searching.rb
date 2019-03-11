@@ -43,6 +43,7 @@ class Searching
     count = params["search"]["count"].to_i
     return 10 if count.zero? || count.negative?
     return 1000 if count > 1000
+
     count
   end
 
