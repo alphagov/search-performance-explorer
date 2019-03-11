@@ -5,4 +5,4 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-task :default => ["lint:ruby_lint", "lint:css_lint", :spec]
+task default: ["lint:ruby_lint", "lint:css_lint", :spec]

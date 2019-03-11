@@ -18,6 +18,7 @@ private
 
   def search_params
     return {} unless params[:search]
+
     params.require(:search).permit(*SearchForm::PARAMS)
   end
 end

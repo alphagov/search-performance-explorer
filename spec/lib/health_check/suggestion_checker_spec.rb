@@ -13,11 +13,11 @@ RSpec.describe HealthCheck::SuggestionChecker do
       DOC
 
       responses = {
-        'adress' => ['address'],
-        'apprentiships' => ['apprenticeships'],
-        'apprenteships' => ['apprenticeships'],
+        'adress' => %w[address],
+        'apprentiships' => %w[apprenticeships],
+        'apprenteships' => %w[apprenticeships],
         'nothing' => [],
-        'other-thing' => ['something']
+        'other-thing' => %w[something]
       }
 
       responses.each do |term, suggestions|
