@@ -7,7 +7,7 @@ This is a Ruby on Rails application that compares the results of an A/B test.
 The repository also contains some other utilities for developing and testing search.
 
 ## Live version
-There is a live version of this application running at https://infinite-escarpment-22010.herokuapp.com/
+There is a live version of this application running at https://search-performance-explorer.herokuapp.com/
 
 ## Running the web application
 * Clone this repository
