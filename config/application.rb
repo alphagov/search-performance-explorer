@@ -5,6 +5,7 @@ require_relative 'boot'
   action_view/railtie
   action_mailer/railtie
   active_job/railtie
+  active_model/railtie
   action_cable/engine
   rails/test_unit/railtie
   sprockets/railtie
