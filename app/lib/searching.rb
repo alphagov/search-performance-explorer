@@ -30,7 +30,7 @@ class Searching
     "production" => "https://www.gov.uk/api",
     "integration" => "https://www-origin.integration.publishing.service.gov.uk/api",
     "staging" => "https://www-origin.staging.publishing.service.gov.uk/api",
-    "development" => "http://rummager.dev.gov.uk"
+    "development" => "http://rummager.dev.gov.uk",
   }.freeze
 
   require "gds_api/rummager"
@@ -61,7 +61,7 @@ class Searching
         fields: FIELDS,
         count: count.to_s,
         ab_tests: "#{params['search']['which_test']}:#{test}",
-        c: Time.now.getutc.to_s
+        c: Time.now.getutc.to_s,
       },
       "Authorization" => ENV["#{host_name.upcase}_AUTH_TOKEN"]
     )

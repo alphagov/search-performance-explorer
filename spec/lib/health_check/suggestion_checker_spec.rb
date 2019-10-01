@@ -17,7 +17,7 @@ RSpec.describe HealthCheck::SuggestionChecker do
         "apprentiships" => %w[apprenticeships],
         "apprenteships" => %w[apprenticeships],
         "nothing" => [],
-        "other-thing" => %w[something]
+        "other-thing" => %w[something],
       }
 
       responses.each do |term, suggestions|

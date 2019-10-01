@@ -19,14 +19,14 @@ RSpec.describe Result do
         "taxons" => [
           "2b669b7d-c9d8-40b7-8b55-aa68a0615daa",
           "bb4c54b9-5b3c-4c2e-8473-a57e2442f386"
-        ]
+        ],
       }
     end
     it "gets mainstream browse pages out of the information hash and formats their link" do
       expected_hash = {
         "Mainstream Browse Pages" => [
           ["driving / vehicle tax mot insurance", "https://gov.uk/browse/driving/vehicle-tax-mot-insurance"]
-        ]
+        ],
       }
       expect(subject.enhanced_results(%w(mainstream_browse_pages))).to eql(expected_hash)
     end
@@ -35,7 +35,7 @@ RSpec.describe Result do
         "Taxons" => [
           ["2b669b7d c9d8 40b7 8b55 aa68a0615daa", ""],
           ["bb4c54b9 5b3c 4c2e 8473 a57e2442f386", ""]
-        ]
+        ],
       }
       expect(subject.enhanced_results(%w(taxons))).to eql(expected_hash)
     end
@@ -51,19 +51,19 @@ RSpec.describe Result do
         "people" => [
           {
             "title" => "The Rt Hon David Evennett MP",
-            "link" => "/government/people/david-evennett"
+            "link" => "/government/people/david-evennett",
           },
           {
             "title" => "The Rt Hon John Whittingdale",
-            "link" => "/government/people/john-whittingdale"
+            "link" => "/government/people/john-whittingdale",
           }
         ],
         "organisations" => [
           {
             "title" => "Driver and Vehicle Licensing Agency",
-            "link" => "/government/organisations/driver-and-vehicle-licensing-agency"
+            "link" => "/government/organisations/driver-and-vehicle-licensing-agency",
           }
-        ]
+        ],
       }
     end
     it "returns the links for people pages and their link in an array" do
@@ -88,7 +88,7 @@ RSpec.describe Result do
         "format" => "answer",
         "public_timestamp" => "2015-04-03T00:01:07.000+01:00",
         "is_historic" => true,
-        "popularity" => 0.0013315579
+        "popularity" => 0.0013315579,
       }
     end
     it "returns the format and date in readable formats if no arguments are passed in" do

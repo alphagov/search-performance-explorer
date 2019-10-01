@@ -29,7 +29,7 @@ module HealthCheck
         json_response = JSON.parse(response.body)
         {
           results: json_response["results"],
-          suggested_queries: json_response["suggested_queries"]
+          suggested_queries: json_response["suggested_queries"],
         }
       else
         raise "Unexpected response #{response}"

@@ -5,13 +5,13 @@ RSpec.describe HealthCheck::JsonSearchClient do
     {
       "results" => [
         {
-          "link" => "/a"
+          "link" => "/a",
         },
         {
-          "link" => "/b"
+          "link" => "/b",
         }
       ],
-      "suggested_queries" => %w(A B)
+      "suggested_queries" => %w(A B),
     }
   end
 

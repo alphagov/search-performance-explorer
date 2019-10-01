@@ -4,14 +4,14 @@ RSpec.describe Searching::Results do
   let(:left_data) do
     {
       "total" => left_result.count,
-      "results" => left_result
+      "results" => left_result,
     }
   end
 
   let(:right_data) do
     {
       "total" => right_result.count,
-      "results" => right_result
+      "results" => right_result,
     }
   end
 
