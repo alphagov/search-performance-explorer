@@ -1,4 +1,4 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::SuggestionChecker do
   context "result" do
@@ -13,11 +13,11 @@ RSpec.describe HealthCheck::SuggestionChecker do
       DOC
 
       responses = {
-        'adress' => %w[address],
-        'apprentiships' => %w[apprenticeships],
-        'apprenteships' => %w[apprenticeships],
-        'nothing' => [],
-        'other-thing' => %w[something]
+        "adress" => %w[address],
+        "apprentiships" => %w[apprenticeships],
+        "apprenteships" => %w[apprenticeships],
+        "nothing" => [],
+        "other-thing" => %w[something]
       }
 
       responses.each do |term, suggestions|

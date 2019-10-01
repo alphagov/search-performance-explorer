@@ -1,5 +1,5 @@
-require 'logging'
-require 'health_check/suggestion_check_result'
+require "logging"
+require "health_check/suggestion_check_result"
 
 module HealthCheck
   class SuggestionCheck
@@ -52,7 +52,7 @@ module HealthCheck
     end
 
     def expected_result_empty?
-      expected_result.nil? || expected_result == ''
+      expected_result.nil? || expected_result == ""
     end
 
     def logger

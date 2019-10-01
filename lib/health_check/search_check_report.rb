@@ -1,8 +1,8 @@
-require 'csv'
+require "csv"
 
 module HealthCheck
   class SearchCheckReport
-    def initialize(output_file: CSV.open('search_check_results.csv', 'wb'))
+    def initialize(output_file: CSV.open("search_check_results.csv", "wb"))
       @report = output_file
       @report << [
         "Pass or Fail",

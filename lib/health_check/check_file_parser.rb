@@ -1,6 +1,6 @@
-require 'csv'
+require "csv"
 require "logging"
-require 'health_check/search_check'
+require "health_check/search_check"
 
 module HealthCheck
   class CheckFileParser

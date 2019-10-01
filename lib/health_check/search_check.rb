@@ -1,4 +1,4 @@
-require 'health_check/search_check_result'
+require "health_check/search_check_result"
 
 module HealthCheck
   SearchCheck = Struct.new(:search_term, :imperative, :path, :minimum_rank, :weight, :tags) do

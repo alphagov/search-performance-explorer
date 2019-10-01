@@ -8,7 +8,7 @@ module HealthCheck
     end
 
     def write_to_log
-      logging_output = [path, search_term, position_found, expectation, tags.join('|')].join(',')
+      logging_output = [path, search_term, position_found, expectation, tags.join("|")].join(",")
       if success
         logger.pass logging_output
       else

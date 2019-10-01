@@ -33,7 +33,7 @@ class Searching
     "development" => "http://rummager.dev.gov.uk"
   }.freeze
 
-  require 'gds_api/rummager'
+  require "gds_api/rummager"
   attr_reader :params
   def initialize(params)
     @params = params
@@ -48,8 +48,8 @@ class Searching
   end
 
   def call
-    findings_new_left = rummager_data(params["search"]["host_a"], 'A')
-    findings_new_right = rummager_data(params["search"]["host_b"], 'B')
+    findings_new_left = rummager_data(params["search"]["host_a"], "A")
+    findings_new_right = rummager_data(params["search"]["host_b"], "B")
     Results.new(findings_new_left, findings_new_right)
   end
 
@@ -57,13 +57,13 @@ class Searching
     rummager = GdsApi::Rummager.new(HOSTS[host_name])
     rummager.search(
       {
-        q: params['search']['search_term'],
+        q: params["search"]["search_term"],
         fields: FIELDS,
         count: count.to_s,
         ab_tests: "#{params['search']['which_test']}:#{test}",
         c: Time.now.getutc.to_s
       },
-      'Authorization' => ENV["#{host_name.upcase}_AUTH_TOKEN"]
+      "Authorization" => ENV["#{host_name.upcase}_AUTH_TOKEN"]
     )
   end
 end

@@ -1,5 +1,5 @@
 module Explainotron
-  def self.explain!(query, hostname: Plek.find('search', external: true))
+  def self.explain!(query, hostname: Plek.find("search", external: true))
     client = GdsApi::Rummager.new(hostname)
 
     Results.new(
@@ -46,7 +46,7 @@ module Explainotron
         Rainbow(match).green
       end
 
-      spaces = ' ' * indent
+      spaces = " " * indent
       puts spaces.to_s + Rainbow("[#{value}] ").magenta + description
 
       if details

@@ -1,5 +1,5 @@
 class Result
-  require 'uri'
+  require "uri"
   delegate :[], to: :@info
   def initialize(info)
     @info = info
@@ -16,18 +16,18 @@ class Result
   end
 
   def get_head_info_list(fields)
-    head_info_list = [@info['format'].humanize, date_format(@info['public_timestamp'])]
-    head_info_list << historical_or_current(@info['is_historic']) if fields.include?("is_historic")
+    head_info_list = [@info["format"].humanize, date_format(@info["public_timestamp"])]
+    head_info_list << historical_or_current(@info["is_historic"]) if fields.include?("is_historic")
     head_info_list << "Popularity: #{@info['popularity']}" if fields.include?("popularity")
     head_info_list
   end
 
   def link
-    format_link(@info['link'])
+    format_link(@info["link"])
   end
 
   def name
-    make_readable(@info['link']).strip
+    make_readable(@info["link"]).strip
   end
 
   def second_head(fields)
@@ -54,11 +54,11 @@ private
   end
 
   def link_title_pair(link, field)
-    return [make_readable(link), ''] if field == "taxons"
+    return [make_readable(link), ""] if field == "taxons"
     return [make_readable(link), format_link(link, "/government/policies/")] if field == "policies"
     return [make_readable(link), format_link(link, "/browse/")] if field == "mainstream_browse_pages"
 
-    [link['title'], format_link(link['link'])]
+    [link["title"], format_link(link["link"])]
   end
 
   def make_readable(text)
@@ -68,16 +68,16 @@ private
   def organisations
     return [] unless @info["organisations"].present?
 
-    @info['organisations'].map do |details|
-      [details['title'], format_link(details['link'])]
+    @info["organisations"].map do |details|
+      [details["title"], format_link(details["link"])]
     end
   end
 
   def people
     return [] unless @info["people"].present?
 
-    @info['people'].map do |details|
-      [details['title'], format_link(details['link'])]
+    @info["people"].map do |details|
+      [details["title"], format_link(details["link"])]
     end
   end
 end

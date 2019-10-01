@@ -1,4 +1,4 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::SearchCheck do
   before do

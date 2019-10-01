@@ -1,4 +1,4 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::JsonSearchClient do
   def search_response_body
@@ -17,7 +17,7 @@ RSpec.describe HealthCheck::JsonSearchClient do
 
   def stub_search(search_term, custom_headers = {})
     stub_request(:get, "http://www.gov.uk/api/search.json?q=#{CGI.escape(search_term)}").
-      with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' }.merge(custom_headers)).
+      with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" }.merge(custom_headers)).
       to_return(status: 200, body: search_response_body.to_json)
   end
 
