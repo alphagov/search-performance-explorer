@@ -10,7 +10,7 @@ module HealthCheck
         "Page",
         "Search Term",
         "Position found",
-        "Position wanted"
+        "Position wanted",
       ]
     end
 
@@ -21,7 +21,7 @@ module HealthCheck
         result.path,
         result.search_term,
         result.position_found,
-        result.expectation
+        result.expectation,
       ]
     end
   end

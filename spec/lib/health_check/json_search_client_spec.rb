@@ -9,7 +9,7 @@ RSpec.describe HealthCheck::JsonSearchClient do
         },
         {
           "link" => "/b",
-        }
+        },
       ],
       "suggested_queries" => %w(A B),
     }
