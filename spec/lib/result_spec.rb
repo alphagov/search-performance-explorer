@@ -16,9 +16,9 @@ RSpec.describe Result do
     let(:sample_data) do
       {
         "mainstream_browse_pages" => ["driving/vehicle-tax-mot-insurance"],
-        "taxons" => [
-          "2b669b7d-c9d8-40b7-8b55-aa68a0615daa",
-          "bb4c54b9-5b3c-4c2e-8473-a57e2442f386",
+        "taxons" => %w[
+          2b669b7d-c9d8-40b7-8b55-aa68a0615daa
+          bb4c54b9-5b3c-4c2e-8473-a57e2442f386
         ],
       }
     end
