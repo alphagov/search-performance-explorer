@@ -21,7 +21,7 @@ module HealthCheck
         check = SuggestionCheck.new(
           search_term: search_term,
           expected_result: expected_result,
-          suggested_query: suggested_queries.first
+          suggested_query: suggested_queries.first,
         )
 
         check.log_result

@@ -63,7 +63,7 @@ class Searching
         ab_tests: "#{params['search']['which_test']}:#{test}",
         c: Time.now.getutc.to_s,
       },
-      "Authorization" => ENV["#{host_name.upcase}_AUTH_TOKEN"]
+      "Authorization" => ENV["#{host_name.upcase}_AUTH_TOKEN"],
     )
   end
 end

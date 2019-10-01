@@ -7,8 +7,8 @@ module Explainotron
       client.search(
         q: query,
         debug: "explain,disable_best_bets,disable_popularity,disable_boosting",
-        count: 3
-      )["results"]
+        count: 3,
+      )["results"],
     )
   end
 

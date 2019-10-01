@@ -18,7 +18,7 @@ RSpec.describe Searching::Results do
   subject do
     described_class.new(
       left_data,
-      right_data
+      right_data,
     )
   end
   context "when all data is visible on both sides" do

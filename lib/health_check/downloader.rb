@@ -10,11 +10,11 @@ module HealthCheck
     def download!
       write(
         "#{@data_dir}/search-results.csv",
-        fetch_data(url: spreadsheet_url(gid: "1400194374"))
+        fetch_data(url: spreadsheet_url(gid: "1400194374")),
       )
       write(
         "#{@data_dir}/suggestions.csv",
-        fetch_data(url: spreadsheet_url(gid: "9"))
+        fetch_data(url: spreadsheet_url(gid: "9")),
       )
     end
 

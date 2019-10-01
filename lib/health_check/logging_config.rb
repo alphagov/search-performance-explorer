@@ -17,8 +17,8 @@ Logging.appenders.stdout(
   "stdout",
   layout: Logging.layouts.pattern(
     pattern: '%l,%m\n',
-    color_scheme: "bright"
-  )
+    color_scheme: "bright",
+  ),
 )
 
 Logging.logger.root.appenders = Logging.appenders.stdout
