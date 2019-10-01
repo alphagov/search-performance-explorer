@@ -3,15 +3,15 @@ require "logging"
 Logging.init :debug, :info, :warn, :pass, :fail, :error, :fatal
 
 Logging.color_scheme("bright",
-  levels: {
-    pass: :green,
-    fail: :red,
-    error: :red,
-    fatal: %i(white on_red),
-  },
-  date: :blue,
-  logger: :cyan,
-  message: :blue)
+                     levels: {
+                       pass: :green,
+                       fail: :red,
+                       error: :red,
+                       fatal: %i(white on_red),
+                     },
+                     date: :blue,
+                     logger: :cyan,
+                     message: :blue)
 
 Logging.appenders.stdout(
   "stdout",
