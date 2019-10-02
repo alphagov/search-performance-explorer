@@ -1,4 +1,4 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::CheckFileParser do
   def checks(data)
@@ -14,7 +14,7 @@ RSpec.describe HealthCheck::CheckFileParser do
 
     expected = [
       HealthCheck::SearchCheck.new("a", "should", "/a", 1, 1, %w(test)),
-      HealthCheck::SearchCheck.new("b", "should", "/b", 1, 1, %w(test))
+      HealthCheck::SearchCheck.new("b", "should", "/b", 1, 1, %w(test)),
     ]
     expect(checks(data)).to eq(expected)
   end

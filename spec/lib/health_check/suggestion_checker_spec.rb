@@ -1,4 +1,4 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::SuggestionChecker do
   context "result" do
@@ -13,11 +13,11 @@ RSpec.describe HealthCheck::SuggestionChecker do
       DOC
 
       responses = {
-        'adress' => %w[address],
-        'apprentiships' => %w[apprenticeships],
-        'apprenteships' => %w[apprenticeships],
-        'nothing' => [],
-        'other-thing' => %w[something]
+        "adress" => %w[address],
+        "apprentiships" => %w[apprenticeships],
+        "apprenteships" => %w[apprenticeships],
+        "nothing" => [],
+        "other-thing" => %w[something],
       }
 
       responses.each do |term, suggestions|
@@ -27,7 +27,7 @@ RSpec.describe HealthCheck::SuggestionChecker do
 
       result = described_class.new(
         search_client: HealthCheck::JsonSearchClient.new,
-        test_data: StringIO.new(data)
+        test_data: StringIO.new(data),
       ).run
 
       expect(result.success_count).to eq 3

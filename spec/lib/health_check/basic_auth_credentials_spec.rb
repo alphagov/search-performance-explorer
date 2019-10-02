@@ -1,4 +1,4 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::BasicAuthCredentials do
   it "be callable with a user:password string" do

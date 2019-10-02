@@ -5,7 +5,7 @@ class ResultController < ApplicationController
     @enhanced_results_fields = Searching::ENHANCED_FIELDS.select { |field| enabled?(field) }
     @show_content_id = enabled?("content_id")
 
-    defaults = { host_a: 'production', host_b: 'production' }
+    defaults = { host_a: "production", host_b: "production" }
     @search = SearchForm.new(defaults.merge(search_params))
     @results = Searching.new(params).call
   end
@@ -13,7 +13,7 @@ class ResultController < ApplicationController
 private
 
   def enabled?(thing)
-    params['info'] == "enhanced" && params[thing] == "on"
+    params["info"] == "enhanced" && params[thing] == "on"
   end
 
   def search_params

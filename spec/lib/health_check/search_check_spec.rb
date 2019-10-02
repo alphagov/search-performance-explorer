@@ -1,8 +1,8 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::SearchCheck do
   before do
-    @search_results = ["any-old-thing"]
+    @search_results = %w[any-old-thing]
   end
 
   context "#result" do

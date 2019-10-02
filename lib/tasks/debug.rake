@@ -1,4 +1,4 @@
-require 'gds_api/rummager'
+require "gds_api/rummager"
 
 namespace :debug do
   desc "Run the core of the search query with explain plans enabled and special boosting disabled"

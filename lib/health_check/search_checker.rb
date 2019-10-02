@@ -1,7 +1,7 @@
 require "logging"
-require 'health_check/calculator'
-require 'health_check/check_file_parser'
-require 'health_check/search_check_report'
+require "health_check/calculator"
+require "health_check/check_file_parser"
+require "health_check/search_check_report"
 
 module HealthCheck
   class SearchChecker
@@ -16,7 +16,7 @@ module HealthCheck
       @overall_calculator = Calculator.new
       @tag_calculators = {}
       @word_count_calculators = {}
-      @file_output = produce_report ? SearchCheckReport.new : File.open(File::NULL, 'w')
+      @file_output = produce_report ? SearchCheckReport.new : File.open(File::NULL, "w")
     end
 
     def run

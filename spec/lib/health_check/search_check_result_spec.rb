@@ -1,11 +1,11 @@
-require 'healthcheck_helper'
+require "healthcheck_helper"
 
 RSpec.describe HealthCheck::SearchCheckResult do
   subject { described_class.new(check: check, search_results: search_results) }
 
   context ".build" do
     context "'should' checks" do
-      context 'desired result is within the desired ranking' do
+      context "desired result is within the desired ranking" do
         let(:check) { HealthCheck::SearchCheck.new("carmen", "should", "/a", 1, 200) }
         let(:search_results) { [{ "link" => "https://www.gov.uk/a" }] }
 

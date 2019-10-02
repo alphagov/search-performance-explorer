@@ -1,7 +1,7 @@
-require 'csv'
+require "csv"
 require "logging"
-require 'health_check/calculator'
-require 'health_check/suggestion_check'
+require "health_check/calculator"
+require "health_check/suggestion_check"
 
 module HealthCheck
   class SuggestionChecker
@@ -16,12 +16,12 @@ module HealthCheck
       calculator = Calculator.new
 
       parsed_checks.each do |search_term, expected_result|
-        suggested_queries = @search_client.search(search_term, count: 0, suggest: 'spelling')[:suggested_queries]
+        suggested_queries = @search_client.search(search_term, count: 0, suggest: "spelling")[:suggested_queries]
 
         check = SuggestionCheck.new(
           search_term: search_term,
           expected_result: expected_result,
-          suggested_query: suggested_queries.first
+          suggested_query: suggested_queries.first,
         )
 
         check.log_result
@@ -35,7 +35,7 @@ module HealthCheck
 
     def parsed_checks
       CSV.parse(@test_data_file, headers: true).map do |row|
-        [row['Search term'], row['Ideal suggestion']]
+        [row["Search term"], row["Ideal suggestion"]]
       end
     end
   end
