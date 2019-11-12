@@ -47,11 +47,12 @@ group :development, :test do
   gem "byebug", platforms: %i(mri mingw x64_mingw)
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", "~> 2.17"
-  gem "govuk-lint"
   gem "json"
   gem "pry"
   gem "rake"
   gem "rspec-rails"
+  gem "rubocop-govuk"
+  gem "scss_lint-govuk"
   gem "selenium-webdriver"
   gem "webmock"
 end
