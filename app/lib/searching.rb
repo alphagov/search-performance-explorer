@@ -60,10 +60,15 @@ class Searching
         q: params["search"]["search_term"],
         fields: FIELDS,
         count: count.to_s,
-        ab_tests: "#{params['search']['which_test']}:#{test}",
+        ab_tests: ab_tests(test),
         c: Time.now.getutc.to_s,
       },
       "Authorization" => ENV["#{host_name.upcase}_AUTH_TOKEN"],
     )
+  end
+
+  def ab_tests(variant)
+    tests = params['search']['which_test']
+    tests.split(",").map { |test| "#{test}:#{variant}" }.join(",")
   end
 end
