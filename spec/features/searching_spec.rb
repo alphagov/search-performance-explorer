@@ -25,4 +25,16 @@ RSpec.describe Searching do
       expect(large_search.count).to eql(1000)
     end
   end
+
+  describe "#ab_tests" do
+    it "handles a single AB test" do
+      search = described_class.new("search" => { "which_test" => "relevance,shingles" })
+      expect(search.ab_tests("B")).to eql("relevance:B,shingles:B")
+    end
+
+    it "handles multiple AB tests" do
+      search = described_class.new("search" => { "which_test" => "relevance" })
+      expect(search.ab_tests("B")).to eql("relevance:B")
+    end
+  end
 end
