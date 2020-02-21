@@ -33,6 +33,13 @@ class Searching
     "development" => "http://rummager.dev.gov.uk",
   }.freeze
 
+  AB_TESTS = {
+    "shingles" => { a: "shingles:A", b: "shingles:B" },
+    "none" => { a: "", b: "" },
+    "learning_to_rank" => { a: "relevance:disable", b: "" },
+    "shingles_without_ltr" => { a: "shingles:A,relevance:disable", b: "shingles:B,relevance:disable" },
+  }
+
   require "gds_api/rummager"
   attr_reader :params
   def initialize(params)
@@ -48,8 +55,9 @@ class Searching
   end
 
   def call
-    findings_new_left = rummager_data(params["search"]["host_a"], "A")
-    findings_new_right = rummager_data(params["search"]["host_b"], "B")
+    ab_tests = AB_TESTS[params["search"]["which_test"]] || AB_TESTS["none"]
+    findings_new_left = rummager_data(params["search"]["host_a"], ab_tests[:a])
+    findings_new_right = rummager_data(params["search"]["host_b"], ab_tests[:b])
     Results.new(findings_new_left, findings_new_right)
   end
 
@@ -60,15 +68,10 @@ class Searching
         q: params["search"]["search_term"],
         fields: FIELDS,
         count: count.to_s,
-        ab_tests: ab_tests(test),
+        ab_tests: test,
         c: Time.now.getutc.to_s,
       },
       "Authorization" => ENV["#{host_name.upcase}_AUTH_TOKEN"],
     )
-  end
-
-  def ab_tests(variant)
-    tests = params['search']['which_test']
-    tests.split(",").map { |test| "#{test}:#{variant}" }.join(",")
   end
 end

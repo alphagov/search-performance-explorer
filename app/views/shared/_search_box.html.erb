@@ -14,10 +14,10 @@
     <div class="form-group">
       <%= f.label :which_test, "A/B test being used", class: "form-label" %>
       <%= f.select :which_test, {
-        "Learning To Rank" => "relevance",
+        "Learning To Rank" => "learning_to_rank",
         "Shingles" => "shingles",
         "None" => "none",
-        "LTR + Shingles" => "shingles,relevance",
+        "Shingles without LTR" => "shingles_without_ltr",
       }, {}, class: "form-control AB_select" %>
     </div>
 
