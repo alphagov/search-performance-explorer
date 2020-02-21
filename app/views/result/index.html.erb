@@ -15,12 +15,10 @@
 
     <div class="heading">
       <% if @search.search_term? %>
-        <h1 class="head-text">You searched for</h1>
-        <h2 class="search-term"><%= @search.search_term %></h2>
+        <h1 class="head-text">You searched for '<%= @search.search_term %>'</h1>
       <% else %>
         <h1 class="head-text">You did not enter a search term</h1>
       <% end %>
-      <h2 class="results-text">These are your results</h2>
     </div>
 
   </div>
