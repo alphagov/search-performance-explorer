@@ -38,6 +38,8 @@ class Searching
     "none" => { a: "", b: "" },
     "learning_to_rank" => { a: "relevance:disable", b: "" },
     "shingles_without_ltr" => { a: "shingles:A,relevance:disable", b: "shingles:B,relevance:disable" },
+    "hippo" => { a: "", b: "mv:hippo" },
+    "elephant" => { a: "", b: "mv:elephant" },
   }
 
   require "gds_api/rummager"
