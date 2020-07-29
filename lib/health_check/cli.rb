@@ -127,10 +127,10 @@ module HealthCheck
         opts[:verbose] = true
       end
 
-      parser.banner = %{Usage: #{File.basename(__FILE__)}
+      parser.banner = %(Usage: #{File.basename(__FILE__)}
 
       Runs a health check.
-      }
+      )
     end
 
     def add_actions(parser)

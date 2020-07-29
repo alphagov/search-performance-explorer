@@ -24,10 +24,10 @@ module Explainotron
       results.each do |result|
         title = result["title"]
         description = result["description"]
-        puts Rainbow(title).yellow + " - #{description}"
-        puts ""
+        logger.info Rainbow(title).yellow + " - #{description}"
+        logger.info ""
         report_result(result["_explanation"])
-        puts ""
+        logger.info ""
       end
     end
 
@@ -49,7 +49,7 @@ module Explainotron
       end
 
       spaces = " " * indent
-      puts spaces.to_s + Rainbow("[#{value}] ").magenta + description
+      logger.info spaces.to_s + Rainbow("[#{value}] ").magenta + description
 
       if details
         details.each do |detail|

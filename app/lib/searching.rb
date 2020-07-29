@@ -1,30 +1,30 @@
 class Searching
-  ENHANCED_FIELDS = %w(
+  ENHANCED_FIELDS = %w[
     document_collections
     specialist_sectors
     policies
     taxons
     mainstream_browse_pages
-  ).freeze
-  HEAD_FIELDS = %w(
+  ].freeze
+  HEAD_FIELDS = %w[
     popularity
     is_historic
-  ).freeze
-  SECONDARY_HEAD_FIELDS = %w(
+  ].freeze
+  SECONDARY_HEAD_FIELDS = %w[
     people
     organisations
-  ).freeze
-  OTHER_FIELDS = %w(
+  ].freeze
+  OTHER_FIELDS = %w[
     description
     format
     link
     public_timestamp
     title
     content_id
-  ).freeze
+  ].freeze
 
   FIELDS = OTHER_FIELDS + ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS
-  OPTION_FIELDS = ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS + %w(content_id).freeze
+  OPTION_FIELDS = ENHANCED_FIELDS + HEAD_FIELDS + SECONDARY_HEAD_FIELDS + %w[content_id].freeze
 
   HOSTS = {
     "production" => "https://www.gov.uk/api",

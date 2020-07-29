@@ -21,8 +21,8 @@ RSpec.describe HealthCheck::SuggestionChecker do
       }
 
       responses.each do |term, suggestions|
-        stub_request(:get, "https://www.gov.uk/api/search.json?count=0&q=#{term}&suggest=spelling").
-          to_return(body: JSON.dump(results: [], suggested_queries: suggestions))
+        stub_request(:get, "https://www.gov.uk/api/search.json?count=0&q=#{term}&suggest=spelling")
+          .to_return(body: JSON.dump(results: [], suggested_queries: suggestions))
       end
 
       result = described_class.new(

@@ -37,11 +37,11 @@ class Result
 private
 
   def date_format(date)
-    DateTime.parse(date).strftime("%B %Y") unless date.nil?
+    Time.zone.parse(date).strftime("%B %Y") unless date.nil?
   end
 
   def format_link(link, extra = "")
-    return link if link == nil || link.start_with?("https://", "http://")
+    return link if link.nil? || link.start_with?("https://", "http://")
     return "https://#{link}" if link.start_with?("www.")
 
     "https://gov.uk" + extra + link
