@@ -120,7 +120,7 @@ module HealthCheck
     def add_help_options(parser)
       parser.on "-h", "--help", "Show this message" do
         puts parser
-        exit
+        exit # rubocop:disable Rails/Exit
       end
 
       parser.on "-v", "--verbose", "Show verbose logging output" do

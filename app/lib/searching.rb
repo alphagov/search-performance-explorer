@@ -40,7 +40,7 @@ class Searching
     "shingles_without_ltr" => { a: "shingles:A,relevance:disable", b: "shingles:B,relevance:disable" },
     "hippo" => { a: "", b: "mv:hippo" },
     "elephant" => { a: "", b: "mv:elephant" },
-  }
+  }.freeze
 
   require "gds_api/rummager"
   attr_reader :params
@@ -71,7 +71,7 @@ class Searching
         fields: FIELDS,
         count: count.to_s,
         ab_tests: test,
-        c: Time.now.getutc.to_s,
+        c: Time.zone.now.getutc.to_s,
       },
       "Authorization" => ENV["#{host_name.upcase}_AUTH_TOKEN"],
     )
