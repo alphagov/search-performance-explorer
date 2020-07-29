@@ -1,6 +1,8 @@
+require "gds_api/search"
+
 module Explainotron
   def self.explain!(query, hostname: Plek.find("search", external: true))
-    client = GdsApi::Rummager.new(hostname)
+    client = GdsApi::Search.new(hostname)
 
     Results.new(
       query,

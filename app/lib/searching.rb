@@ -42,7 +42,7 @@ class Searching
     "elephant" => { a: "", b: "mv:elephant" },
   }.freeze
 
-  require "gds_api/rummager"
+  require "gds_api/search"
   attr_reader :params
   def initialize(params)
     @params = params
@@ -58,14 +58,14 @@ class Searching
 
   def call
     ab_tests = AB_TESTS[params["search"]["which_test"]] || AB_TESTS["none"]
-    findings_new_left = rummager_data(params["search"]["host_a"], ab_tests[:a])
-    findings_new_right = rummager_data(params["search"]["host_b"], ab_tests[:b])
+    findings_new_left = search_data(params["search"]["host_a"], ab_tests[:a])
+    findings_new_right = search_data(params["search"]["host_b"], ab_tests[:b])
     Results.new(findings_new_left, findings_new_right)
   end
 
-  def rummager_data(host_name, test)
-    rummager = GdsApi::Rummager.new(HOSTS[host_name])
-    rummager.search(
+  def search_data(host_name, test)
+    search_client = GdsApi::Search.new(HOSTS[host_name])
+    search_client.search(
       {
         q: params["search"]["search_term"],
         fields: FIELDS,
