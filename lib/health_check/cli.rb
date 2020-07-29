@@ -32,7 +32,7 @@ module HealthCheck
       call
     rescue Net::HTTPServerError => e
       warn "Unable to continue: bad response from search API:"
-      $sterr.puts e.backtrace
+      warn e.backtrace
     end
 
   private
