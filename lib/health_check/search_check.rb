@@ -11,11 +11,11 @@ module HealthCheck
     end
 
     def valid_path?
-      !path.nil? && !path.empty? && path.start_with?("/")
+      path.present? && path.start_with?("/")
     end
 
     def valid_search_term?
-      !search_term.nil? && !search_term.empty?
+      search_term.present?
     end
 
     def valid_weight?

@@ -8,7 +8,7 @@ class Result
   def enhanced_results(enhanced_fields)
     return_hash = {}
     enhanced_fields.each do |field|
-      next unless @info[field].present?
+      next if @info[field].blank?
 
       return_hash[field.titleize] = @info[field].map { |t| link_title_pair(t, field) }
     end
@@ -66,7 +66,7 @@ private
   end
 
   def organisations
-    return [] unless @info["organisations"].present?
+    return [] if @info["organisations"].blank?
 
     @info["organisations"].map do |details|
       [details["title"], format_link(details["link"])]
@@ -74,7 +74,7 @@ private
   end
 
   def people
-    return [] unless @info["people"].present?
+    return [] if @info["people"].blank?
 
     @info["people"].map do |details|
       [details["title"], format_link(details["link"])]
