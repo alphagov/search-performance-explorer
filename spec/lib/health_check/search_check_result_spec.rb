@@ -40,7 +40,6 @@ RSpec.describe HealthCheck::SearchCheckResult do
     end
   end
 
-
   context "'should not' checks" do
     context "an undesirable result is in the top N" do
       let(:check) { HealthCheck::SearchCheck.new("carmen", "should not", "/a", 1, 200) }

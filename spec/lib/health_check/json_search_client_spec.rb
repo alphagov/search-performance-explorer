@@ -11,14 +11,14 @@ RSpec.describe HealthCheck::JsonSearchClient do
           "link" => "/b",
         },
       ],
-      "suggested_queries" => %w(A B),
+      "suggested_queries" => %w[A B],
     }
   end
 
   def stub_search(search_term, custom_headers = {})
-    stub_request(:get, "http://www.gov.uk/api/search.json?q=#{CGI.escape(search_term)}").
-      with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" }.merge(custom_headers)).
-      to_return(status: 200, body: search_response_body.to_json)
+    stub_request(:get, "http://www.gov.uk/api/search.json?q=#{CGI.escape(search_term)}")
+      .with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" }.merge(custom_headers))
+      .to_return(status: 200, body: search_response_body.to_json)
   end
 
   it "support the search format" do

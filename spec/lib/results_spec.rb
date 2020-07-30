@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Searching::Results do
+RSpec.describe Results do
   let(:left_data) do
     {
       "total" => left_result.count,

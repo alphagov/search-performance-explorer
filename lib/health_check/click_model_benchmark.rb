@@ -1,4 +1,4 @@
-require "gds_api/rummager"
+require "gds_api/search"
 require "health_check/evaluator"
 require "rainbow"
 
@@ -10,7 +10,7 @@ module HealthCheck
     end
 
     def initialize(search_client:, model: ClickModelBenchmark.load_model)
-      @rummager = search_client
+      @search_client = search_client
       @model = model
     end
 
@@ -19,7 +19,7 @@ module HealthCheck
 
       scores = []
       evaluator.queries.each do |query|
-        search_results = rummager.search(
+        search_results = search_client.search(
           query,
           fields: "content_id,title",
           count: 20,
@@ -41,7 +41,7 @@ module HealthCheck
 
   private
 
-    attr_reader :rummager
+    attr_reader :search_client
     attr_reader :model
 
     def report_query(query, query_score)

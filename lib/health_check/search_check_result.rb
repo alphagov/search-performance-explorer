@@ -48,7 +48,7 @@ module HealthCheck
       if @check.positive_imperative?
         found_within_limit?
       else
-        ! found_within_limit?
+        !found_within_limit?
       end
     end
 

@@ -13,8 +13,8 @@ RSpec.describe HealthCheck::CheckFileParser do
     DATA
 
     expected = [
-      HealthCheck::SearchCheck.new("a", "should", "/a", 1, 1, %w(test)),
-      HealthCheck::SearchCheck.new("b", "should", "/b", 1, 1, %w(test)),
+      HealthCheck::SearchCheck.new("a", "should", "/a", 1, 1, %w[test]),
+      HealthCheck::SearchCheck.new("b", "should", "/b", 1, 1, %w[test]),
     ]
     expect(checks(data)).to eq(expected)
   end

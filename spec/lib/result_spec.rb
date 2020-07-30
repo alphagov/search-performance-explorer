@@ -28,7 +28,7 @@ RSpec.describe Result do
           ["driving / vehicle tax mot insurance", "https://gov.uk/browse/driving/vehicle-tax-mot-insurance"],
         ],
       }
-      expect(subject.enhanced_results(%w(mainstream_browse_pages))).to eql(expected_hash)
+      expect(subject.enhanced_results(%w[mainstream_browse_pages])).to eql(expected_hash)
     end
     it "gets taxons out of the information hash and returns them with an empty string" do
       expected_hash = {
@@ -37,11 +37,11 @@ RSpec.describe Result do
           ["bb4c54b9 5b3c 4c2e 8473 a57e2442f386", ""],
         ],
       }
-      expect(subject.enhanced_results(%w(taxons))).to eql(expected_hash)
+      expect(subject.enhanced_results(%w[taxons])).to eql(expected_hash)
     end
     it "returns an empty hash when the field isn't present" do
       expected_hash = {}
-      expect(subject.enhanced_results(%w(policies))).to eql(expected_hash)
+      expect(subject.enhanced_results(%w[policies])).to eql(expected_hash)
     end
   end
 
@@ -71,14 +71,14 @@ RSpec.describe Result do
         ["The Rt Hon David Evennett MP", "https://gov.uk/government/people/david-evennett"],
         ["The Rt Hon John Whittingdale", "https://gov.uk/government/people/john-whittingdale"],
       ]
-      expect(subject.second_head(%w(people))).to eql(expected_array)
+      expect(subject.second_head(%w[people])).to eql(expected_array)
     end
 
     it "returns the links for organisation pages and their link in an array" do
       expected_array = [
         ["Driver and Vehicle Licensing Agency", "https://gov.uk/government/organisations/driver-and-vehicle-licensing-agency"],
       ]
-      expect(subject.second_head(%w(organisations))).to eql(expected_array)
+      expect(subject.second_head(%w[organisations])).to eql(expected_array)
     end
   end
 
@@ -98,7 +98,7 @@ RSpec.describe Result do
 
     it "returns a full array of all elements if is historic and popularity are passed in" do
       expected_array = ["Answer", "April 2015", "Historical", "Popularity: 0.0013315579"]
-      expect(subject.get_head_info_list(%w(is_historic popularity))).to eql(expected_array)
+      expect(subject.get_head_info_list(%w[is_historic popularity])).to eql(expected_array)
     end
   end
 end

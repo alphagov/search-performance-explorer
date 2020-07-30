@@ -25,7 +25,7 @@ end
 
 class SearchForm
   include ActiveModel::Model
-  PARAMS = %i(
+  PARAMS = %i[
     content_id
     count
     document_collections
@@ -42,7 +42,7 @@ class SearchForm
     specialist_sectors
     taxons
     which_test
-  ).freeze
+  ].freeze
   attr_accessor(*PARAMS)
 
   def search_term?

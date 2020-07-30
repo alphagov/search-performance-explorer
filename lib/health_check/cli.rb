@@ -32,7 +32,7 @@ module HealthCheck
       call
     rescue Net::HTTPServerError => e
       warn "Unable to continue: bad response from search API:"
-      $sterr.puts e.backtrace
+      warn e.backtrace
     end
 
   private
@@ -127,10 +127,10 @@ module HealthCheck
         opts[:verbose] = true
       end
 
-      parser.banner = %{Usage: #{File.basename(__FILE__)}
+      parser.banner = %(Usage: #{File.basename(__FILE__)}
 
       Runs a health check.
-      }
+      )
     end
 
     def add_actions(parser)

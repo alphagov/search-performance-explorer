@@ -1,5 +1,7 @@
 # Benchmarking search using the health check script
 
+TODO: consider updating mentions to Rummager, as it was renamed to Search on gds-api-adapters version 63.0.0.
+
 As we work on rummager we want some objective metrics of the performance of search, i.e. does it return useful results? That's what the health check is for.
 
 It can run 3 kinds of checks.
