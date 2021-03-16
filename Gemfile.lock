@@ -1,11 +1,10 @@
 GIT
   remote: https://github.com/alphagov/govuk_frontend_toolkit_gem.git
-  revision: 9bae66b74adc88af12c89b513e52b0c5b6f675de
+  revision: bf8afd715d93ec3e49225c440d14cb012bebad38
   submodules: true
   specs:
     govuk_frontend_toolkit (9.0.0)
       railties (>= 3.1.0)
-      sass (>= 3.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -106,7 +105,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
     execjs (2.7.0)
-    ffi (1.13.1)
+    ffi (1.15.0)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     gds-api-adapters (70.0.0)
