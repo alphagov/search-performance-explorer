@@ -108,7 +108,7 @@ GEM
     ffi (1.15.0)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
-    gds-api-adapters (71.0.0)
+    gds-api-adapters (71.1.0)
       addressable
       link_header
       null_logger
