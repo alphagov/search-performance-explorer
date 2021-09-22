@@ -44,7 +44,7 @@ private
     return link if link.nil? || link.start_with?("https://", "http://")
     return "https://#{link}" if link.start_with?("www.")
 
-    "https://gov.uk" + extra + link
+    "https://gov.uk#{extra}#{link}"
   end
 
   def historical_or_current(check)

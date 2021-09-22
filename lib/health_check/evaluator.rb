@@ -2,8 +2,7 @@ module HealthCheck
   class Evaluator
     MIN_EXAMINATIONS = 10
 
-    attr_reader :attractiveness
-    attr_reader :satisfyingness
+    attr_reader :attractiveness, :satisfyingness
 
     def initialize(model)
       @attractiveness = JSON.parse(model["attr"])

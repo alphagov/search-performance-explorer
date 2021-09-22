@@ -1,5 +1,6 @@
 class Results
   attr_reader :left_total, :left_missing, :right_total, :right_missing, :left, :right, :result_count
+
   def initialize(left, right)
     @result_count = right["results"].count > left["results"].count ? right["results"].count : left["results"].count
     @left = (0..result_count - 1).map { |i| Result.new(left["results"][i]) }
