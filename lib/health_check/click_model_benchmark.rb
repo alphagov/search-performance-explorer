@@ -5,7 +5,7 @@ require "rainbow"
 module HealthCheck
   class ClickModelBenchmark
     def self.load_model
-      file = File.read(DATA_DIR + "/click_model.json")
+      file = File.read("#{DATA_DIR}/click_model.json")
       JSON.parse(file)
     end
 
@@ -41,11 +41,10 @@ module HealthCheck
 
   private
 
-    attr_reader :search_client
-    attr_reader :model
+    attr_reader :search_client, :model
 
     def report_query(query, query_score)
-      title = Rainbow(query).yellow + ": "
+      title = "#{Rainbow(query).yellow}: "
       puts title.ljust(40) + query_score.round(2).to_s
     end
 

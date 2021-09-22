@@ -44,6 +44,7 @@ class Searching
 
   require "gds_api/search"
   attr_reader :params
+
   def initialize(params)
     @params = params
   end

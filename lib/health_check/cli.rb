@@ -56,7 +56,7 @@ module HealthCheck
     end
 
     def run_search_result_tests
-      check_file_path = DATA_DIR + "search-results.csv"
+      check_file_path = "#{DATA_DIR}search-results.csv"
       check_file = open_file(check_file_path)
 
       health_check = HealthCheck::SearchChecker.new(
@@ -70,7 +70,7 @@ module HealthCheck
 
     # Run a health-check on the suggestions in suggestions.csv
     def run_suggestions_test
-      check_file = open_file(DATA_DIR + "suggestions.csv")
+      check_file = open_file("#{DATA_DIR}suggestions.csv")
 
       calculator = HealthCheck::SuggestionChecker.new(
         search_client: search_client,
